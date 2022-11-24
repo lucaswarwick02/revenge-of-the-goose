@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ElectricFence
   m_EditorClassIdentifier: 
   prompt: You come to an electric fence
-  choices:
-  - text: Climb over the fence
+  choice1:
+    text: Climb the fence
     linkedNode: {fileID: 11400000, guid: d6d0235a4fa04d04b9059c9ad7bf3c48, type: 2}
-  - text: Make a gap in the fence
+  choice2:
+    text: Cut a hole in the fence
     linkedNode: {fileID: 11400000, guid: d6d0235a4fa04d04b9059c9ad7bf3c48, type: 2}

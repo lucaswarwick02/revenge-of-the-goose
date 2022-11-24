@@ -6,7 +6,8 @@ using UnityEngine;
 public class StoryNode : ScriptableObject
 {
     public string prompt;
-    public Choice[] choices;
+    public Choice choice1;
+    public Choice choice2;
 }
 
 [System.Serializable]
