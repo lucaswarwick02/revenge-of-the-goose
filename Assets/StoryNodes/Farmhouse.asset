@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a64ce701291ed949b6294b4f219305d, type: 3}
   m_Name: Farmhouse
   m_EditorClassIdentifier: 
+  groundSprite: {fileID: 21300000, guid: 268cdae1454fee949b637fc3f537c811, type: 3}
   prompt: You arrive at the farmhouse
-  choices: []
+  choice1:
+    text: 
+    linkedNode: {fileID: 0}
+  choice2:
+    text: 
+    linkedNode: {fileID: 0}

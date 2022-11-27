@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a64ce701291ed949b6294b4f219305d, type: 3}
   m_Name: ElectricFence
   m_EditorClassIdentifier: 
+  groundSprite: {fileID: 21300000, guid: 561c78ae647034947bbb70fdcdf48d08, type: 3}
   prompt: You come to an electric fence
   choice1:
     text: Climb the fence

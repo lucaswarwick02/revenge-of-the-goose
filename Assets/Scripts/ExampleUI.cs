@@ -15,29 +15,28 @@ public class ExampleUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentNode = startNode;
-        UpdateUI();
+        StoryNode.OnNodeChange.AddListener(UpdateUI);
+        StoryNode.OnNodeChange.Invoke(startNode);
     }
 
-    public void UpdateUI () {
-        prompt.text = currentNode.prompt;
+    public void UpdateUI (StoryNode node) {
+        this.currentNode = node;
+        prompt.text = node.prompt;
 
-        choice1.text = currentNode.choice1.text;
-        choice2.text = currentNode.choice2.text;
+        choice1.text = node.choice1.text;
+        choice2.text = node.choice2.text;
     }
 
     public void Choice1 () {
         if (currentNode.choice1.linkedNode == null) return;
 
-        currentNode = currentNode.choice1.linkedNode;
-        UpdateUI();
+        StoryNode.OnNodeChange.Invoke(currentNode.choice1.linkedNode);
     }
 
     public void Choice2 () {
         if (currentNode.choice2.linkedNode == null) return;
 
-        currentNode = currentNode.choice1.linkedNode;
-        UpdateUI();
+        StoryNode.OnNodeChange.Invoke(currentNode.choice2.linkedNode);
     }
 
 }
