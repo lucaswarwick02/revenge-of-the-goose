@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a64ce701291ed949b6294b4f219305d, type: 3}
-  m_Name: Farmhouse
+  m_Name: 1_Start
   m_EditorClassIdentifier: 
-  groundSprite: {fileID: 21300000, guid: 268cdae1454fee949b637fc3f537c811, type: 3}
-  prompt: You arrive at the farmhouse
-  choice1:
-    text: 
-    linkedNode: {fileID: 0}
-  choice2:
-    text: 
-    linkedNode: {fileID: 0}
+  Prompt: Happy lake. Bitter about dead geese.
+  Choices:
+  - {fileID: 11400000, guid: e8bfae875393c6d4baaed577c3ce7c72, type: 2}
+  - {fileID: 11400000, guid: 464afa725bc8df74a9e27209c5c4621e, type: 2}
+  GroundSprite: {fileID: 0}

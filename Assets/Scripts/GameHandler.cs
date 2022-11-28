@@ -9,10 +9,10 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StoryNode.OnNodeChange.AddListener(UpdateScene);
+        StoryNode.OnCurrentStoryNodeChange += UpdateScene;
     }
 
     public void UpdateScene (StoryNode node) {
-        groundRenderer.sprite = node.groundSprite;
+        groundRenderer.sprite = node.GroundSprite;
     }
 }

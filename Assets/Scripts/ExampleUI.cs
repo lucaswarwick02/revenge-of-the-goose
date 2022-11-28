@@ -2,41 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ExampleUI : MonoBehaviour
 {
-    public TextMeshProUGUI prompt;
-    public TextMeshProUGUI choice1;
-    public TextMeshProUGUI choice2;
+    public TMP_Text promptTextField;
+    public Button choiceButtonPrefab;
+    public Transform buttonContainer;
 
     public StoryNode startNode;
-    StoryNode currentNode;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        StoryNode.OnNodeChange.AddListener(UpdateUI);
-        StoryNode.OnNodeChange.Invoke(startNode);
+        StoryNode.OnCurrentStoryNodeChange += UpdateUI;
+        StoryNode.CurrentStoryNode = startNode;
+    }
+    void OnDisable()
+    {
+        StoryNode.OnCurrentStoryNodeChange -= UpdateUI;
     }
 
-    public void UpdateUI (StoryNode node) {
-        this.currentNode = node;
-        prompt.text = node.prompt;
+    public void UpdateUI(StoryNode node)
+    {
+        if (node == null)
+        {
+            Debug.LogError("Node was null!");
+            return;
+        }
 
-        choice1.text = node.choice1.text;
-        choice2.text = node.choice2.text;
+        promptTextField.text = node.Prompt;
+
+        for (int choiceIndex = 0; choiceIndex < node.Choices.Length; choiceIndex++)
+        {
+            Button newButton = Instantiate(choiceButtonPrefab, buttonContainer);
+            newButton.GetComponent<TMP_Text>().text = node.Choices[choiceIndex].Text;
+            newButton.onClick.AddListener(() => ButtonPressed(choiceIndex));
+        }
     }
 
-    public void Choice1 () {
-        if (currentNode.choice1.linkedNode == null) return;
+    public void ButtonPressed(int choiceIndex)
+    {
+        Choice choiceChosen = StoryNode.CurrentStoryNode.Choices[choiceIndex];
 
-        StoryNode.OnNodeChange.Invoke(currentNode.choice1.linkedNode);
-    }
-
-    public void Choice2 () {
-        if (currentNode.choice2.linkedNode == null) return;
-
-        StoryNode.OnNodeChange.Invoke(currentNode.choice2.linkedNode);
+        if (choiceChosen is BasicChoice bChoice)
+        {
+            StoryNode.CurrentStoryNode = bChoice.NextStoryNode;
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync((choiceChosen as MinigameChoice).MinigameScene);
+        }
     }
 
 }

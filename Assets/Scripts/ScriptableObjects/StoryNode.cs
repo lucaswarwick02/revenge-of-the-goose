@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "New StoryNode", menuName = "StoryNode")]
+[CreateAssetMenu(fileName = "New Story Node", menuName = "Game/Story Node")]
 public class StoryNode : ScriptableObject
 {
-    public class NodeEvent : UnityEvent<StoryNode> {}
-    public static NodeEvent OnNodeChange = new NodeEvent();
+    private static StoryNode currentStoryNode = null;
 
-    [Header("Visuals")]
-    public Sprite groundSprite;
+    public static StoryNode CurrentStoryNode
+    {
+        get => currentStoryNode;
+        set
+        {
+            currentStoryNode = value;
+            OnCurrentStoryNodeChange?.Invoke(currentStoryNode);
+        }
+
+    }
+
+    public static Action<StoryNode> OnCurrentStoryNodeChange;
 
     [Header("Choices")]
-    public string prompt;
-    public Choice choice1;
-    public Choice choice2;
-}
+    public string Prompt;
+    public Choice[] Choices;
 
-[System.Serializable]
-public class Choice {
-    public string text;
-    public StoryNode linkedNode;
+    [Header("Visuals")]
+    public Sprite GroundSprite;
 }
