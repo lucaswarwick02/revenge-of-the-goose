@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 1B_SwimAcrossLake
   m_EditorClassIdentifier: 
   Text: Swim Across Lake
-  MinigameScene: 
+  MinigameScene: Minigame-1
   NextStoryNodeIfWin: {fileID: 0}
   NextStoryNodeIfLose: {fileID: 0}

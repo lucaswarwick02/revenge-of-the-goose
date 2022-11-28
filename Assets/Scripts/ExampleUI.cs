@@ -38,12 +38,15 @@ public class ExampleUI : MonoBehaviour
         {
             Button newButton = Instantiate(choiceButtonPrefab, buttonContainer);
             newButton.GetComponent<TMP_Text>().text = node.Choices[choiceIndex].Text;
-            newButton.onClick.AddListener(() => ButtonPressed(choiceIndex));
+
+            int thisChoiceIndex = choiceIndex; // This is necessary for some reason - something to do with variable scope
+            newButton.onClick.AddListener(() => ButtonPressed(thisChoiceIndex));
         }
     }
 
     public void ButtonPressed(int choiceIndex)
     {
+        Debug.Log(choiceIndex + StoryNode.CurrentStoryNode.name);
         Choice choiceChosen = StoryNode.CurrentStoryNode.Choices[choiceIndex];
 
         if (choiceChosen is BasicChoice bChoice)

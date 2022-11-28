@@ -13,6 +13,7 @@ public class StoryNode : ScriptableObject
         {
             currentStoryNode = value;
             OnCurrentStoryNodeChange?.Invoke(currentStoryNode);
+            Debug.Log("New Story Node: " + currentStoryNode.name);
         }
 
     }
