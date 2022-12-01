@@ -10,11 +10,6 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     float sizeIncrease = 1.15f;
     float fadeDuration = 0.15f;
 
-    private void Awake()
-    {
-        Debug.Log("HELLO2");
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         StopAllCoroutines();
@@ -23,7 +18,6 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("HELLO");
         StopAllCoroutines();
         StartCoroutine(DecreaseFontSize());
     }
