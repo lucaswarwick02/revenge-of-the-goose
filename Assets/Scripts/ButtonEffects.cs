@@ -7,25 +7,24 @@ using TMPro;
 
 public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    TextMeshProUGUI textMesh;
-
-    float originalSize;
-
     float sizeIncrease = 1.15f;
     float fadeDuration = 0.15f;
 
-    private void Awake() {
-        textMesh = GetComponent<TextMeshProUGUI>();
-        originalSize = textMesh.fontSize;
+    private void Awake()
+    {
+        Debug.Log("HELLO2");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        StopAllCoroutines();
         StartCoroutine(IncreaseFontSize());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log("HELLO");
+        StopAllCoroutines();
         StartCoroutine(DecreaseFontSize());
     }
 
@@ -35,7 +34,7 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         while (t < 1)
         {
             // Now the loop will execute on every end of frame until the condition is true
-            textMesh.fontSize = Mathf.Lerp(originalSize, originalSize * sizeIncrease, t);
+            transform.localScale = Vector3.one * Mathf.Lerp(1, sizeIncrease, t);
             t += Time.deltaTime / fadeDuration;
             yield return new WaitForEndOfFrame(); // So that I return something at least.
         }
@@ -47,7 +46,7 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         while (t < 1)
         {
             // Now the loop will execute on every end of frame until the condition is true
-            textMesh.fontSize = Mathf.Lerp(originalSize * sizeIncrease, originalSize, t);
+            transform.localScale = Vector3.one * Mathf.Lerp(sizeIncrease, 1, t);
             t += Time.deltaTime / fadeDuration;
             yield return new WaitForEndOfFrame(); // So that I return something at least.
         }
