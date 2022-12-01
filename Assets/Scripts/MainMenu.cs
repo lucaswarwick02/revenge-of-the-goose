@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject mainMenuPanel;
-    public GameObject choicesPanel;
+    [SerializeField] int gameSceneIndex;
 
-    public void Exit () {
+    public void Exit ()
+    {
         Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
-    public void Play () {
-        mainMenuPanel.SetActive(false); // Hide the Main Menu
-        choicesPanel.SetActive(true); // Show the Choices Panel
+    public void Play ()
+    {
+        SceneManager.LoadScene(gameSceneIndex);
     }
 }
