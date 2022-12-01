@@ -37,7 +37,7 @@ public class ExampleUI : MonoBehaviour
         for (int choiceIndex = 0; choiceIndex < node.Choices.Length; choiceIndex++)
         {
             Button newButton = Instantiate(choiceButtonPrefab, buttonContainer);
-            newButton.GetComponent<TMP_Text>().text = node.Choices[choiceIndex].Text;
+            newButton.GetComponent<ChoiceButton>().SetText(choiceIndex, node.Choices[choiceIndex].Text);
 
             int thisChoiceIndex = choiceIndex; // This is necessary for some reason - something to do with variable scope
             newButton.onClick.AddListener(() => ButtonPressed(thisChoiceIndex));
