@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public SpriteRenderer groundRenderer;
+    public MapArea startMapArea;
 
     // Start is called before the first frame update
     void Start()
     {
         StoryNode.OnCurrentStoryNodeChange += UpdateScene;
+        Instantiate(startMapArea);
     }
 
-    public void UpdateScene (StoryNode node) {
-        groundRenderer.sprite = node.GroundSprite;
+    public void UpdateScene (StoryNode node)
+    {
+
     }
 }

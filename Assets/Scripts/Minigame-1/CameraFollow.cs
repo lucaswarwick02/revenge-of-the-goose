@@ -5,14 +5,10 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform player;
+    public float zFollowOffset = -5.25f;
 
-    public float maxY;
-    public float minY;
-
-    // Update is called once per frame
     void Update()
     {
-        float y = Mathf.Clamp(player.position.y, minY, maxY);
-        transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        transform.position = new Vector3(0, transform.position.y, player.position.z + zFollowOffset);
     }
 }
