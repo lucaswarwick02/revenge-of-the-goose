@@ -388,7 +388,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 191.85
+  m_fontSize: 191.8
   m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GEESE
+  m_text: GOOSE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c777536721866f944815977582cca8f5, type: 2}
   m_sharedMaterial: {fileID: 426986560290734316, guid: c777536721866f944815977582cca8f5, type: 2}
