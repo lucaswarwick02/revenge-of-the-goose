@@ -12,38 +12,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8660254
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 686067332858275916, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -60
       objectReference: {fileID: 0}
@@ -59,9 +27,13 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4f110229fa46f4c45ba94b62ce1ba00c, type: 3}
+    - target: {fileID: 5333683928520978109, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f110229fa46f4c45ba94b62ce1ba00c, type: 3}
     - target: {fileID: 5842308619934372689, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
       propertyPath: m_Name
-      value: Shrub_2
+      value: Shrubery_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}

@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MouseTracker))]
 public class PlayerCombat : MonoBehaviour
 {
     public SpriteRenderer muzzleFlash;
@@ -12,10 +11,23 @@ public class PlayerCombat : MonoBehaviour
     public float flashDelay = 0.15f;
     float flashTimer = 0f;
 
+    [Header("Damage")]
+    [SerializeField] private float baseDamage;
+    [SerializeField] private AnimationCurve damageMultiplierByNumberOfCollisionsBefore;
+    [SerializeField] private AnimationCurve damageMultiplierByDistance;
+
+    private MouseTracker mouseTracker;
+
+    private void Awake()
+    {
+        mouseTracker = GetComponent<MouseTracker>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && shootTimer <= 0f) {
+        if (Input.GetMouseButtonDown(0) && shootTimer <= 0f)
+        {
             // Show the muzzle flash
             muzzleFlash.enabled = true;
 
@@ -23,11 +35,7 @@ public class PlayerCombat : MonoBehaviour
             shootTimer = shootDelay;
             flashTimer = flashDelay;
 
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit)) {
-                Debug.Log(hit.collider.name);            
-            }
+            Shoot();
         }
 
         shootTimer = Mathf.Clamp(shootTimer -= Time.deltaTime, 0f, shootDelay);
@@ -35,6 +43,22 @@ public class PlayerCombat : MonoBehaviour
 
         if (flashTimer <= 0f && muzzleFlash.enabled) {
             muzzleFlash.enabled = false;
+        }
+    }
+
+    private void Shoot()
+    {
+        Vector3 origin = new Vector3(transform.position.x, mouseTracker.MousePlaneHeight, transform.position.z);
+
+        if (mouseTracker.MouseWorldPosition.HasValue)
+        {
+            RaycastHit[] hits = Physics.RaycastAll(origin, mouseTracker.MouseWorldPosition.Value - origin, 100);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                RaycastHit hit = hits[i];
+                float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - origin).magnitude);
+                Debug.Log($"Hit {hit.collider.gameObject.name} for {damage}");
+            }
         }
     }
 }
