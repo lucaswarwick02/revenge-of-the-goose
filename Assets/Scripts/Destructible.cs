@@ -1,17 +1,18 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Destructible : MonoBehaviour
 {
-    public event Action OnHit;
-
-    public event Action OnDestroyed;
-
     [SerializeField] private float hitPoints = 100;
+    [Space]
+    public UnityEvent OnDestroyed;
+    public UnityEvent<RaycastHit> OnHit;
 
-    public bool InflictDamage(float amount)
+    public bool InflictDamage(float amount, RaycastHit hitInfo)
     {
         hitPoints -= amount;
+        OnHit.Invoke(hitInfo);
 
         if (hitPoints <= 0)
         {
@@ -24,6 +25,7 @@ public class Destructible : MonoBehaviour
 
     private void Destroy()
     {
+        OnDestroyed.Invoke();
         Destroy(gameObject);
     }
 }

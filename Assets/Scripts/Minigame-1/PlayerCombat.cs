@@ -60,17 +60,11 @@ public class PlayerCombat : MonoBehaviour
                 RaycastHit hit = hits[i];
 
                 Destructible destructibleObj = hit.collider.gameObject.GetComponentInParent<Destructible>();
-                Killable killableObj = hit.collider.gameObject.GetComponentInParent<Killable>();
 
                 if (destructibleObj is not null)
                 {
                     float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - origin).magnitude);
-                    destructibleObj.InflictDamage(damage);
-                }
-                else if (killableObj is not null)
-                {
-                    float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - origin).magnitude);
-                    killableObj.InflictDamage(damage);
+                    destructibleObj.InflictDamage(damage, hit);
                 }
                 else
                 {
