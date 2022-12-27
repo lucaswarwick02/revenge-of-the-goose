@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
+    public event Action OnHit;
+
     public event Action OnDestroyed;
 
     [SerializeField] private float hitPoints = 100;

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Killable : MonoBehaviour
 {
+    public event Action OnHit;
+
     public event Action OnKilled;
 
     [SerializeField] private float hitPoints = 100;
