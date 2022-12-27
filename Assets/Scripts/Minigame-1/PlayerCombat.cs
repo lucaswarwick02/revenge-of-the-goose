@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MouseTracker))]
@@ -52,12 +53,23 @@ public class PlayerCombat : MonoBehaviour
 
         if (mouseTracker.MouseWorldPosition.HasValue)
         {
-            RaycastHit[] hits = Physics.RaycastAll(origin, mouseTracker.MouseWorldPosition.Value - origin, 100);
+            RaycastHit[] hits = Physics.RaycastAll(origin, mouseTracker.MouseWorldPosition.Value - origin, 100).OrderBy(h => h.distance).ToArray();
+
             for (int i = 0; i < hits.Length; i++)
             {
                 RaycastHit hit = hits[i];
-                float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - origin).magnitude);
-                Debug.Log($"Hit {hit.collider.gameObject.name} for {damage}");
+
+                Destructible destructableObj = hit.collider.gameObject.GetComponentInParent<Destructible>();
+
+                if (destructableObj is not null)
+                {
+                    float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - origin).magnitude);
+                    destructableObj.InflictDamage(damage);
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }

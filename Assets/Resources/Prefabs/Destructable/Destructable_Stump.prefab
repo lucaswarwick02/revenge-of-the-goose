@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2541321628024724392}
-  m_Layer: 0
+  - component: {fileID: 4212203946987230527}
+  m_Layer: 6
   m_Name: Destructable_Stump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4212203946987230527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923316038243590325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393a1598852fbc246b142ee172ea5fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 100
 --- !u!1001 &615979028291331943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,6 +72,14 @@ PrefabInstance:
     - target: {fileID: 5842308619934372689, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
       propertyPath: m_Name
       value: Shrubery_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842308619934372689, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7906284735819052071, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}

@@ -151,7 +151,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 2529240881011978684}
   shootDelay: 0.25
   flashDelay: 0.15
-  baseDamage: 10
+  baseDamage: 100
   damageMultiplierByNumberOfCollisionsBefore:
     serializedVersion: 2
     m_Curve:
@@ -183,11 +183,20 @@ MonoBehaviour:
       time: 0
       value: 1
       inSlope: -0
-      outSlope: -0
-      tangentMode: 0
+      outSlope: 0
+      tangentMode: 65
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 12
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 50
       value: 0
