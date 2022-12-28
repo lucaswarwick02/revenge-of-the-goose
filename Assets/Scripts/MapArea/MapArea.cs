@@ -4,7 +4,6 @@ using UnityEngine;
 public class MapArea : MonoBehaviour
 {
     [SerializeField] private Transform startPoint;
-    [SerializeField] private ChoiceTrigger choiceTrigger;
     [SerializeField] private Transform choiceCameraSnapPoint;
     [SerializeField] private MapAreaChoice[] choices;
 
@@ -17,8 +16,6 @@ public class MapArea : MonoBehaviour
         {
             choice.gateway.OnPlayerEnteredGateway += () => MoveToNextStoryNode(choice.resultingNode);
         }
-
-        choiceTrigger.OnPlayerEnteredTrigger += StartChoice;
     }
 
     private void StartChoice()
