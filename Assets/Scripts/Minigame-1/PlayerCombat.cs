@@ -17,6 +17,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private AnimationCurve damageMultiplierByNumberOfCollisionsBefore;
     [SerializeField] private AnimationCurve damageMultiplierByDistance;
 
+    [Header("Raycasting Parameters")]
+    [SerializeField] private Vector3 raycastOriginOffset;
+
     private MouseTracker mouseTracker;
 
     private void Awake()
@@ -49,7 +52,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 origin = new Vector3(transform.position.x, mouseTracker.MousePlaneHeight, transform.position.z);
+        Vector3 origin = new Vector3(transform.position.x, mouseTracker.MousePlaneHeight, transform.position.z) + raycastOriginOffset;
 
         if (mouseTracker.MouseWorldPosition.HasValue)
         {
@@ -74,4 +77,12 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position + raycastOriginOffset, 0.1f);
+    }
+#endif
 }
