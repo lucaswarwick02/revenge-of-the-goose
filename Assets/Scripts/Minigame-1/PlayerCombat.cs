@@ -53,7 +53,8 @@ public class PlayerCombat : MonoBehaviour
 
         if (mouseTracker.MouseWorldPosition.HasValue)
         {
-            RaycastHit[] hits = Physics.RaycastAll(origin, mouseTracker.MouseWorldPosition.Value - origin, 100).OrderBy(h => h.distance).ToArray();
+            Ray ray = new Ray(origin, mouseTracker.MouseWorldPosition.Value - origin);
+            RaycastHit[] hits = Physics.RaycastAll(ray, 100, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
 
             for (int i = 0; i < hits.Length; i++)
             {

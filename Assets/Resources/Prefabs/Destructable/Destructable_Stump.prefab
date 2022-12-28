@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2541321628024724392}
   - component: {fileID: 4212203946987230527}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Destructable_Stump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,11 +93,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5842308619934372689, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7906284735819052071, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c428b1838550cea49b42b47c6c0c9249, type: 3}
