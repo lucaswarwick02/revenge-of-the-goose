@@ -14,11 +14,11 @@ public class CreateEffectOnMesh : MonoBehaviour
         {
             if (effect.main.simulationSpace == ParticleSystemSimulationSpace.Local)
             {
-                Instantiate(effect, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal), transform);
+                Instantiate(effect, hitInfo.point + hitInfo.normal * 0.01f, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal), transform);
             }
             else
             {
-                Instantiate(effect, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal));
+                Instantiate(effect, hitInfo.point + hitInfo.normal * 0.01f, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal));
             }
         }
     }
