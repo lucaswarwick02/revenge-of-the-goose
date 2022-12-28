@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;
     public Transform mask;
 
-    [SerializeField] private SpriteRenderer arms;
+    //[SerializeField] private SpriteRenderer arms;
 
     private Rigidbody rb;
     private MouseTracker mouseTracker;
@@ -25,14 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = velocity * speed;
 
-        if (mouseTracker.MouseWorldPosition.HasValue)
-        {
-            Vector3 gunDir = new Vector3(mouseTracker.MouseWorldPosition.Value.x, 0, mouseTracker.MouseWorldPosition.Value.z) - transform.position;
-            arms.transform.localRotation = Quaternion.Euler(0, 0, Mathf.Clamp(Vector3.Angle(Vector3.right, gunDir) - 90, -45, 45));
-        }
-        else
-        {
-            arms.transform.localRotation = Quaternion.identity;
-        }
+        //if (mouseTracker.MouseWorldPosition.HasValue)
+        //{
+        //    Vector3 gunDir = new Vector3(mouseTracker.MouseWorldPosition.Value.x, 0, mouseTracker.MouseWorldPosition.Value.z) - transform.position;
+        //    arms.transform.localRotation = Quaternion.Euler(0, 0, Mathf.Clamp(Vector3.Angle(Vector3.right, gunDir) - 90, -45, 45));
+        //}
+        //else
+        //{
+        //    arms.transform.localRotation = Quaternion.identity;
+        //}
     }
 }

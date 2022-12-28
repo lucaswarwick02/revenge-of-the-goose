@@ -1,26 +1,34 @@
+using Game.Utility;
 using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(MouseTracker))]
 public class PlayerCombat : MonoBehaviour
 {
-    public SpriteRenderer muzzleFlash;
+    private const float MIN_SHOOT_ANGLE = -45;
+    private const float MAX_SHOOT_ANGLE = 45;
 
-    public float shootDelay = 0.25f;
-    float shootTimer = 0f;
-
-    public float flashDelay = 0.15f;
-    float flashTimer = 0f;
+    [Header("General")]
+    [SerializeField] private SpriteRenderer arms;
+    [SerializeField] private SpriteRenderer muzzleFlash;
+    [SerializeField] private float shootDelay = 0.25f;
+    [SerializeField] private float flashDelay = 0.15f;
 
     [Header("Damage")]
     [SerializeField] private float baseDamage;
     [SerializeField] private AnimationCurve damageMultiplierByNumberOfCollisionsBefore;
     [SerializeField] private AnimationCurve damageMultiplierByDistance;
 
-    [Header("Raycasting Parameters")]
-    [SerializeField] private Vector3 raycastOriginOffset;
+    [Header("Shooting Parameters")]
+    [SerializeField] private float barrelLength;
 
     private MouseTracker mouseTracker;
+    float shootTimer = 0f;
+    float flashTimer = 0f;
+
+    private Vector3 barrelPos;
+    private Vector3 shootDir;
+    private Vector3 armPivotOnMousePlane;
 
     private void Awake()
     {
@@ -45,19 +53,51 @@ public class PlayerCombat : MonoBehaviour
         shootTimer = Mathf.Clamp(shootTimer -= Time.deltaTime, 0f, shootDelay);
         flashTimer = Mathf.Clamp(flashTimer - Time.deltaTime, 0f, flashDelay);
 
-        if (flashTimer <= 0f && muzzleFlash.enabled) {
+        if (flashTimer <= 0f && muzzleFlash.enabled)
+        {
             muzzleFlash.enabled = false;
         }
+
+        CalculateShootingInfoAndRotateArms();
+    }
+
+    private void CalculateShootingInfoAndRotateArms()
+    {
+        // Calculate arm-pivot as projected on the mouse-plane
+        Vector3 armsPivot = arms.transform.position;
+        Vector3 camToPivotDir = (armsPivot - Camera.main.transform.position).normalized;
+
+        if (!MouseTracker.MousePlaneIntersection(armsPivot, camToPivotDir, out armPivotOnMousePlane))
+        {
+            Debug.LogError("Could not calculate shooting pivot as no intersection was made with the mouse-plane!");
+            return;
+        }
+
+        // Calculate shooting direction from pivot
+        Vector3 desiredRaycastDir = (mouseTracker.MouseWorldPosition.Value - armPivotOnMousePlane).normalized;
+        float actualRaycastAngle = Mathf.Clamp(Vector3.Angle(Vector3.forward, desiredRaycastDir) * (desiredRaycastDir.x < 0 ? -1 : 1), MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
+        shootDir = Quaternion.Euler(0, actualRaycastAngle, 0) * Vector3.forward;
+        barrelPos = armPivotOnMousePlane + shootDir * barrelLength;
+
+        // Calculate gun image rotation
+        Vector3 camPos = Camera.main.transform.position;
+        Vector3 camToBarrelDir = (barrelPos - camPos).normalized;
+
+        if (!VectorMaths.LinePlaneIntersection(armsPivot, arms.transform.forward, camPos, camToBarrelDir, out Vector3 gunRotationPlaneIntersect))
+        {
+            Debug.LogError("Could not calculate gun-rotation-plane intersect!");
+            return;
+        }
+
+        Vector3 desiredGunDir = gunRotationPlaneIntersect - armsPivot;
+        arms.transform.LookAt(armsPivot + camToPivotDir, desiredGunDir);
     }
 
     private void Shoot()
     {
-        Vector3 origin = new Vector3(transform.position.x, mouseTracker.MousePlaneHeight, transform.position.z) + raycastOriginOffset;
-
         if (mouseTracker.MouseWorldPosition.HasValue)
         {
-            Ray ray = new Ray(origin, mouseTracker.MouseWorldPosition.Value - origin);
-            RaycastHit[] hits = Physics.RaycastAll(ray, 100, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
+            RaycastHit[] hits = Physics.RaycastAll(barrelPos, shootDir, 100, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -67,7 +107,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (destructibleObj is not null)
                 {
-                    float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - origin).magnitude);
+                    float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - barrelPos).magnitude);
                     destructibleObj.InflictDamage(damage, hit);
                 }
                 else
@@ -82,7 +122,7 @@ public class PlayerCombat : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position + raycastOriginOffset, 0.1f);
+        Gizmos.DrawLine(armPivotOnMousePlane, barrelPos);
     }
 #endif
 }

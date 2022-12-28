@@ -134,7 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   mask: {fileID: 0}
-  arms: {fileID: 6535664692848304913}
 --- !u!114 &2108742072506294006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da99a1d5be47b34b895016bcfccd51f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arms: {fileID: 6535664692848304913}
   muzzleFlash: {fileID: 2529240881011978684}
   shootDelay: 0.25
   flashDelay: 0.15
@@ -188,7 +188,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 12
+      time: 6
       value: 1
       inSlope: 0
       outSlope: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  raycastOriginOffset: {x: 0, y: 0, z: 2}
+  barrelLength: 2
 --- !u!54 &987521240307639403
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483e03284e5f9a14f8d841a7ecda9cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePlaneHeight: 0.25
 --- !u!1 &4257667249059462447
 GameObject:
   m_ObjectHideFlags: 0
