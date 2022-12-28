@@ -5,11 +5,21 @@ using UnityEngine.Events;
 
 public class CreateEffectOnMesh : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem effect;
+    [SerializeField] private ParticleSystem[] effects;
     [SerializeField] private UnityAction trigger;
 
     public void TriggerEffect(RaycastHit hitInfo)
     {
-        Instantiate(effect, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal));
+        foreach (ParticleSystem effect in effects)
+        {
+            if (effect.main.simulationSpace == ParticleSystemSimulationSpace.Local)
+            {
+                Instantiate(effect, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal), transform);
+            }
+            else
+            {
+                Instantiate(effect, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal));
+            }
+        }
     }
 }
