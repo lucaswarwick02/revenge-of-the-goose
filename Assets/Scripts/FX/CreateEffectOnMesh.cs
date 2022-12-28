@@ -10,6 +10,6 @@ public class CreateEffectOnMesh : MonoBehaviour
 
     public void TriggerEffect(RaycastHit hitInfo)
     {
-        GameObject effectGO = Instantiate(effect, hitInfo.point, Quaternion.Euler(hitInfo.normal), transform).gameObject;
+        Instantiate(effect, hitInfo.point, Quaternion.FromToRotation(Vector3.forward, hitInfo.normal));
     }
 }
