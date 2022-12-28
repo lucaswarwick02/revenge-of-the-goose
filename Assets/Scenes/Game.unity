@@ -465,7 +465,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3014802483894083411, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
       propertyPath: mousePlaneHeight
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4187847514466876661, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
       propertyPath: m_RootOrder
