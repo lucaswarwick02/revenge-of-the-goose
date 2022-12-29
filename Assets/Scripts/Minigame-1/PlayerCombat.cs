@@ -63,24 +63,19 @@ public class PlayerCombat : MonoBehaviour
         CalculateShootingInfoAndRotateArms();
     }
 
+    /// <summary>
+    /// Due to the 2.5D view, a lot of calculations are required to negotiate between the horizontal raycasting plane, the 30deg sprite plane, and the perspective camera.
+    /// This method essentially works to rotate the gun/arm sprite to point the barrel at where the mouse intersects with the 30deg plane, and then projects (from the camera perspective)
+    /// the pivot and barrel positions of the image onto the horizontal raycasting plane so that the horizontal shooting and the 30deg image match up exactly.
+    /// </summary>
     private void CalculateShootingInfoAndRotateArms()
     {
-        // Calculate arm-pivot as projected on the mouse-plane
-        Vector3 armsPivot = arms.transform.position;
-        Vector3 camToPivotDir = (armsPivot - Camera.main.transform.position).normalized;
-
-        if (!MouseTracker.MousePlaneIntersection(armsPivot, camToPivotDir, out raycastPivotPos))
-        {
-            Debug.LogError("Could not calculate shooting pivot as no intersection was made with the mouse-plane!");
-            return;
-        }
-
-
         // Calculate gun image rotation
+        Vector3 armsPivot = arms.transform.position;
         Vector3 camPos = Camera.main.transform.position;
         Vector3 camToMouseDir = (mouseTracker.MouseWorldPosition.Value - camPos).normalized;
 
-        if (!VectorMaths.LinePlaneIntersection(armsPivot, arms.transform.forward, camPos, camToMouseDir, out Vector3 imagePlaneMouseIntersect))
+        if (!VectorMaths.LinePlaneIntersection(armsPivot, arms.transform.forward, camPos, camToMouseDir, out Vector3 imagePlaneMouseIntersect)) // where the mouse intersects with the 30deg plane
         {
             Debug.LogError("Could not calculate gun-rotation-plane intersect!");
             return;
@@ -95,8 +90,16 @@ public class PlayerCombat : MonoBehaviour
 
 
         // Calculate shooting direction from pivot
+        Vector3 camToPivotDir = (armsPivot - Camera.main.transform.position).normalized;
+        Vector3 camToBarrelDir = (imageBarrelPos - Camera.main.transform.position).normalized;
 
-        if (!MouseTracker.MousePlaneIntersection(camPos, imageBarrelPos - camPos, out raycastBarrelPos))
+        if (!MouseTracker.MousePlaneIntersection(armsPivot, camToPivotDir, out raycastPivotPos)) // the arm/gun pivot projected onto the horizontal raycasting plane
+        {
+            Debug.LogError("Could not calculate shooting pivot as no intersection was made with the mouse-plane!");
+            return;
+        }
+
+        if (!MouseTracker.MousePlaneIntersection(camPos, camToBarrelDir, out raycastBarrelPos)) // the barrel position projected onto the horizontal raycasting plane
         {
             Debug.LogError("Could not calculate gun-rotation-plane intersect!");
             return;
