@@ -10,57 +10,49 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private SpriteRenderer arms;
-    [SerializeField] private SpriteRenderer muzzleFlash;
-    [SerializeField] private float shootDelay = 0.25f;
-    [SerializeField] private float flashDelay = 0.15f;
+    [SerializeField] private float barrelLength;
 
     [Header("Damage")]
     [SerializeField] private float baseDamage;
     [SerializeField] private AnimationCurve damageMultiplierByNumberOfCollisionsBefore;
     [SerializeField] private AnimationCurve damageMultiplierByDistance;
 
-    [Header("Shooting Parameters")]
-    [SerializeField] private float barrelLength;
-
     private MouseTracker mouseTracker;
-    float shootTimer = 0f;
-    float flashTimer = 0f;
+    private Animator animator;
 
     private Vector3 initialGunUpDir;
     private Vector3 raycastBarrelPos;
     private Vector3 raycastDir;
     private Vector3 raycastPivotPos;
 
+    public bool CanShoot { get; private set; } = true;
+
     private void Awake()
     {
         mouseTracker = GetComponent<MouseTracker>();
+        animator = GetComponent<Animator>();
         initialGunUpDir = arms.transform.up;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && shootTimer <= 0f)
+        if (CanShoot && Input.GetMouseButtonDown(0))
         {
-            // Show the muzzle flash
-            muzzleFlash.enabled = true;
-
-            // Reset the shoot delay timer
-            shootTimer = shootDelay;
-            flashTimer = flashDelay;
-
+            animator.SetTrigger("Shoot");
             Shoot();
         }
 
-        shootTimer = Mathf.Clamp(shootTimer -= Time.deltaTime, 0f, shootDelay);
-        flashTimer = Mathf.Clamp(flashTimer - Time.deltaTime, 0f, flashDelay);
-
-        if (flashTimer <= 0f && muzzleFlash.enabled)
-        {
-            muzzleFlash.enabled = false;
-        }
-
         CalculateShootingInfoAndRotateArms();
+    }
+
+    public void DisableShooting()
+    {
+        CanShoot = false;
+    }
+
+    public void EnableShooting()
+    {
+        CanShoot = true;
     }
 
     /// <summary>
