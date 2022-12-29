@@ -208,7 +208,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  barrelLength: 2
+  barrelLength: 1
 --- !u!54 &987521240307639403
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -26,13 +26,15 @@ public class PlayerCombat : MonoBehaviour
     float shootTimer = 0f;
     float flashTimer = 0f;
 
-    private Vector3 barrelPos;
-    private Vector3 shootDir;
-    private Vector3 armPivotOnMousePlane;
+    private Vector3 initialGunUpDir;
+    private Vector3 raycastBarrelPos;
+    private Vector3 raycastDir;
+    private Vector3 raycastPivotPos;
 
     private void Awake()
     {
         mouseTracker = GetComponent<MouseTracker>();
+        initialGunUpDir = arms.transform.up;
     }
 
     // Update is called once per frame
@@ -67,37 +69,47 @@ public class PlayerCombat : MonoBehaviour
         Vector3 armsPivot = arms.transform.position;
         Vector3 camToPivotDir = (armsPivot - Camera.main.transform.position).normalized;
 
-        if (!MouseTracker.MousePlaneIntersection(armsPivot, camToPivotDir, out armPivotOnMousePlane))
+        if (!MouseTracker.MousePlaneIntersection(armsPivot, camToPivotDir, out raycastPivotPos))
         {
             Debug.LogError("Could not calculate shooting pivot as no intersection was made with the mouse-plane!");
             return;
         }
 
-        // Calculate shooting direction from pivot
-        Vector3 desiredRaycastDir = (mouseTracker.MouseWorldPosition.Value - armPivotOnMousePlane).normalized;
-        float actualRaycastAngle = Mathf.Clamp(Vector3.Angle(Vector3.forward, desiredRaycastDir) * (desiredRaycastDir.x < 0 ? -1 : 1), MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
-        shootDir = Quaternion.Euler(0, actualRaycastAngle, 0) * Vector3.forward;
-        barrelPos = armPivotOnMousePlane + shootDir * barrelLength;
 
         // Calculate gun image rotation
         Vector3 camPos = Camera.main.transform.position;
-        Vector3 camToBarrelDir = (barrelPos - camPos).normalized;
+        Vector3 camToMouseDir = (mouseTracker.MouseWorldPosition.Value - camPos).normalized;
 
-        if (!VectorMaths.LinePlaneIntersection(armsPivot, arms.transform.forward, camPos, camToBarrelDir, out Vector3 gunRotationPlaneIntersect))
+        if (!VectorMaths.LinePlaneIntersection(armsPivot, arms.transform.forward, camPos, camToMouseDir, out Vector3 imagePlaneMouseIntersect))
         {
             Debug.LogError("Could not calculate gun-rotation-plane intersect!");
             return;
         }
 
-        Vector3 desiredGunDir = gunRotationPlaneIntersect - armsPivot;
-        arms.transform.LookAt(armsPivot + camToPivotDir, desiredGunDir);
+        Vector3 desiredGunDir = imagePlaneMouseIntersect - armsPivot;
+        float clampedGunAngle = Mathf.Clamp(Vector3.Angle(initialGunUpDir, desiredGunDir), MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
+        Vector3 clampedGunDir = Vector3.RotateTowards(initialGunUpDir, desiredGunDir, Mathf.Deg2Rad * clampedGunAngle, 0);
+        Vector3 imageBarrelPos = armsPivot + clampedGunDir * barrelLength;
+
+        arms.transform.LookAt(armsPivot + arms.transform.forward, clampedGunDir);
+
+
+        // Calculate shooting direction from pivot
+
+        if (!MouseTracker.MousePlaneIntersection(camPos, imageBarrelPos - camPos, out raycastBarrelPos))
+        {
+            Debug.LogError("Could not calculate gun-rotation-plane intersect!");
+            return;
+        }
+
+        raycastDir = (raycastBarrelPos - raycastPivotPos).normalized;
     }
 
     private void Shoot()
     {
         if (mouseTracker.MouseWorldPosition.HasValue)
         {
-            RaycastHit[] hits = Physics.RaycastAll(barrelPos, shootDir, 100, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
+            RaycastHit[] hits = Physics.RaycastAll(raycastBarrelPos, raycastDir, 100, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -107,7 +119,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (destructibleObj is not null)
                 {
-                    float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - barrelPos).magnitude);
+                    float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - raycastBarrelPos).magnitude);
                     destructibleObj.InflictDamage(damage, hit);
                 }
                 else
@@ -121,8 +133,9 @@ public class PlayerCombat : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(armPivotOnMousePlane, barrelPos);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(raycastPivotPos, raycastBarrelPos);
+        Gizmos.DrawSphere(raycastBarrelPos, 0.025f);
     }
 #endif
 }
