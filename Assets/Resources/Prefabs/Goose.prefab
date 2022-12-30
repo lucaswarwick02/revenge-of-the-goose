@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1295977571396967811}
   - component: {fileID: 2529240881011978684}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2108742072506294006}
   - component: {fileID: 987521240307639403}
   - component: {fileID: 387411193905853886}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Goose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2870766538349714065}
   - component: {fileID: 6535664692848304913}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 4799835919777479626}
   - component: {fileID: 4707934416890381762}
   - component: {fileID: 4616713546710632507}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,8 +424,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8142799396256668474}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.1, z: 0}
+  m_Size: {x: 0.5, y: 1.1, z: 0.01}
   m_Center: {x: 0, y: 0.65, z: 0}

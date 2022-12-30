@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8318501346959142043}
   - component: {fileID: 7893052337663213508}
   - component: {fileID: 8253403991596932707}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120130235182023100}
-  m_LocalRotation: {x: -0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2541321628024724392}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!212 &8318501346959142043
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124,7 +124,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2541321628024724392}
   - component: {fileID: 4212203946987230527}
-  m_Layer: 0
+  - component: {fileID: 7303807506793078874}
+  m_Layer: 7
   m_Name: KillableBunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,3 +179,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &7303807506793078874
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923316038243590325}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.76, y: 0.5, z: 0.3}
+  m_Center: {x: 0, y: 0.25, z: 0.15}

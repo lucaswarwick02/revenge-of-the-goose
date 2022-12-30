@@ -511,8 +511,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goose
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3014802483894083411, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
 --- !u!1 &1556502560
 GameObject:
