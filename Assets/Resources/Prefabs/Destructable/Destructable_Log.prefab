@@ -167,7 +167,7 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7921692009304604449}
         m_TargetAssemblyTypeName: CreateEffectOnMesh, Assembly-CSharp
         m_MethodName: TriggerEffect
         m_Mode: 0

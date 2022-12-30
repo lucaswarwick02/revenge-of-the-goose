@@ -115,7 +115,7 @@ public class PlayerCombat : MonoBehaviour
     private void Shoot()
     {
         // Get all colliders hit (in order of distance from player), excluding those on the "NotPlayerShootable" layer
-        RaycastHit[] hits = Physics.RaycastAll(raycastBarrelPos, raycastDir, maxShootingDistance + shootingDistanceLeniency, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
+        RaycastHit[] hits = Physics.RaycastAll(raycastBarrelPos, raycastDir, maxShootingDistance + shootingDistanceLeniency, LayerMask.GetMask("PlayerShootable")).OrderBy(h => h.distance).ToArray();
 
         for (int i = 0; i < hits.Length; i++)
         {
