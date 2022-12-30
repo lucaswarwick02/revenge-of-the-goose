@@ -463,6 +463,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
+      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].time
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
+      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].inSlope
+      value: -0.20920739
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
+      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].inWeight
+      value: 0.01807635
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
+      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].outSlope
+      value: -0.20920739
+      objectReference: {fileID: 0}
     - target: {fileID: 4187847514466876661, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -511,7 +527,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goose
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3014802483894083411, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
 --- !u!1 &1556502560
 GameObject:
@@ -773,10 +790,6 @@ MonoBehaviour:
     CursorPrefab: {fileID: 4498717764382592753, guid: 284b5484081af5b489974058c73467a1, type: 3}
     UpdatePositionAutomatically: 0
     LerpSpeed: 25
-  - CursorID: mouse_dot
-    CursorPrefab: {fileID: 4498717764382592753, guid: bccd240eef4172e46b843fab7b63cfe5, type: 3}
-    UpdatePositionAutomatically: 1
-    LerpSpeed: 20
 --- !u!1 &2023502592
 GameObject:
   m_ObjectHideFlags: 0

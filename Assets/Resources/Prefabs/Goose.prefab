@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 4187847514466876658}
   - component: {fileID: 2108742072506294006}
   - component: {fileID: 987521240307639403}
-  - component: {fileID: 3014802483894083411}
   - component: {fileID: 387411193905853886}
   m_Layer: 6
   m_Name: Goose
@@ -148,7 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arms: {fileID: 6535664692848304913}
+  rotationSensitivity: 2
   barrelLength: 1
+  maxShootingDistance: 10
   baseDamage: 100
   damageMultiplierByNumberOfCollisionsBefore:
     serializedVersion: 2
@@ -196,13 +197,13 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 50
+      time: 20
       value: 0
-      inSlope: -0.048942503
-      outSlope: -0.048942503
+      inSlope: -0.20920739
+      outSlope: -0.20920739
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.029098053
+      inWeight: 0.01807635
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -223,18 +224,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &3014802483894083411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4187847514466876663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483e03284e5f9a14f8d841a7ecda9cab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &387411193905853886
 Animator:
   serializedVersion: 4

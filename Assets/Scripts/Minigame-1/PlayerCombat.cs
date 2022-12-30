@@ -1,6 +1,5 @@
 using Game.Utility;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -9,9 +8,12 @@ public class PlayerCombat : MonoBehaviour
     private const float MAX_SHOOT_ANGLE = 45;
     private const float MOUSE_PLANE_HEIGHT = 0.25f;
 
-    [Header("General")]
     [SerializeField] private SpriteRenderer arms;
+    [SerializeField] private float rotationSensitivity;
+
+    [Header("Raycasting")]
     [SerializeField] private float barrelLength;
+    [SerializeField] private float maxShootingDistance;
 
     [Header("Damage")]
     [SerializeField] private float baseDamage;
@@ -25,7 +27,8 @@ public class PlayerCombat : MonoBehaviour
     private Vector3 raycastBarrelPos;
     private Vector3 raycastDir;
     private Vector3 raycastPivotPos;
-    private Vector3 clampedMouseTarget;
+
+    private float currentGunAngle;
 
     public bool CanShoot { get; private set; } = true;
 
@@ -34,13 +37,17 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         mouseCursor = FindObjectOfType<MouseCursor>();
+        animator = GetComponent<Animator>();
         initialGunUpDir = arms.transform.up;
     }
 
     private void Update()
     {
+        currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
 
         if (CanShoot && Input.GetMouseButtonDown(0))
         {
@@ -49,11 +56,6 @@ public class PlayerCombat : MonoBehaviour
         }
 
         CalculateShootingInfoAndRotateArms();
-    }
-
-    private void FixedUpdate()
-    {
-        mouseCursor.MoveCursorOverWorldPosition("crosshair", clampedMouseTarget);
     }
 
     public void DisableShooting()
@@ -68,40 +70,19 @@ public class PlayerCombat : MonoBehaviour
 
     /// <summary>
     /// Due to the 2.5D view, a lot of calculations are required to negotiate between the horizontal raycasting plane, the 30deg sprite plane, and the perspective camera.
-    /// This method essentially works to rotate the gun/arm sprite to point the barrel at where the mouse intersects with the 30deg plane, and then projects (from the camera perspective)
-    /// the pivot and barrel positions of the image onto the horizontal raycasting plane so that the horizontal shooting and the 30deg image match up exactly.
+    /// This method essentially works to rotate the gun/arm sprite, and then projects (from the camera perspective) the pivot and barrel positions of the image onto the
+    /// horizontal raycasting plane so that the horizontal shooting and the 30deg image match up exactly.
     /// </summary>
     private void CalculateShootingInfoAndRotateArms()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (!RaycastPlaneIntersection(ray.origin, ray.direction, out Vector3 mouseRaycastPlanePos))
-        {
-            Debug.LogError("Could not get mouse position on the raycast plane!");
-            return;
-        }
-
-        // Calculate gun image rotation
+        // Rotate gun
         Vector3 armsPivot = arms.transform.position;
-        Vector3 camPos = Camera.main.transform.position;
-        Vector3 camToMouseDir = (mouseRaycastPlanePos - camPos).normalized;
-
-        if (!VectorMaths.LinePlaneIntersection(armsPivot, arms.transform.forward, camPos, camToMouseDir, out Vector3 imagePlaneMouseIntersect)) // where the mouse intersects with the 30deg plane
-        {
-            Debug.LogError("Could not calculate gun-rotation-plane intersect!");
-            return;
-        }
-
-        Vector3 desiredGunDir = imagePlaneMouseIntersect - armsPivot;
-        float clampedGunAngle = Mathf.Clamp(Vector3.Angle(initialGunUpDir, desiredGunDir), MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
-        Vector3 clampedGunDir = Vector3.RotateTowards(initialGunUpDir, desiredGunDir, Mathf.Deg2Rad * clampedGunAngle, 0);
+        Vector3 clampedGunDir = Vector3.RotateTowards(initialGunUpDir, Vector3.right, Mathf.Deg2Rad * currentGunAngle, 0);
         Vector3 imageBarrelPos = armsPivot + clampedGunDir * barrelLength;
 
         arms.transform.LookAt(armsPivot + arms.transform.forward, clampedGunDir);
-        clampedMouseTarget = armsPivot + clampedGunDir * desiredGunDir.magnitude * Vector3.Dot(desiredGunDir.normalized, clampedGunDir.normalized);
 
-
-        // Calculate shooting direction from pivot
+        // Calculate raycasting positions from the rotated image
         Vector3 camToPivotDir = (armsPivot - Camera.main.transform.position).normalized;
         Vector3 camToBarrelDir = (imageBarrelPos - Camera.main.transform.position).normalized;
 
@@ -111,19 +92,29 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        if (!RaycastPlaneIntersection(camPos, camToBarrelDir, out raycastBarrelPos)) // the barrel position projected onto the horizontal raycasting plane
+        if (!RaycastPlaneIntersection(Camera.main.transform.position, camToBarrelDir, out raycastBarrelPos)) // the barrel position projected onto the horizontal raycasting plane
         {
             Debug.LogError("Could not calculate gun-rotation-plane intersect!");
             return;
         }
 
         raycastDir = (raycastBarrelPos - raycastPivotPos).normalized;
+
+        // Set crosshair position
+        if (Physics.Raycast(raycastBarrelPos, raycastDir, out RaycastHit hit, maxShootingDistance, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))))
+        {
+            mouseCursor.MoveCursorOverWorldPosition("crosshair", hit.point);
+        }
+        else
+        {
+            mouseCursor.MoveCursorOverWorldPosition("crosshair", raycastBarrelPos + raycastDir * maxShootingDistance);
+        }
     }
 
     private void Shoot()
     {
         // Get all colliders hit (in order of distance from player), excluding those on the "NotPlayerShootable" layer
-        RaycastHit[] hits = Physics.RaycastAll(raycastBarrelPos, raycastDir, 100, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
+        RaycastHit[] hits = Physics.RaycastAll(raycastBarrelPos, raycastDir, maxShootingDistance, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))).OrderBy(h => h.distance).ToArray();
 
         for (int i = 0; i < hits.Length; i++)
         {
