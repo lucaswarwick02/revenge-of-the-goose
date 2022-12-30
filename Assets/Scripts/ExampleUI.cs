@@ -1,62 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Game.Utility;
 using TMPro;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class ExampleUI : MonoBehaviour
 {
-    public TMP_Text promptTextField;
-    public Button choiceButtonPrefab;
-    public Transform buttonContainer;
+    //public static Vector3 CurrentScoreTextWorldPos { get; private set; }
 
-    public StoryNode startNode;
+    [SerializeField] private StoryNode startNode;
 
-    // Start is called before the first frame update
+    [Header("Destruction Scoring")]
+    [SerializeField] private TMP_Text destructionScoreText;
+    [SerializeField] private DestructionScorePopup scorePopupPrefab;
+
     void OnEnable()
     {
         StoryNode.OnCurrentStoryNodeChange += UpdateUI;
         StoryNode.CurrentStoryNode = startNode;
+
+        PlaythroughStats.OnDestructionScoreChanged += UpdateDestructionScore;
     }
+
     void OnDisable()
     {
         StoryNode.OnCurrentStoryNodeChange -= UpdateUI;
+        PlaythroughStats.OnDestructionScoreChanged -= UpdateDestructionScore;
+    }
+
+    private void UpdateDestructionScore(int newScore, int deltaScore, Vector3 destructionEventPosition)
+    {
+        if (deltaScore > 0)
+        {
+            DestructionScorePopup scorePopup = Instantiate(scorePopupPrefab, transform);
+            scorePopup.Initialise(deltaScore, destructionEventPosition, (Vector2)destructionScoreText.transform.position, () => SetDestructionScore(newScore));
+        }
+    }
+
+    private void SetDestructionScore(int score)
+    {
+        destructionScoreText.text = $"{score}";
     }
 
     public void UpdateUI(StoryNode node)
     {
-        if (node == null)
-        {
-            Debug.LogError("Node was null!");
-            return;
-        }
-
-        promptTextField.text = node.Prompt;
-
-        //for (int choiceIndex = 0; choiceIndex < node.Choices.Length; choiceIndex++)
-        //{
-        //    Button newButton = Instantiate(choiceButtonPrefab, buttonContainer);
-        //    newButton.GetComponent<ChoiceButton>().SetText(choiceIndex, node.Choices[choiceIndex].Text);
-
-        //    int thisChoiceIndex = choiceIndex; // This is necessary for some reason - something to do with variable scope
-        //    newButton.onClick.AddListener(() => ButtonPressed(thisChoiceIndex));
-        //}
     }
-
-    public void ButtonPressed(int choiceIndex)
-    {
-        Debug.Log(choiceIndex + StoryNode.CurrentStoryNode.name);
-        Choice choiceChosen = StoryNode.CurrentStoryNode.Choices[choiceIndex];
-
-        if (choiceChosen is BasicChoice bChoice)
-        {
-            StoryNode.CurrentStoryNode = bChoice.NextStoryNode;
-        }
-        else
-        {
-            SceneManager.LoadSceneAsync((choiceChosen as MinigameChoice).MinigameScene);
-        }
-    }
-
 }

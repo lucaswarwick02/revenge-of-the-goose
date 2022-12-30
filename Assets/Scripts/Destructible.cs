@@ -36,15 +36,14 @@ public class Destructible : MonoBehaviour
     {
         if (type == DestructableType.Enemy)
         {
-            PlaythroughStats.EnemyKillCount++;
+            PlaythroughStats.IncrementEnemyKillCount(transform.position);
         }
         else if (type == DestructableType.Friendly)
         {
-            PlaythroughStats.FriendlyKillCount++;
+            PlaythroughStats.IncrementFriendlyKillCount(transform.position);
         }
 
-        // display +/- points here
-        PlaythroughStats.DestructionScore += destructionScore;
+        PlaythroughStats.AddDestructionScore(destructionScore, transform.position);
 
         OnDestroyed.Invoke();
         Destroy(gameObject);
