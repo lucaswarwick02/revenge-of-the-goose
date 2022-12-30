@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 346937030}
-  zFollowOffset: -5.25
+  zFollowOffset: -4.5
 --- !u!1 &1144982461
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,22 +463,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
-      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].time
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
-      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].inSlope
-      value: -0.20920739
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
-      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].inWeight
-      value: 0.01807635
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108742072506294006, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
-      propertyPath: damageMultiplierByDistance.m_Curve.Array.data[2].outSlope
-      value: -0.20920739
-      objectReference: {fileID: 0}
     - target: {fileID: 4187847514466876661, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
       propertyPath: m_RootOrder
       value: 3

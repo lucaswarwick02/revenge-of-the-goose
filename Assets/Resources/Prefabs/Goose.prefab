@@ -149,7 +149,8 @@ MonoBehaviour:
   arms: {fileID: 6535664692848304913}
   rotationSensitivity: 2
   barrelLength: 1
-  maxShootingDistance: 10
+  maxShootingDistance: 12
+  shootingDistanceLeniency: 1
   baseDamage: 100
   damageMultiplierByNumberOfCollisionsBefore:
     serializedVersion: 2
