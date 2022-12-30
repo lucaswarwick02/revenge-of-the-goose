@@ -719,6 +719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902042227}
   - component: {fileID: 1902042226}
+  - component: {fileID: 1902042228}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -754,6 +755,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1902042228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902042225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac7114697045d24e9611ba11be8ca5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1556502564}
+  mouseCursors:
+  - CursorID: crosshair
+    CursorPrefab: {fileID: 4498717764382592753, guid: 284b5484081af5b489974058c73467a1, type: 3}
+    UpdatePositionAutomatically: 0
+    LerpSpeed: 25
+  - CursorID: mouse_dot
+    CursorPrefab: {fileID: 4498717764382592753, guid: bccd240eef4172e46b843fab7b63cfe5, type: 3}
+    UpdatePositionAutomatically: 1
+    LerpSpeed: 20
 --- !u!1 &2023502592
 GameObject:
   m_ObjectHideFlags: 0

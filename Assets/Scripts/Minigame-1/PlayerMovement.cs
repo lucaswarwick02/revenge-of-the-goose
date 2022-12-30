@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MouseTracker))]
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
