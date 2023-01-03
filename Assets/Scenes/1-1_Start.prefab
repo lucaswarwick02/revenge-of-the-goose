@@ -708,13 +708,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22590050bf13c0244bdaaab2d399a313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {fileID: 0}
-  choiceCameraSnapPoint: {fileID: 0}
-  choices:
+  gateways:
   - gateway: {fileID: 7288688100972666697}
-    resultingNode: {fileID: 0}
-  - gateway: {fileID: 0}
-    resultingNode: {fileID: 0}
+    resultingArea: {fileID: 1829712235895486512}
 --- !u!1 &6467840873006286939
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,28 +1,19 @@
-using Game.Utility;
 using TMPro;
 using UnityEngine;
 
 public class ExampleUI : MonoBehaviour
 {
-    //public static Vector3 CurrentScoreTextWorldPos { get; private set; }
-
-    [SerializeField] private StoryNode startNode;
-
     [Header("Destruction Scoring")]
     [SerializeField] private TMP_Text destructionScoreText;
     [SerializeField] private DestructionScorePopup scorePopupPrefab;
 
     void OnEnable()
     {
-        StoryNode.OnCurrentStoryNodeChange += UpdateUI;
-        StoryNode.CurrentStoryNode = startNode;
-
         PlaythroughStats.OnDestructionScoreChanged += UpdateDestructionScore;
     }
 
     void OnDisable()
     {
-        StoryNode.OnCurrentStoryNodeChange -= UpdateUI;
         PlaythroughStats.OnDestructionScoreChanged -= UpdateDestructionScore;
     }
 
@@ -38,9 +29,5 @@ public class ExampleUI : MonoBehaviour
     private void SetDestructionScore(int score)
     {
         destructionScoreText.text = $"{score}";
-    }
-
-    public void UpdateUI(StoryNode node)
-    {
     }
 }

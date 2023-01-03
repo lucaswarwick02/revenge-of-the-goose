@@ -3,38 +3,30 @@ using UnityEngine;
 
 public class MapArea : MonoBehaviour
 {
-    [SerializeField] private Transform startPoint; // ! Depricated
-    [SerializeField] private Transform choiceCameraSnapPoint; // ! Depricated
-    [SerializeField] private MapAreaChoice[] choices;
+    public static event Action<MapArea> OnNextMapAreaChosen;
 
-    public Action<Vector3> OnChoiceTriggered;
-    public Action<StoryNode> OnNextStoryNodeChosen;
+    [SerializeField] private MapAreaChoice[] gateways;
 
     private void OnEnable()
     {
-        foreach (MapAreaChoice choice in choices)
+        foreach (MapAreaChoice choice in gateways)
         {
             // When the map is loaded, set the choice trigger's to move to the corresponding node
-            choice.gateway.OnPlayerEnteredGateway += () => MoveToNextStoryNode(choice.resultingNode);
+            choice.gateway.OnPlayerEnteredGateway += () => MoveToNextArea(choice.resultingArea);
         }
 
-        OnNextStoryNodeChosen += node => { if (node == null) { Debug.LogError("StoryNode not set!"); } else { Debug.Log("Next StoryNode = " + node.name); } };
+        OnNextMapAreaChosen += node => { if (node == null) { Debug.LogError("StoryNode not set!"); } else { Debug.Log("Next StoryNode = " + node.name); } };
     }
 
-    private void StartChoice()
+    private void MoveToNextArea(MapArea newArea)
     {
-        OnChoiceTriggered?.Invoke(choiceCameraSnapPoint.position); // ! Depricated
-    }
-
-    private void MoveToNextStoryNode(StoryNode newNode)
-    {
-        OnNextStoryNodeChosen?.Invoke(newNode);
+        OnNextMapAreaChosen?.Invoke(newArea);
     }
 
     [Serializable]
     public struct MapAreaChoice
     {
         public ChoiceGateway gateway;
-        public StoryNode resultingNode;
+        public MapArea resultingArea;
     }
 }

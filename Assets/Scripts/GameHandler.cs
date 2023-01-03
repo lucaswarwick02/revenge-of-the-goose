@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public MapArea startMapArea;
+    [SerializeField] private MapArea startMapArea;
+
+    public MapArea CurrentMapArea { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        StoryNode.OnCurrentStoryNodeChange += UpdateScene;
-        Instantiate(startMapArea);
+        MapArea.OnNextMapAreaChosen += UpdateScene;
+        CurrentMapArea = Instantiate(startMapArea);
     }
 
-    public void UpdateScene (StoryNode node)
+    public void UpdateScene (MapArea newArea)
     {
-
+        Destroy(CurrentMapArea.gameObject);
+        CurrentMapArea = Instantiate(newArea);
+        // Set player back to (0,0)
     }
 }
