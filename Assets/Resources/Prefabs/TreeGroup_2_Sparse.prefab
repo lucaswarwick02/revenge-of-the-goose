@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

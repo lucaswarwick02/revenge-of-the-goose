@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 186833333733567200, guid: 1d6faf036d2ad394fa564d23f7b28189, type: 3}
       propertyPath: m_Name
-      value: TreeGroup
+      value: TreeGroup_Sparse
       objectReference: {fileID: 0}
     - target: {fileID: 689628653421973970, guid: 1d6faf036d2ad394fa564d23f7b28189, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25,6 +25,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3459501265972452348, guid: 1d6faf036d2ad394fa564d23f7b28189, type: 3}
       propertyPath: m_LocalScale.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 1d6faf036d2ad394fa564d23f7b28189, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 3459501265972452348, guid: 1d6faf036d2ad394fa564d23f7b28189, type: 3}
