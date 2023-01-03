@@ -549,7 +549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3653982975f887a4b9583bb6aaf14481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startNode: {fileID: 11400000, guid: 24e0b8ae15e867b4d96da1bf528df05c, type: 2}
   destructionScoreText: {fileID: 1567651408}
   scorePopupPrefab: {fileID: -7542677075567174285, guid: 01540cfb31d9d2e48a577904dcef4668, type: 3}
 --- !u!1 &1567651406
@@ -781,7 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6032c0ed2b3cd684baada916f94c4402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMapArea: {fileID: 1829712235895486512, guid: 2bf25706fe9eb784abee46dc09d0bdd4, type: 3}
+  startMapArea: {fileID: 1829712235895486512, guid: db4dde28cbe31af4783f69b822a41ea7, type: 3}
 --- !u!4 &1902042227
 Transform:
   m_ObjectHideFlags: 0
