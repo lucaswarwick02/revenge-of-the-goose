@@ -434,10 +434,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goose
       objectReference: {fileID: 0}
-    - target: {fileID: 4616713546710632507, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
-      propertyPath: m_Size.z
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
 --- !u!1 &1556502560
