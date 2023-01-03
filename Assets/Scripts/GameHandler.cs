@@ -17,6 +17,5 @@ public class GameHandler : MonoBehaviour
     {
         Destroy(CurrentMapArea.gameObject);
         CurrentMapArea = Instantiate(newArea);
-        // Set player back to (0,0)
     }
 }
