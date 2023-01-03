@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &36552962119035417
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 186833333733567200, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_Name
+      value: TreeGroup_2_Sparse
+      objectReference: {fileID: 0}
+    - target: {fileID: 689628653421973970, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664015928295241088, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459501265972452348, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416969943025149358, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906680317221066785, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432391854107527668, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718122115774217385, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.38
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b81d7a5d8fb62b418381c7e2048104b, type: 3}
