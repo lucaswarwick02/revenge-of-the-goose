@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ed010e6b098ce142bdaeedd5df2d495, type: 3}
-  m_Name: 1A_GoAroundLake
+  m_Script: {fileID: 11500000, guid: 7f07e4c924382d74da1e481dbc31fded, type: 3}
+  m_Name: 3_Choice
   m_EditorClassIdentifier: 
-  Text: Go Around Lake
-  MinigameScene: 
-  NextStoryNodeIfWin: {fileID: 0}
-  NextStoryNodeIfLose: {fileID: 0}
+  Text: Choice 1
+  NextStoryNode: {fileID: 0}

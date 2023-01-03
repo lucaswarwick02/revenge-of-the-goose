@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prompt: Happy lake. Bitter about dead geese.
   Choices:
-  - {fileID: 11400000, guid: e8bfae875393c6d4baaed577c3ce7c72, type: 2}
-  - {fileID: 11400000, guid: 464afa725bc8df74a9e27209c5c4621e, type: 2}
+  - {fileID: 11400000, guid: c536b083e8b87c24885f84c77fe27c95, type: 2}
+  - {fileID: 11400000, guid: cce13cbcd3c6581498357c9b485d84c9, type: 2}
   GroundSprite: {fileID: 0}
