@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6032c0ed2b3cd684baada916f94c4402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMapArea: {fileID: 1829712235895486512, guid: db4dde28cbe31af4783f69b822a41ea7, type: 3}
+  startMapArea: {fileID: 1829712235895486512, guid: 2bf25706fe9eb784abee46dc09d0bdd4, type: 3}
 --- !u!4 &1902042227
 Transform:
   m_ObjectHideFlags: 0
