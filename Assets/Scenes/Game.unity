@@ -261,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 346937030}
   zFollowOffset: -4.5
+  gooseBoundaryPrefab: {fileID: 7402911117813462253, guid: 654e3eb369b0eac4ab1bc6b54e4e1984, type: 3}
 --- !u!1 &1184578674
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +433,10 @@ PrefabInstance:
     - target: {fileID: 4187847514466876663, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
       propertyPath: m_Name
       value: Goose
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616713546710632507, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
+      propertyPath: m_Size.z
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
