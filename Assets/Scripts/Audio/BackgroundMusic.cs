@@ -15,8 +15,10 @@ public class BackgroundMusic : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static void PlayMusic () {
-        if (INSTANCE.audioSource.isPlaying) return;
+    public static void PlayMusic (AudioClip audioClip) {
+        StopMusic();
+
+        INSTANCE.audioSource.clip = audioClip;
         INSTANCE.audioSource.Play();
     }
 

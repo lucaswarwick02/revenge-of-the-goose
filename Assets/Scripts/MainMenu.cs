@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] int gameSceneIndex;
+
+    [Header("Background Music")]
     [SerializeField] BackgroundMusic backgroundMusic;
+    [SerializeField] AudioClip musicClip;
 
     private void Start() {
         Invoke("EnableMusic", 4f);
@@ -27,6 +30,6 @@ public class MainMenu : MonoBehaviour
     }
 
     void EnableMusic () {
-        BackgroundMusic.PlayMusic();
+        BackgroundMusic.PlayMusic(musicClip);
     }
 }
