@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gateways:
   - gateway: {fileID: 7288688100972666697}
-    resultingArea: {fileID: 0}
+    resultingArea: {fileID: 1829712235895486512, guid: 2bf25706fe9eb784abee46dc09d0bdd4, type: 3}
 --- !u!1 &4281774661486913855
 GameObject:
   m_ObjectHideFlags: 0

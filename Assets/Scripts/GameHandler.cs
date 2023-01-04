@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
     public static bool isPaused = false;
+
+    public static event Action OnSceneUpdated;
     
     [SerializeField] private MapArea startMapArea;
 
@@ -12,12 +15,17 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         MapArea.OnNextMapAreaChosen += UpdateScene;
-        CurrentMapArea = Instantiate(startMapArea);
+        UpdateScene(startMapArea);
     }
 
     public void UpdateScene (MapArea newArea)
     {
-        Destroy(CurrentMapArea.gameObject);
+        if (CurrentMapArea != null)
+        {
+            Destroy(CurrentMapArea.gameObject);
+        }
+
         CurrentMapArea = Instantiate(newArea);
+        OnSceneUpdated?.Invoke();
     }
 }

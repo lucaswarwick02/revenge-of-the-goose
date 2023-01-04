@@ -15,24 +15,26 @@ public static class PlaythroughStats
     }
 
 
-    public static event Action<int, int, Vector3> OnEnemyKillCountChanged;
+    // Event for when the enemy kill count is incremented <new count, world position of kill event>
+    public static event Action<int, Vector3> OnEnemyKilled;
 
     public static int EnemyKillCount { get; private set; }
 
-    public static void IncrementEnemyKillCount(Vector3 atPosition, int noKilled = 1)
+    public static void IncrementEnemyKillCount(Vector3 atPosition)
     {
-        EnemyKillCount += noKilled;
-        OnEnemyKillCountChanged?.Invoke(EnemyKillCount, noKilled, atPosition);
+        EnemyKillCount++;
+        OnEnemyKilled?.Invoke(EnemyKillCount, atPosition);
     }
 
 
-    public static event Action<int, int, Vector3> OnFriendlyKillCountChanged;
+    // Event for when the animal kill count is incremented <new count, world position of kill event>
+    public static event Action<int, Vector3> OnAnimalKilled;
 
-    public static int FriendlyKillCount { get; private set; }
+    public static int AnimalKillCount { get; private set; }
 
-    public static void IncrementFriendlyKillCount(Vector3 atPosition, int noKilled = 1)
+    public static void IncrementAnimalKillCount(Vector3 atPosition)
     {
-        FriendlyKillCount += noKilled;
-        OnFriendlyKillCountChanged?.Invoke(FriendlyKillCount, noKilled, atPosition);
+        AnimalKillCount++;
+        OnAnimalKilled?.Invoke(AnimalKillCount, atPosition);
     }
 }

@@ -42,7 +42,7 @@ public class Destructible : MonoBehaviour
         }
         else if (type == DestructableType.Friendly)
         {
-            PlaythroughStats.IncrementFriendlyKillCount(transform.position);
+            PlaythroughStats.IncrementAnimalKillCount(transform.position);
         }
 
         PlaythroughStats.AddDestructionScore(destructionScore, transform.position);
