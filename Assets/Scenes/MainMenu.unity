@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSceneIndex: 1
-  intro: {fileID: 0}
+  intro: {fileID: 1190492722}
   backgroundMusic: {fileID: 310129582}
   musicClip: {fileID: 8300000, guid: bde4965d47600954fbdf5f9da6c7980f, type: 3}
 --- !u!114 &226300122
