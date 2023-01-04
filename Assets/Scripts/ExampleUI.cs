@@ -7,6 +7,9 @@ public class ExampleUI : MonoBehaviour
     [SerializeField] private TMP_Text destructionScoreText;
     [SerializeField] private DestructionScorePopup scorePopupPrefab;
 
+    [Header("UI Panels")]
+    [SerializeField] private PausePanel pausePanel;
+
     void OnEnable()
     {
         PlaythroughStats.OnDestructionScoreChanged += UpdateDestructionScore;
@@ -29,5 +32,11 @@ public class ExampleUI : MonoBehaviour
     private void SetDestructionScore(int score)
     {
         destructionScoreText.text = $"{score}";
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            pausePanel.Pause();
+        }
     }
 }
