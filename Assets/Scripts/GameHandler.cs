@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    public static bool isPaused = false;
+    
     [SerializeField] private MapArea startMapArea;
 
     public MapArea CurrentMapArea { get; private set; }
