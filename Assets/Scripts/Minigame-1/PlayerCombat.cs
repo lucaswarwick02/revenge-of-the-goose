@@ -31,7 +31,7 @@ public class PlayerCombat : MonoBehaviour
 
     private float currentGunAngle;
 
-    public bool CanShoot { get; private set; } = true;
+    public bool canShoot = true;
 
     private static bool RaycastPlaneIntersection(Vector3 linePoint, Vector3 lineDirection, out Vector3 intersectPoint)
         => VectorMaths.LinePlaneIntersection(new Vector3(0, MOUSE_PLANE_HEIGHT, 0), Vector3.up, linePoint, lineDirection, out intersectPoint);
@@ -49,26 +49,16 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         if (GameHandler.isPaused) return;
-        
+
         currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
 
-        if (CanShoot && Input.GetMouseButtonDown(0))
+        if (canShoot && Input.GetMouseButtonDown(0))
         {
             animator.SetTrigger("Shoot");
             Shoot();
         }
 
         CalculateShootingInfoAndRotateArms();
-    }
-
-    public void DisableShooting()
-    {
-        CanShoot = false;
-    }
-
-    public void EnableShooting()
-    {
-        CanShoot = true;
     }
 
     /// <summary>
