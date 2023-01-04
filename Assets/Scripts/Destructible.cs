@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +9,8 @@ public class Destructible : MonoBehaviour
     [SerializeField] private float hitPoints = 100;
     [SerializeField] private int destructionScore;
     [Space]
-    public UnityEvent OnDestroyed;
+    [SerializeField] private bool destroyImmediately = true;
+    public UnityEvent<RaycastHit, Vector3> OnDestroyed;
     public UnityEvent<RaycastHit> OnHit;
 
     private enum DestructableType
@@ -18,21 +20,21 @@ public class Destructible : MonoBehaviour
         Friendly,
     }
 
-    public bool InflictDamage(float amount, RaycastHit hitInfo)
+    public bool InflictDamage(float amount, RaycastHit hitInfo, Vector3 origin)
     {
         hitPoints -= amount;
-        OnHit.Invoke(hitInfo);
+        OnHit?.Invoke(hitInfo);
 
         if (hitPoints <= 0)
         {
-            Destroy();
+            BeginDestruction(hitInfo, origin);
             return true;
         }
 
         return false;
     }
 
-    private void Destroy()
+    private void BeginDestruction(RaycastHit hitInfo, Vector3 origin)
     {
         if (type == DestructableType.Enemy)
         {
@@ -45,7 +47,11 @@ public class Destructible : MonoBehaviour
 
         PlaythroughStats.AddDestructionScore(destructionScore, transform.position);
 
-        OnDestroyed.Invoke();
-        Destroy(gameObject);
+        OnDestroyed?.Invoke(hitInfo, origin);
+
+        if (destroyImmediately)
+        {
+            Destroy(gameObject);
+        }
     }
 }

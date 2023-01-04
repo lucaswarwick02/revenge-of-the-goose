@@ -13,8 +13,10 @@ public class RabbitController : MonoBehaviour
 
     private Rigidbody rb;
     private Animator anim;
-
+    
     private float nextJumpTime;
+
+    public bool IsDead { get; set; }
 
     private void Awake()
     {
@@ -24,19 +26,22 @@ public class RabbitController : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > nextJumpTime)
+        if (!IsDead)
         {
-            nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
-            StartJump();
-        }
+            if (Time.time > nextJumpTime)
+            {
+                nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
+                StartJump();
+            }
 
-        if (rb.velocity.x > 0.01f)
-        {
-            image.localScale = new Vector3(-1, 1, 1);
-        }
-        else if (rb.velocity.x < -0.01f)
-        {
-            image.localScale = new Vector3(1, 1, 1);
+            if (rb.velocity.x > 0.01f)
+            {
+                image.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (rb.velocity.x < -0.01f)
+            {
+                image.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 
@@ -49,5 +54,21 @@ public class RabbitController : MonoBehaviour
     {
         float jumpSpeed = UnityEngine.Random.value * (maxJumpSpeed - minJumpSpeed) + minJumpSpeed;
         rb.velocity = jumpSpeed * (Quaternion.Euler(0, UnityEngine.Random.value * 360, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
+    }
+
+    public void StartDeath(RaycastHit hitInfo, Vector3 origin)
+    {
+        IsDead = true;
+        anim.SetTrigger("Death");
+
+        Vector3 impactDir = Vector3.RotateTowards((hitInfo.point - origin).normalized, Vector3.up, Mathf.Deg2Rad * 30, 0);
+        rb.velocity = impactDir * 4;
+
+        enabled = false;
+    }
+
+    private void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

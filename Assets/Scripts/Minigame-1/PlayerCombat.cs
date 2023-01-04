@@ -126,7 +126,7 @@ public class PlayerCombat : MonoBehaviour
             if (destructibleObj is not null)
             {
                 float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - raycastBarrelPos).magnitude);
-                destructibleObj.InflictDamage(damage, hit);
+                destructibleObj.InflictDamage(damage, hit, raycastBarrelPos);
             }
             else
             {
