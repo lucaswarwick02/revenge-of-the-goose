@@ -54,11 +54,17 @@ public class PlayerCombat : MonoBehaviour
 
         if (canShoot && Input.GetMouseButtonDown(0))
         {
+            canShoot = false;
             animator.SetTrigger("Shoot");
             Shoot();
         }
 
         CalculateShootingInfoAndRotateArms();
+    }
+
+    public void FinishShooting()
+    {
+        canShoot = true;
     }
 
     /// <summary>
