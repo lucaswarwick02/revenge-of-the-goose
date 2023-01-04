@@ -346,7 +346,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 771163941}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1213962738}
+        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
+        m_MethodName: ExitToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &771163941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +493,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 824737450}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1213962738}
+        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
+        m_MethodName: Continue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &824737450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,7 +1209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructionScoreText: {fileID: 1567651408}
   scorePopupPrefab: {fileID: -7542677075567174285, guid: 01540cfb31d9d2e48a577904dcef4668, type: 3}
-  pausePanel: {fileID: 1213962734}
+  pausePanel: {fileID: 1213962738}
 --- !u!1 &1567651406
 GameObject:
   m_ObjectHideFlags: 0
