@@ -596,6 +596,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  canShoot: 1
 --- !u!54 &987521240307639403
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -677,7 +678,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 9f4b99b12ee74544aad6fc6350e5f421, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.35
   Loop: 0
   Mute: 0
   Spatialize: 0
