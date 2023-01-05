@@ -28,7 +28,7 @@ public class PausePanel : MonoBehaviour
     }
 
     public void ExitToMainMenu () {
-        UnPause();
+        GameHandler.isPaused = false;
         SceneManager.LoadScene("MainMenu");
     }
 }

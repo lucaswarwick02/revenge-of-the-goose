@@ -13,11 +13,19 @@ public class Destructible : MonoBehaviour
     public UnityEvent<RaycastHit, Vector3> OnDestroyed;
     public UnityEvent<RaycastHit> OnHit;
 
+    private void Start() {
+        if (type == DestructableType.Boss) {
+            BossBar.SetupSlider(hitPoints, transform);
+            OnHit.AddListener(_ => BossBar.UpdateHealthBar(hitPoints) );
+        }
+    }
+
     private enum DestructableType
     {
         Obstacle,
         Enemy,
         Friendly,
+        Boss,
     }
 
     public bool InflictDamage(float amount, RaycastHit hitInfo, Vector3 origin)
