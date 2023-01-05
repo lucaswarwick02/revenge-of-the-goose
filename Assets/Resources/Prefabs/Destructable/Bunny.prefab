@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 4266101814370703392}
   - component: {fileID: 4753680620180607054}
   m_Layer: 7
-  m_Name: KillableBunny
+  m_Name: Bunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
