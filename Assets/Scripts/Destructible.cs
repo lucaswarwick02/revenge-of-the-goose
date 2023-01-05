@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Destructible : MonoBehaviour
 {
+    [SerializeField] private string destructibleName;
     [SerializeField] private DestructableType type;
     [SerializeField] private float hitPoints = 100;
     [SerializeField] private int destructionScore;
@@ -15,7 +16,7 @@ public class Destructible : MonoBehaviour
 
     private void Start() {
         if (type == DestructableType.Boss) {
-            BossBar.SetupSlider(hitPoints, transform);
+            BossBar.SetupSlider(hitPoints, transform, destructibleName);
             OnHit.AddListener(_ => BossBar.UpdateHealthBar(hitPoints) );
         }
     }

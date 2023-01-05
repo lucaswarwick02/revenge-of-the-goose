@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BossBar : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class BossBar : MonoBehaviour
 
     [SerializeField] private Slider slider;
     [SerializeField] private Transform player;
+    [SerializeField] private TextMeshProUGUI bossName;
 
-    public Transform destructable;
+    private Transform destructable;
 
     private void Awake() {
         INSTANCE = this;
@@ -30,10 +32,11 @@ public class BossBar : MonoBehaviour
         }
     }
 
-    public static void SetupSlider(float maxValue, Transform destructable) {
+    public static void SetupSlider(float maxValue, Transform destructable, string bossName) {
         INSTANCE.slider.maxValue = maxValue;
         INSTANCE.slider.value = maxValue;
         INSTANCE.destructable = destructable;
+        INSTANCE.bossName.text = bossName;
     }
 
     public static void UpdateHealthBar (float value) {
@@ -42,9 +45,11 @@ public class BossBar : MonoBehaviour
 
     private void HideBossBar () {
         slider.gameObject.SetActive(false);
+        bossName.gameObject.SetActive(false);
     }
 
     private void ShowBossBar () {
         slider.gameObject.SetActive(true);
+        bossName.gameObject.SetActive(true);
     }
 }
