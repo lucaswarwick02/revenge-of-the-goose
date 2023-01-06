@@ -5,6 +5,7 @@ public class MapArea : MonoBehaviour
 {
     public static event Action<MapArea> OnNextMapAreaChosen;
 
+    [SerializeField] public bool NeutralArea;
     [SerializeField] private MapAreaChoice[] gateways;
 
     private void OnEnable()

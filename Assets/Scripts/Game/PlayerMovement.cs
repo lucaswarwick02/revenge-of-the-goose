@@ -12,7 +12,12 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        MapArea.OnNextMapAreaChosen += OnNewArea;
+        GameHandler.OnMapAreaChanged += OnMapAreaChanged;
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
     }
 
     private void FixedUpdate() {
@@ -28,8 +33,9 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", rb.velocity.magnitude);
     }
 
-    private void OnNewArea(MapArea area)
+    private void OnMapAreaChanged(bool inNeutralArea)
     {
         transform.position = Vector3.zero;
+        animator.SetBool("Neutral", inNeutralArea);
     }
 }

@@ -1,5 +1,6 @@
 using Game.Utility;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -38,8 +39,9 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
+        GameHandler.OnMapAreaChanged += OnMapAreaChanged;
+
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
         mouseCursor = FindObjectOfType<MouseCursor>();
         animator = GetComponent<Animator>();
@@ -48,7 +50,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if (GameHandler.IsPaused) return;
+        if (GameHandler.IsPaused || GameHandler.InNeutralArea) return;
 
         currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
 
@@ -60,6 +62,11 @@ public class PlayerCombat : MonoBehaviour
         }
 
         CalculateShootingInfoAndRotateArms();
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
     }
 
     public void FinishShooting()
@@ -131,6 +138,12 @@ public class PlayerCombat : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void OnMapAreaChanged(bool inNeutralArea)
+    {
+        canShoot = !inNeutralArea;
+        animator.SetBool("Neutral", inNeutralArea);
     }
 
 #if UNITY_EDITOR

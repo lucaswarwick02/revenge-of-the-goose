@@ -13,11 +13,11 @@ public class AnimalCommentController : MonoBehaviour
 
     private void Awake()
     {
-        GameHandler.OnSceneUpdated += GetListOfAnimalCommenters;
+        GameHandler.OnMapAreaChanged += GetListOfAnimalCommenters;
         PlaythroughStats.OnAnimalKilled += OnAnimalKilled;
     }
 
-    private void GetListOfAnimalCommenters()
+    private void GetListOfAnimalCommenters(bool inNeutralArea)
     {
         animalCommenters = FindObjectsOfType<AnimalCommenter>();
     }

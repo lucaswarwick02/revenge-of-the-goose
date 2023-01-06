@@ -12,6 +12,8 @@ public class MouseCursor : MonoBehaviour
 
     private void OnEnable()
     {
+        GameHandler.OnMapAreaChanged += OnMapAreaChanged;
+
         Cursor.visible = false;
 
         for (int i = 0; i < mouseCursors.Length; i++)
@@ -24,18 +26,25 @@ public class MouseCursor : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        for (int i = 0; i < cursorInstances.Values.Count; i++)
+        if (!GameHandler.InNeutralArea)
         {
-            MouseCursorInfo cursor = cursorInstances.Values.ElementAt(i);
-
-            if (cursor.UpdatePositionAutomatically)
+            for (int i = 0; i < cursorInstances.Values.Count; i++)
             {
-                cursor.TargetPosition = Input.mousePosition;
-            }
+                MouseCursorInfo cursor = cursorInstances.Values.ElementAt(i);
 
-            cursor.Instance.position = Vector2.Lerp(cursor.Instance.position, cursor.TargetPosition, cursor.LerpSpeed * Time.deltaTime);
+                if (cursor.UpdatePositionAutomatically)
+                {
+                    cursor.TargetPosition = Input.mousePosition;
+                }
+
+                cursor.Instance.position = Vector2.Lerp(cursor.Instance.position, cursor.TargetPosition, cursor.LerpSpeed * Time.deltaTime);
+            }
         }
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
     }
 
     public void MoveCursorOverWorldPosition(string cursorID, Vector3 worldPosition)
@@ -43,6 +52,24 @@ public class MouseCursor : MonoBehaviour
         MouseCursorInfo cursorInfo = cursorInstances[cursorID];
         cursorInfo.TargetPosition = Camera.main.WorldToScreenPoint(worldPosition);
         cursorInstances[cursorID] = cursorInfo;
+    }
+
+    private void OnMapAreaChanged(bool inNeutralArea)
+    {
+        if (inNeutralArea)
+        {
+            foreach (MouseCursorInfo cursor in cursorInstances.Values)
+            {
+                cursor.Instance.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (MouseCursorInfo cursor in cursorInstances.Values)
+            {
+                cursor.Instance.gameObject.SetActive(true);
+            }
+        }
     }
 
     [Serializable]

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public static event Action OnSceneUpdated;
+    public static event Action<bool> OnMapAreaChanged;
 
     public static event Action<Vector3> OnGameOver;
 
@@ -12,6 +12,8 @@ public class GameHandler : MonoBehaviour
     public static bool IsPaused { get; private set; }
 
     public static MapArea CurrentMapArea { get; private set; }
+
+    public static bool InNeutralArea { get; private set; }
 
     [SerializeField] private MapArea startMapArea;
 
@@ -42,7 +44,8 @@ public class GameHandler : MonoBehaviour
         }
 
         CurrentMapArea = Instantiate(newArea);
-        OnSceneUpdated?.Invoke();
+        InNeutralArea = newArea.NeutralArea;
+        OnMapAreaChanged?.Invoke(InNeutralArea);
     }
 
     public static void SetPaused(bool pause)

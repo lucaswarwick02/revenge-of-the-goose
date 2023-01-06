@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22590050bf13c0244bdaaab2d399a313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NeutralArea: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
     resultingArea: {fileID: 1829712235895486512, guid: db4dde28cbe31af4783f69b822a41ea7, type: 3}
