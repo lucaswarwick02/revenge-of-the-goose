@@ -9,8 +9,11 @@ public class Destructible : MonoBehaviour
     [SerializeField] private int destructionScore;
     [Space]
     [SerializeField] private bool destroyImmediately = true;
+
     public UnityEvent<RaycastHit, Vector3> OnDestroyed;
     public UnityEvent<RaycastHit> OnHit;
+
+    public bool IsDestroyed { get; private set; }
 
     private void Start() {
         if (type == DestructableType.Boss) {
@@ -32,7 +35,7 @@ public class Destructible : MonoBehaviour
         hitPoints -= amount;
         OnHit?.Invoke(hitInfo);
 
-        if (hitPoints <= 0)
+        if (hitPoints <= 0 && !IsDestroyed)
         {
             BeginDestruction(hitInfo, origin);
             return true;
@@ -43,6 +46,8 @@ public class Destructible : MonoBehaviour
 
     private void BeginDestruction(RaycastHit hitInfo, Vector3 origin)
     {
+        IsDestroyed = true;
+
         if (type == DestructableType.Enemy)
         {
             PlaythroughStats.IncrementEnemyKillCount(transform.position);
