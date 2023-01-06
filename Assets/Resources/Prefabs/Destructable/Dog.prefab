@@ -79,7 +79,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.890625, y: 1.96875}
+  m_Size: {x: 0.4453125, y: 0.9067154}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 7165324616688830759, guid: b348dc00140741f40a47e43431ca06b6, type: 3}
   - {fileID: 7165324616688830759, guid: 62aa8acb941bede48b7e54715aa32ad1, type: 3}
 --- !u!1 &8802559812465712827
 GameObject:
@@ -155,6 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2541321628024724392}
+  - component: {fileID: 7036960829228381744}
   - component: {fileID: 4212203946987230527}
   - component: {fileID: 7303807506793078874}
   - component: {fileID: 4266101814370703392}
@@ -182,6 +182,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7036960829228381744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923316038243590325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9374b3ac93a5f87459ef591f66424cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  maxSightRange: 10
+  attackRange: 1
+  attackInterval: 3
+  attackDamage: 100
 --- !u!114 &4212203946987230527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,15 +211,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393a1598852fbc246b142ee172ea5fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  hitPoints: 80
-  destructionScore: 0
+  destructibleName: Dog
+  type: 1
+  hitPoints: 100
+  destructionScore: 5000
   destroyImmediately: 0
   OnDestroyed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RabbitController, Assembly-CSharp
+      - m_Target: {fileID: 7036960829228381744}
+        m_TargetAssemblyTypeName: DogController, Assembly-CSharp
         m_MethodName: StartDeath
         m_Mode: 0
         m_Arguments:
@@ -210,7 +228,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Death
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   OnHit:
@@ -267,7 +285,7 @@ Animator:
   m_GameObject: {fileID: 8923316038243590325}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1e24db1d4544703439ed1ff74c9c9da0, type: 2}
+  m_Controller: {fileID: 9100000, guid: b64d7be01c3cb4f479ad8b4b3f4943eb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
