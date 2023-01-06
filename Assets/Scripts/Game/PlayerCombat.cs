@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    private const int SHOTS_PER_RELOAD = 2;
     private const float MIN_SHOOT_ANGLE = -45;
     private const float MAX_SHOOT_ANGLE = 45;
     private const float MOUSE_PLANE_HEIGHT = 0.25f;
@@ -32,7 +33,13 @@ public class PlayerCombat : MonoBehaviour
 
     private float currentGunAngle;
 
-    public bool canShoot = true;
+    public int BulletsRemaining { get; private set; }
+
+    public bool Shooting { get; private set; }
+
+    public bool Reloading { get; private set; }
+
+    public bool CanShoot { get; private set; }
 
     private static bool RaycastPlaneIntersection(Vector3 linePoint, Vector3 lineDirection, out Vector3 intersectPoint)
         => VectorMaths.LinePlaneIntersection(new Vector3(0, MOUSE_PLANE_HEIGHT, 0), Vector3.up, linePoint, lineDirection, out intersectPoint);
@@ -54,10 +61,13 @@ public class PlayerCombat : MonoBehaviour
 
         currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
 
-        if (canShoot && Input.GetMouseButtonDown(0))
+        if (CanShoot && Input.GetMouseButtonDown(0) && !Shooting && !Reloading && BulletsRemaining > 0)
         {
-            canShoot = false;
+            BulletsRemaining--;
+
+            Shooting = true;
             animator.SetTrigger("Shoot");
+
             Shoot();
         }
 
@@ -71,7 +81,20 @@ public class PlayerCombat : MonoBehaviour
 
     public void FinishShooting()
     {
-        canShoot = true;
+        Shooting = false;
+
+        if (BulletsRemaining < 1)
+        {
+            Reloading = true;
+            animator.SetTrigger("Reload");
+        }
+    }
+
+    public void FinishReloading()
+    {
+        Reloading = false;
+        BulletsRemaining = SHOTS_PER_RELOAD;
+        Debug.Log("Hello");
     }
 
     /// <summary>
@@ -142,7 +165,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void OnMapAreaChanged(bool inNeutralArea)
     {
-        canShoot = !inNeutralArea;
+        CanShoot = !inNeutralArea;
+        Shooting = false;
+        Reloading = false;
+        BulletsRemaining = SHOTS_PER_RELOAD;
         animator.SetBool("Neutral", inNeutralArea);
     }
 
