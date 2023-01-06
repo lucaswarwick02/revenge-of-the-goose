@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (GameHandler.isPaused) return;
+        if (GameHandler.IsPaused) return;
 
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");

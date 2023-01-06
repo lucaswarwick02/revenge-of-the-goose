@@ -48,7 +48,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if (GameHandler.isPaused) return;
+        if (GameHandler.IsPaused) return;
 
         currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
 

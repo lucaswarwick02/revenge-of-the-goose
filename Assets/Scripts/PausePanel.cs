@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class PausePanel : MonoBehaviour
 {
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void Pause() {
-        if (GameHandler.isPaused) return;
+        if (GameHandler.IsPaused) return;
 
         gameObject.SetActive(true);
 
-        GameHandler.isPaused = true;
+        GameHandler.SetPaused(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -18,7 +23,7 @@ public class PausePanel : MonoBehaviour
     public void UnPause () {
         gameObject.SetActive(false);
 
-        GameHandler.isPaused = false;
+        GameHandler.SetPaused(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -27,8 +32,9 @@ public class PausePanel : MonoBehaviour
         UnPause();
     }
 
-    public void ExitToMainMenu () {
-        GameHandler.isPaused = false;
+    public void ExitToMainMenu ()
+    {
         SceneManager.LoadScene("MainMenu");
+        GameHandler.SetPaused(false);
     }
 }

@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (Time.time > canHealTime)
         {
-            CurrentHealth += HEALTH_GAIN_PER_SECOND * Time.deltaTime;
+            CurrentHealth = Mathf.Clamp(CurrentHealth + HEALTH_GAIN_PER_SECOND * Time.deltaTime, 0, MAX_HEALTH);
         }
     }
 }

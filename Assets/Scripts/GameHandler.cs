@@ -3,22 +3,38 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public static bool isPaused = false;
-
     public static event Action OnSceneUpdated;
-    
+
+    public static event Action<Vector3> OnGameOver;
+
+    public static bool IsGameOver { get; private set; }
+
+    public static bool IsPaused { get; private set; }
+
+    public static MapArea CurrentMapArea { get; private set; }
+
     [SerializeField] private MapArea startMapArea;
 
-    public MapArea CurrentMapArea { get; private set; }
+    private void Awake()
+    {
+        IsGameOver = false;
+        IsPaused = false;
+    }
 
-    // Start is called before the first frame update
     void Start()
     {
         MapArea.OnNextMapAreaChosen += UpdateScene;
+        PlayerHealth.OnPlayerDie += OnPlayerDied;
         UpdateScene(startMapArea);
     }
 
-    public void UpdateScene (MapArea newArea)
+    private void OnDisable()
+    {
+        MapArea.OnNextMapAreaChosen -= UpdateScene;
+        PlayerHealth.OnPlayerDie -= OnPlayerDied;
+    }
+
+    private void UpdateScene (MapArea newArea)
     {
         if (CurrentMapArea != null)
         {
@@ -27,5 +43,17 @@ public class GameHandler : MonoBehaviour
 
         CurrentMapArea = Instantiate(newArea);
         OnSceneUpdated?.Invoke();
+    }
+
+    public static void SetPaused(bool pause)
+    {
+        IsPaused = pause;
+        Time.timeScale = pause ? 0 : 1;
+    }
+
+    private void OnPlayerDied(Vector3 deathCausePosition)
+    {
+        IsGameOver = true;
+        OnGameOver?.Invoke(deathCausePosition);
     }
 }

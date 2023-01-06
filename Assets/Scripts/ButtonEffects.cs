@@ -29,7 +29,7 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             // Now the loop will execute on every end of frame until the condition is true
             transform.localScale = Vector3.one * Mathf.Lerp(1, sizeIncrease, t);
-            t += Time.deltaTime / fadeDuration;
+            t += Time.unscaledDeltaTime / fadeDuration;
             yield return new WaitForEndOfFrame(); // So that I return something at least.
         }
     }
@@ -41,7 +41,7 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             // Now the loop will execute on every end of frame until the condition is true
             transform.localScale = Vector3.one * Mathf.Lerp(sizeIncrease, 1, t);
-            t += Time.deltaTime / fadeDuration;
+            t += Time.unscaledDeltaTime / fadeDuration;
             yield return new WaitForEndOfFrame(); // So that I return something at least.
         }
     }

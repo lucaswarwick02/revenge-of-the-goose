@@ -9,15 +9,18 @@ public class ExampleUI : MonoBehaviour
 
     [Header("UI Panels")]
     [SerializeField] private PausePanel pausePanel;
+    [SerializeField] private GameOverPanel gameOverPanel;
 
     void OnEnable()
     {
         PlaythroughStats.OnDestructionScoreChanged += UpdateDestructionScore;
+        GameHandler.OnGameOver += OnGameOver;
     }
 
     void OnDisable()
     {
         PlaythroughStats.OnDestructionScoreChanged -= UpdateDestructionScore;
+        GameHandler.OnGameOver -= OnGameOver;
     }
 
     private void UpdateDestructionScore(int newScore, int deltaScore, Vector3 destructionEventPosition)
@@ -38,5 +41,10 @@ public class ExampleUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) {
             pausePanel.Pause();
         }
+    }
+
+    private void OnGameOver(Vector3 deathCausePosition)
+    {
+        gameOverPanel.gameObject.SetActive(true);
     }
 }
