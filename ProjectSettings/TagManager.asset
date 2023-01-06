@@ -14,7 +14,7 @@ TagManager:
   - PlayerShootable
   - PlayerObstacle
   - Player
-  - 
+  - IsolatedPlayerObstacle
   - 
   - 
   - 

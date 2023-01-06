@@ -94,7 +94,6 @@ public class PlayerCombat : MonoBehaviour
     {
         Reloading = false;
         BulletsRemaining = SHOTS_PER_RELOAD;
-        Debug.Log("Hello");
     }
 
     /// <summary>
