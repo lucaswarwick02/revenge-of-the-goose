@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 226300120}
   - component: {fileID: 226300121}
   - component: {fileID: 226300122}
+  - component: {fileID: 226300123}
   m_Layer: 0
   m_Name: MenuController
   m_TagString: Untagged
@@ -418,8 +419,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSceneIndex: 1
   intro: {fileID: 1190492722}
-  backgroundMusic: {fileID: 310129582}
-  musicClip: {fileID: 8300000, guid: bde4965d47600954fbdf5f9da6c7980f, type: 3}
 --- !u!114 &226300122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +434,51 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 56342cebefce15d4ca1a50843c8eae37, type: 2}
   musicSlider: {fileID: 718859672}
   soundsSlider: {fileID: 786891489}
+--- !u!114 &226300123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226300119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 7e1bc2cd6764ac44ab6d5f8e61ddc262, type: 2}
+    - {fileID: 11400000, guid: 693f0e18f78da214fb69f7f925e2fe72, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 226300121}
+          m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+          m_MethodName: AnimationEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 226300121}
+          m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+          m_MethodName: AnimationSoftEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &310129580
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +490,7 @@ GameObject:
   - component: {fileID: 310129583}
   - component: {fileID: 310129582}
   - component: {fileID: 310129581}
+  - component: {fileID: 310129584}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -465,7 +510,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1141050152386812023, guid: 56342cebefce15d4ca1a50843c8eae37, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -561,6 +606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154c7337e38fcd648afe8bb339a10227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MetalMusic: {fileID: 8300000, guid: bde4965d47600954fbdf5f9da6c7980f, type: 3}
+  NeutralMusic: {fileID: 0}
 --- !u!4 &310129583
 Transform:
   m_ObjectHideFlags: 0
@@ -576,6 +623,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &310129584
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310129580}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &350554570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,6 +1888,8 @@ PlayableDirector:
     value: {fileID: 1310201293}
   - key: {fileID: -137838673442608307, guid: f28a91fe2c2a3d647a913fcd14b48c29, type: 2}
     value: {fileID: 0}
+  - key: {fileID: -3985377728561732743, guid: f28a91fe2c2a3d647a913fcd14b48c29, type: 2}
+    value: {fileID: 226300123}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &1190492723

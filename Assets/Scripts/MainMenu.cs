@@ -4,19 +4,20 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
+using System;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] int gameSceneIndex;
+    public static event Action OnMainMenuStarted;
+    public static event Action OnMainMenuAnimationComplete;
+    public static event Action OnMainMenuAnimationSoftComplete;
 
+    [SerializeField] int gameSceneIndex;
     [SerializeField] private PlayableDirector intro;
 
-    [Header("Background Music")]
-    [SerializeField] BackgroundMusic backgroundMusic;
-    [SerializeField] AudioClip musicClip;
-
-    private void Start() {
-        Invoke("EnableMusic", 4f);
+    private void Start()
+    {
+        OnMainMenuStarted?.Invoke();
     }
 
     private void Update() {
@@ -38,7 +39,13 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(gameSceneIndex);
     }
 
-    void EnableMusic () {
-        BackgroundMusic.PlayMusic(musicClip);
+    public void AnimationEnd()
+    {
+        OnMainMenuAnimationComplete?.Invoke();
+    }
+
+    public void AnimationSoftEnd()
+    {
+        OnMainMenuAnimationSoftComplete?.Invoke();
     }
 }
