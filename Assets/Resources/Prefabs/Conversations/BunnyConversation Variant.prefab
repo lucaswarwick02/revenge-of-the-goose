@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630dd7c8755cb6941b713a08adf29e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversationID: 0
-  rangeToStartConversation: 3
+  conversationID: Rabbit
+  rangeToStartConversation: 4
   dialogue:
   - dialogueID: Intro
     text: Greetings!
