@@ -9,6 +9,7 @@ public class Destructible : MonoBehaviour
     [SerializeField] private int destructionScore;
     [Space]
     [SerializeField] private bool destroyImmediately = true;
+    [SerializeField] private bool contributeToEncounters = true;
 
     public UnityEvent<RaycastHit, Vector3> OnDestroyed;
     public UnityEvent<RaycastHit> OnHit;
@@ -21,11 +22,11 @@ public class Destructible : MonoBehaviour
             OnHit.AddListener(_ => BossBar.UpdateHealthBar(hitPoints) );
         }
 
-        if (type == DestructableType.Friendly) {
+        if (type == DestructableType.Friendly && contributeToEncounters) {
             PlaythroughStats.IncrementAnimalsEncountered();
         }
 
-        if (type == DestructableType.Enemy) {
+        if (type == DestructableType.Enemy && contributeToEncounters) {
             PlaythroughStats.IncrementEnemiesEncountered();
         }
     }

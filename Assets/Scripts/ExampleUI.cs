@@ -12,9 +12,6 @@ public class ExampleUI : MonoBehaviour
     [SerializeField] private GameOverPanel gameOverPanel;
     [SerializeField] private DialoguePanel dialoguePanel;
 
-    [Header("Player Information")]
-    [SerializeField] private TMP_Text ammoText;
-
     void OnEnable()
     {
         PlaythroughStats.OnDestructionScoreChanged += UpdateDestructionScore;
@@ -39,11 +36,6 @@ public class ExampleUI : MonoBehaviour
     private void SetDestructionScore(int score)
     {
         destructionScoreText.text = $"{score}";
-    }
-
-    private void SetAmmo(int ammo)
-    {
-        ammoText.text = $"Ammo: {ammo}";
     }
 
     private void Update() {
