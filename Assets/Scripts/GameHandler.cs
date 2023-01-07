@@ -19,6 +19,8 @@ public class GameHandler : MonoBehaviour
 
     private void Awake()
     {
+        PlaythroughStats.Reset();
+        Decisions.Reset();
         IsGameOver = false;
         IsPaused = false;
     }

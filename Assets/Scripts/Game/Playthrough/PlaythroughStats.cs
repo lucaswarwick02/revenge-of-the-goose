@@ -1,8 +1,16 @@
 using System;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public static class PlaythroughStats
 {
+    public static void Reset()
+    {
+        DestructionScore = 0;
+        EnemyKillCount = 0;
+        AnimalKillCount = 0;
+    }
+
     // Event for when the destruction score changes <new score, score change, world position of destruction event>
     public static event Action<int, int, Vector3> OnDestructionScoreChanged;
 

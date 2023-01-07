@@ -10,7 +10,7 @@ public class Converser : MonoBehaviour
     public static event Action<Vector3> OnStartConversation;
     public static event Action OnEndConversation;
 
-    [SerializeField] private int conversationID;
+    [SerializeField] private string conversationID;
     [SerializeField] private float rangeToStartConversation = 3;
     [Space]
     [SerializeField] private List<Dialogue> dialogue;
@@ -104,9 +104,17 @@ public class Converser : MonoBehaviour
     private void RecieveResponse(string responseID, string nextDialogueID)
     {
         // Record response for use later in story
+        if (Decisions.ConversationResponses.TryGetValue(conversationID, out List<string> conversationResponses))
+        {
+            conversationResponses.Add(responseID);
+            Decisions.ConversationResponses[conversationID] = conversationResponses;
+        }
+        else
+        {
+            Decisions.ConversationResponses.Add(conversationID, new List<string>() { responseID });
+        }
 
         // Move to next dialogue
-
         if (nextDialogueID == string.Empty)
         {
             EndConversation();
