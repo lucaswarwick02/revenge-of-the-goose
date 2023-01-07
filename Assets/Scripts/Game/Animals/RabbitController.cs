@@ -72,4 +72,16 @@ public class RabbitController : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void StandGround()
+    {
+        rb.mass = 100000000;
+        jumpingIsActive = false;
+    }
+
+    public void StopStandingGround()
+    {
+        rb.mass = 1;
+        jumpingIsActive = true;
+    }
 }
