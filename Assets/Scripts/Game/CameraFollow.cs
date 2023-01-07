@@ -1,25 +1,46 @@
 using UnityEngine;
 using Game.Utility;
-using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private float zFollowOffset = -5.25f;
-    [SerializeField] private float zGameOverOffset = -6f;
-    [SerializeField] private float cameraLerpSpeed;
-    [SerializeField] private GameObject gooseBoundaryPrefab;
-    [SerializeField] private float cameraGameOverFOV;
+    private const float FOLLOW_LERP_SPEED = 5;
+    private const float FOV_LERP_SPEED = 2;
 
-    private Vector3 targetCamPos;
+    private const float PLAYER_OFFSET = -4.5f;
+    private const float PLAYER_FOV = 40;
+
+    private const float CONVERSATION_OFFSET = -7.5f;
+    private const float CONVERSATION_FOV = 30;
+
+    private const float GAME_OVER_OFFSET = -7f;
+    private const float GAME_OVER_FOV = 20;
+
+    [SerializeField] private Transform player;
+    [SerializeField] private GameObject gooseBoundaryPrefab;
+
+    private enum Mode
+    {
+        Player,
+        Target,
+    }
+
+    private Mode currentMode;
+    private Transform target;
+    private Vector3 targetPos;
+    private float targetOffset;
+    private float targetFOV;
 
     private void Awake()
     {
+        SetPlayerMode();
+
         GameHandler.OnGameOver += OnGameOver;
+        Converser.OnStartConversation += OnStartConversation;
+        Converser.OnEndConversation += SetPlayerMode;
 
         if (player)
         {
-            UpdateTargetPosition(player.position, zFollowOffset, true);
+            UpdateTargetPosition(player.position, true);
 
             float vp_y = Camera.main.WorldToViewportPoint(player.position).y;
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(1, vp_y, 1));
@@ -38,42 +59,66 @@ public class CameraFollow : MonoBehaviour
     private void OnDisable()
     {
         GameHandler.OnGameOver -= OnGameOver;
+        Converser.OnStartConversation -= OnStartConversation;
+        Converser.OnEndConversation -= SetPlayerMode;
     }
 
     void Update()
     {
-        if (!GameHandler.IsGameOver)
+        if (currentMode == Mode.Player)
         {
-            UpdateTargetPosition(player.position, zFollowOffset);
+            UpdateTargetPosition(player.position);
+        }
+        else if (target != null)
+        {
+            UpdateTargetPosition(target.position);
         }
 
-        transform.position = Vector3.Lerp(transform.position, targetCamPos, cameraLerpSpeed * Time.unscaledDeltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPos, FOLLOW_LERP_SPEED * Time.unscaledDeltaTime);
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, FOV_LERP_SPEED * Time.unscaledDeltaTime);
     }
 
-    private void UpdateTargetPosition(Vector3 targetPosition, float zOffset, bool doInstantly = false)
+    public void SetPlayerMode()
     {
-        targetCamPos = new Vector3(0, transform.position.y, targetPosition.z + zOffset);
+        currentMode = Mode.Player;
+        targetFOV = PLAYER_FOV;
+        targetOffset = PLAYER_OFFSET;
+    }
+
+    public void SetTargetMode(Transform target, float offset, float FOV)
+    {
+        currentMode = Mode.Target;
+        this.target = target;
+        targetOffset = offset;
+        targetFOV = FOV;
+    }
+
+    public void SetTargetMode(Vector3 position, float offset, float FOV)
+    {
+        currentMode = Mode.Target;
+        target = null;
+        targetOffset = offset;
+        targetFOV = FOV;
+        UpdateTargetPosition(position);
+    }
+
+    private void UpdateTargetPosition(Vector3 targetPosition, bool doInstantly = false)
+    {
+        targetPos = new Vector3(0, transform.position.y, targetPosition.z + targetOffset);
 
         if (doInstantly)
         {
-            transform.position = targetCamPos;
+            transform.position = targetPos;
         }
     }
 
-    private void OnGameOver(Vector3 deathCausePosition)
+    private void OnStartConversation(Vector3 converserPos)
     {
-        UpdateTargetPosition(deathCausePosition, zGameOverOffset);
-        StartCoroutine(LerpToCameraFOV(cameraGameOverFOV));
+        SetTargetMode(converserPos, CONVERSATION_OFFSET, CONVERSATION_FOV);
     }
 
-    private IEnumerator LerpToCameraFOV(float newFOV)
+    private void OnGameOver(Vector3 killerPos)
     {
-        while (Mathf.Abs(Camera.main.fieldOfView - newFOV) > 0.001f)
-        {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, newFOV, cameraLerpSpeed * Time.unscaledDeltaTime);
-            yield return null;
-        }
-
-        Camera.main.fieldOfView = newFOV;
+        SetTargetMode(killerPos, GAME_OVER_OFFSET, GAME_OVER_FOV);
     }
 }

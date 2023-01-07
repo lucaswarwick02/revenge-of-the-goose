@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class Converser : MonoBehaviour
 {
+    public static event Action<Vector3> OnStartConversation;
+    public static event Action OnEndConversation;
+
     [SerializeField] private int conversationID;
     [SerializeField] private float rangeToStartConversation = 3;
     [Space]
@@ -15,7 +18,7 @@ public class Converser : MonoBehaviour
     private ExampleUI canvas;
     private DialoguePanel dialoguePanel;
 
-    private Dictionary<string, Dialogue> dialogueDict = new Dictionary<string, Dialogue>();
+    private readonly Dictionary<string, Dialogue> dialogueDict = new Dictionary<string, Dialogue>();
     private bool conversationStarted;
 
     [Serializable]
@@ -56,6 +59,7 @@ public class Converser : MonoBehaviour
 
     public void StartConversation()
     {
+        OnStartConversation?.Invoke(transform.position);
         dialoguePanel = canvas.OpenDialoguePanel();
         EnactDialogue(0);
     }
@@ -119,6 +123,7 @@ public class Converser : MonoBehaviour
         {
             canvas.CloseDialoguePanel();
             GameHandler.SetPaused(false);
+            OnEndConversation?.Invoke();
         });
     }
 }
