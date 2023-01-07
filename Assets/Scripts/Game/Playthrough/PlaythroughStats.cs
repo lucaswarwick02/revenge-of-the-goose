@@ -34,6 +34,12 @@ public static class PlaythroughStats
         OnEnemyKilled?.Invoke(EnemyKillCount, atPosition);
     }
 
+    public static int EnemiesEncountered { get; private set; }
+
+    public static void IncrementEnemiesEncountered() {
+        EnemiesEncountered++;
+    }
+
 
     // Event for when the animal kill count is incremented <new count, world position of kill event>
     public static event Action<int, Vector3> OnAnimalKilled;
@@ -44,5 +50,11 @@ public static class PlaythroughStats
     {
         AnimalKillCount++;
         OnAnimalKilled?.Invoke(AnimalKillCount, atPosition);
+    }
+
+    public static int AnimalsEncountered { get; private set; }
+
+    public static void IncrementAnimalsEncountered () {
+        AnimalsEncountered++;
     }
 }

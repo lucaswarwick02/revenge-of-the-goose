@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class AnimalCommentController : MonoBehaviour
 {
-    private AnimalCommenter[] animalCommenters;
+    public static List<AnimalCommenter> animalCommenters = new List<AnimalCommenter>();
 
     private Dictionary<int, List<string>> commentsDict = new Dictionary<int, List<string>>{
         {1, new List<string>{"Thank you!", "Our Saviour!"}}
     };
     private List<string> currentComments;
-
+ 
     private void Awake()
     {
-        GameHandler.OnMapAreaChanged += GetListOfAnimalCommenters;
         PlaythroughStats.OnAnimalKilled += OnAnimalKilled;
         PlaythroughStats.OnEnemyKilled += OnEnemyKilled;
-    }
-
-    private void GetListOfAnimalCommenters()
-    {
-        animalCommenters = FindObjectsOfType<AnimalCommenter>();
     }
 
     private void OnAnimalKilled(int totalAnimalsKilled, Vector3 killEventPosition)

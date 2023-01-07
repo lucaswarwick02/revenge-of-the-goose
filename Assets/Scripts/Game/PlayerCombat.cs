@@ -54,6 +54,10 @@ public class PlayerCombat : MonoBehaviour
         mouseCursor = FindObjectOfType<MouseCursor>();
         animator = GetComponent<Animator>();
         initialGunUpDir = arms.transform.up;
+
+        if (!GameHandler.InNeutralMode) {
+            CanShoot = true;
+        }
     }
 
     private void Update()

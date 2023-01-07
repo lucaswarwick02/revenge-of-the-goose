@@ -29,7 +29,7 @@ public class AnimalCommenter : MonoBehaviour
             textElem.transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        Debug.Log("Will last " + currentComment.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        // Debug.Log("Will last " + currentComment.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         Destroy(currentComment, currentComment.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 
@@ -39,10 +39,14 @@ public class AnimalCommenter : MonoBehaviour
         GetComponent<Destructible>().OnDestroyed.AddListener(DisableSafely);
         canvas = FindObjectOfType<Canvas>();
     }
+    private void OnEnable() {
+        AnimalCommentController.animalCommenters.Add(this);
+    }
 
     private void OnDisable()
     {
         GetComponent<Destructible>().OnDestroyed.RemoveListener(DisableSafely);
+        AnimalCommentController.animalCommenters.Remove(this);
     }
 
     private void Update()

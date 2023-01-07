@@ -20,6 +20,14 @@ public class Destructible : MonoBehaviour
             BossBar.SetupSlider(hitPoints, transform, destructibleName);
             OnHit.AddListener(_ => BossBar.UpdateHealthBar(hitPoints) );
         }
+
+        if (type == DestructableType.Friendly) {
+            PlaythroughStats.IncrementAnimalsEncountered();
+        }
+
+        if (type == DestructableType.Enemy) {
+            PlaythroughStats.IncrementEnemiesEncountered();
+        }
     }
 
     private enum DestructableType

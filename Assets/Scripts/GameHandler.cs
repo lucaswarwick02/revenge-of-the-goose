@@ -53,12 +53,15 @@ public class GameHandler : MonoBehaviour
     {
         if (CurrentMapArea != null)
         {
-            Destroy(CurrentMapArea.gameObject);
+            Destroy(CurrentMapArea.gameObject, 0);
         }
 
         CurrentMapArea = Instantiate(newArea);
         SetNeutralMode(newArea.NeutralArea);
         OnMapAreaChanged?.Invoke();
+
+        Debug.Log(PlaythroughStats.AnimalKillCount + " / " + PlaythroughStats.AnimalsEncountered + " Animals Killed");
+        Debug.Log(PlaythroughStats.EnemyKillCount + " / " + PlaythroughStats.EnemiesEncountered + " Enemies Killed");
     }
 
     public static void SetPaused(bool pause)
