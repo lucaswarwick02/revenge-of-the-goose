@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     private const int SHOTS_PER_RELOAD = 2;
+    private const float MIN_TIME_BETWEEN_SHOTS = 0.15f;
     private const float MIN_SHOOT_ANGLE = -45;
     private const float MAX_SHOOT_ANGLE = 45;
     private const float MOUSE_PLANE_HEIGHT = 0.25f;
@@ -32,10 +33,9 @@ public class PlayerCombat : MonoBehaviour
     private Vector3 raycastPivotPos;
 
     private float currentGunAngle;
+    private float nextShootTime;
 
     public int BulletsRemaining { get; private set; }
-
-    public bool Shooting { get; private set; }
 
     public bool Reloading { get; private set; }
 
@@ -61,14 +61,12 @@ public class PlayerCombat : MonoBehaviour
 
         currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
 
-        if (CanShoot && Input.GetMouseButtonDown(0) && !Shooting && !Reloading && BulletsRemaining > 0)
+        if (CanShoot && Input.GetMouseButtonDown(0) && !Reloading && BulletsRemaining > 0 && Time.time >= nextShootTime)
         {
             BulletsRemaining--;
-
-            Shooting = true;
             animator.SetTrigger("Shoot");
-
             Shoot();
+            nextShootTime = Time.time + MIN_TIME_BETWEEN_SHOTS;
         }
 
         CalculateShootingInfoAndRotateArms();
@@ -81,8 +79,6 @@ public class PlayerCombat : MonoBehaviour
 
     public void FinishShooting()
     {
-        Shooting = false;
-
         if (BulletsRemaining < 1)
         {
             Reloading = true;
@@ -165,7 +161,6 @@ public class PlayerCombat : MonoBehaviour
     public void OnMapAreaChanged(bool inNeutralArea)
     {
         CanShoot = !inNeutralArea;
-        Shooting = false;
         Reloading = false;
         BulletsRemaining = SHOTS_PER_RELOAD;
         animator.SetBool("Neutral", inNeutralArea);

@@ -15,6 +15,7 @@ public class AnimalCommentController : MonoBehaviour
     {
         GameHandler.OnMapAreaChanged += GetListOfAnimalCommenters;
         PlaythroughStats.OnAnimalKilled += OnAnimalKilled;
+        PlaythroughStats.OnEnemyKilled += OnEnemyKilled;
     }
 
     private void GetListOfAnimalCommenters(bool inNeutralArea)
@@ -26,6 +27,24 @@ public class AnimalCommentController : MonoBehaviour
     {
         List<string> attemptedComments;
         if (commentsDict.TryGetValue(totalAnimalsKilled, out attemptedComments)) {
+            currentComments = attemptedComments;
+        }
+
+        foreach (AnimalCommenter animalCommenter in animalCommenters)
+        {
+            if (animalCommenter.enabled)
+            {
+                string randomComment = currentComments[Random.Range(0, currentComments.Count)];
+                animalCommenter.Comment(randomComment);
+            }
+        }
+    }
+
+    private void OnEnemyKilled(int totalEnemiesKilled, Vector3 killEventPosition)
+    {
+        List<string> attemptedComments;
+        if (commentsDict.TryGetValue(totalEnemiesKilled, out attemptedComments))
+        {
             currentComments = attemptedComments;
         }
 
