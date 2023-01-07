@@ -15,11 +15,13 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
 
         GameHandler.OnMapAreaChanged += OnMapAreaChanged;
+        GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
     }
 
     private void OnDisable()
     {
         GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
+        GameHandler.OnNeutralModeChange -= OnNeutralModeChanged;
     }
 
     private void Update()
@@ -40,9 +42,13 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", rb.velocity.magnitude);
     }
 
-    private void OnMapAreaChanged(bool inNeutralArea)
+    private void OnMapAreaChanged()
     {
         transform.position = Vector3.zero;
-        animator.SetBool("Neutral", inNeutralArea);
+    }
+
+    private void OnNeutralModeChanged(bool inNeutralMode)
+    {
+        animator.SetBool("Neutral", inNeutralMode);
     }
 }

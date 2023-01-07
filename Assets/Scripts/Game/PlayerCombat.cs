@@ -47,6 +47,7 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         GameHandler.OnMapAreaChanged += OnMapAreaChanged;
+        GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
 
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -57,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if (GameHandler.IsPaused || GameHandler.InNeutralArea) return;
+        if (GameHandler.IsPaused || GameHandler.InNeutralMode) return;
 
         currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
 
@@ -75,6 +76,7 @@ public class PlayerCombat : MonoBehaviour
     private void OnDisable()
     {
         GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
+        GameHandler.OnNeutralModeChange -= OnNeutralModeChanged;
     }
 
     public void FinishShooting()
@@ -158,12 +160,16 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void OnMapAreaChanged(bool inNeutralArea)
+    private void OnMapAreaChanged()
     {
-        CanShoot = !inNeutralArea;
         Reloading = false;
         BulletsRemaining = SHOTS_PER_RELOAD;
-        animator.SetBool("Neutral", inNeutralArea);
+    }
+
+    private void OnNeutralModeChanged(bool inNeutralMode)
+    {
+        CanShoot = !inNeutralMode;
+        animator.SetBool("Neutral", inNeutralMode);
     }
 
 #if UNITY_EDITOR

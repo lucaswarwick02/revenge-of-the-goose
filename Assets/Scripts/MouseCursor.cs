@@ -12,7 +12,7 @@ public class MouseCursor : MonoBehaviour
 
     private void OnEnable()
     {
-        GameHandler.OnMapAreaChanged += OnMapAreaChanged;
+        GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
 
         Cursor.visible = false;
 
@@ -26,7 +26,7 @@ public class MouseCursor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameHandler.InNeutralArea)
+        if (!GameHandler.InNeutralMode)
         {
             for (int i = 0; i < cursorInstances.Values.Count; i++)
             {
@@ -44,7 +44,7 @@ public class MouseCursor : MonoBehaviour
 
     private void OnDisable()
     {
-        GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
+        GameHandler.OnNeutralModeChange -= OnNeutralModeChanged;
     }
 
     public void MoveCursorOverWorldPosition(string cursorID, Vector3 worldPosition)
@@ -54,21 +54,11 @@ public class MouseCursor : MonoBehaviour
         cursorInstances[cursorID] = cursorInfo;
     }
 
-    private void OnMapAreaChanged(bool inNeutralArea)
+    private void OnNeutralModeChanged(bool inNeutralMode)
     {
-        if (inNeutralArea)
+        foreach (MouseCursorInfo cursor in cursorInstances.Values)
         {
-            foreach (MouseCursorInfo cursor in cursorInstances.Values)
-            {
-                cursor.Instance.gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            foreach (MouseCursorInfo cursor in cursorInstances.Values)
-            {
-                cursor.Instance.gameObject.SetActive(true);
-            }
+            cursor.Instance.gameObject.SetActive(inNeutralMode == cursor.usedInNeutralMode);
         }
     }
 
@@ -77,6 +67,7 @@ public class MouseCursor : MonoBehaviour
     {
         public string CursorID;
         public GameObject CursorPrefab;
+        public bool usedInNeutralMode;
         public bool UpdatePositionAutomatically;
         public float LerpSpeed;
 

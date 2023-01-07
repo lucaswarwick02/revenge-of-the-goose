@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aed667d8c0dec34e95a7bf1ffd1b6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpingIsActive: 1
   minJumpInterval: 2
   maxJumpInterval: 6
   minJumpSpeed: 2

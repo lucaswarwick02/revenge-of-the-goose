@@ -51,12 +51,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8351741981306102534, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
+      propertyPath: jumpingIsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8923316038243590325, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
       propertyPath: m_Name
       value: BunnyConversation Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 8351741981306102534, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
     - {fileID: 6814346866860667102, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
 --- !u!1 &3164076205614648486 stripped
@@ -110,3 +113,20 @@ MonoBehaviour:
     secondsShownFor: 3
     responsesToWaitFor: []
     nextDialogueID: 
+  endEffects:
+  - responseRequired: Sadist
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6244274805318792108}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: EnableHostile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

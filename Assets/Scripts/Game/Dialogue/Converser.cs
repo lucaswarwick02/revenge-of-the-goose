@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Converser : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class Converser : MonoBehaviour
     [SerializeField] private float rangeToStartConversation = 3;
     [Space]
     [SerializeField] private List<Dialogue> dialogue;
+    [SerializeField] private List<ConditionalEffect> endEffects;
 
     private ExampleUI canvas;
     private DialoguePanel dialoguePanel;
@@ -37,6 +38,13 @@ public class Converser : MonoBehaviour
         public string responseID;
         public string text;
         public string nextDialogueID;
+    }
+
+    [Serializable]
+    private struct ConditionalEffect
+    {
+        public string responseRequired;
+        public UnityEvent effect;
     }
 
     private void Awake()
@@ -122,8 +130,22 @@ public class Converser : MonoBehaviour
         dialoguePanel.CloseDialogue(() =>
         {
             canvas.CloseDialoguePanel();
+
+            foreach (ConditionalEffect effect in endEffects)
+            {
+                if (effect.responseRequired == string.Empty || Decisions.PlayerResponded(conversationID, effect.responseRequired))
+                {
+                    effect.effect?.Invoke();
+                }
+            }
+
             GameHandler.SetPaused(false);
             OnEndConversation?.Invoke();
         });
+    }
+
+    public void EnableHostile()
+    {
+        GameHandler.SetNeutralMode(false);
     }
 }

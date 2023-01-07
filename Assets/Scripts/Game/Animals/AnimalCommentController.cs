@@ -18,7 +18,7 @@ public class AnimalCommentController : MonoBehaviour
         PlaythroughStats.OnEnemyKilled += OnEnemyKilled;
     }
 
-    private void GetListOfAnimalCommenters(bool inNeutralArea)
+    private void GetListOfAnimalCommenters()
     {
         animalCommenters = FindObjectsOfType<AnimalCommenter>();
     }

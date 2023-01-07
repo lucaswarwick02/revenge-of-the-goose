@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class RabbitController : MonoBehaviour
 {
+    [SerializeField] private bool jumpingIsActive = true;
     [SerializeField] private float minJumpInterval = 2;
     [SerializeField] private float maxJumpInterval = 6;
     [SerializeField] private float minJumpSpeed = 2;
@@ -28,7 +29,7 @@ public class RabbitController : MonoBehaviour
     {
         if (!IsDead)
         {
-            if (Time.time > nextJumpTime)
+            if (jumpingIsActive &&Time.time > nextJumpTime)
             {
                 nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
                 StartJump();

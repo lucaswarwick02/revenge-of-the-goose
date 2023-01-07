@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public static event Action<bool> OnMapAreaChanged;
+    public static event Action OnMapAreaChanged;
+
+    public static event Action<bool> OnNeutralModeChange;
 
     public static event Action<Vector3> OnGameOver;
 
@@ -13,7 +15,7 @@ public class GameHandler : MonoBehaviour
 
     public static MapArea CurrentMapArea { get; private set; }
 
-    public static bool InNeutralArea { get; private set; }
+    public static bool InNeutralMode { get; private set; }
 
     [SerializeField] private MapArea startMapArea;
 
@@ -38,6 +40,15 @@ public class GameHandler : MonoBehaviour
         PlayerHealth.OnPlayerDie -= OnPlayerDied;
     }
 
+    public static void SetNeutralMode(bool isNeutral)
+    {
+        if (InNeutralMode != isNeutral)
+        {
+            InNeutralMode = isNeutral;
+            OnNeutralModeChange?.Invoke(isNeutral);
+        }
+    }
+
     private void UpdateScene (MapArea newArea)
     {
         if (CurrentMapArea != null)
@@ -46,8 +57,8 @@ public class GameHandler : MonoBehaviour
         }
 
         CurrentMapArea = Instantiate(newArea);
-        InNeutralArea = newArea.NeutralArea;
-        OnMapAreaChanged?.Invoke(InNeutralArea);
+        SetNeutralMode(newArea.NeutralArea);
+        OnMapAreaChanged?.Invoke();
     }
 
     public static void SetPaused(bool pause)
