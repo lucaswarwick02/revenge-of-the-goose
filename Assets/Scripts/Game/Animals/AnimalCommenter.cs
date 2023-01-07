@@ -36,9 +36,13 @@ public class AnimalCommenter : MonoBehaviour
     private void Awake()
     {
         // disable this script when the animal dies
-        GetComponent<Destructible>().OnDestroyed.AddListener((_, _) => DisableSafely());
-
+        GetComponent<Destructible>().OnDestroyed.AddListener(DisableSafely);
         canvas = FindObjectOfType<Canvas>();
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<Destructible>().OnDestroyed.RemoveListener(DisableSafely);
     }
 
     private void Update()
@@ -49,7 +53,7 @@ public class AnimalCommenter : MonoBehaviour
         }
     }
 
-    private void DisableSafely()
+    private void DisableSafely(RaycastHit hit, Vector3 pos)
     {
         if (currentComment != null)
         {

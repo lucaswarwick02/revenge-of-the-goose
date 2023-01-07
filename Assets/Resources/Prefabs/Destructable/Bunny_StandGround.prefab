@@ -105,9 +105,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8923316038243590325, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
       propertyPath: m_Name
-      value: Bunny
+      value: Bunny_StandGround
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6814346866860667102, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cdac1fbc14395d14ba8e67a627a25833, type: 3}
 --- !u!114 &1121805041604801164 stripped
 MonoBehaviour:

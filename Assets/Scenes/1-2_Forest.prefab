@@ -584,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22590050bf13c0244bdaaab2d399a313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NeutralArea: 0
   gateways:
   - gateway: {fileID: 7288688100972666697}
     resultingArea: {fileID: 1829712235895486512, guid: 7532faad51d4208498525b6a552d7d8c, type: 3}
@@ -3919,7 +3920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2541321628024724392, guid: 1b94ea7308ab550489b63bad5918e8d8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.103405
+      value: 14.77
       objectReference: {fileID: 0}
     - target: {fileID: 2541321628024724392, guid: 1b94ea7308ab550489b63bad5918e8d8, type: 3}
       propertyPath: m_LocalRotation.w
