@@ -10,6 +10,7 @@ public class ExampleUI : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private PausePanel pausePanel;
     [SerializeField] private GameOverPanel gameOverPanel;
+    [SerializeField] private DialoguePanel dialoguePanel;
 
     void OnEnable()
     {
@@ -46,5 +47,16 @@ public class ExampleUI : MonoBehaviour
     private void OnGameOver(Vector3 deathCausePosition)
     {
         gameOverPanel.gameObject.SetActive(true);
+    }
+
+    public DialoguePanel OpenDialoguePanel()
+    {
+        dialoguePanel.gameObject.SetActive(true);
+        return dialoguePanel;
+    }
+
+    public void CloseDialoguePanel()
+    {
+        dialoguePanel.gameObject.SetActive(false);
     }
 }

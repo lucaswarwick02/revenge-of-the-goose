@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static Vector3 Position { get; private set; }
+
     public float speed = 5f;
 
     private Rigidbody rb;
@@ -18,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
+    }
+
+    private void Update()
+    {
+        Position = transform.position;
     }
 
     private void FixedUpdate() {

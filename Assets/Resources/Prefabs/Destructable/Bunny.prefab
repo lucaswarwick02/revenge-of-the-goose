@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393a1598852fbc246b142ee172ea5fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destructibleName: Rabbit
   type: 2
   hitPoints: 80
   destructionScore: 0
