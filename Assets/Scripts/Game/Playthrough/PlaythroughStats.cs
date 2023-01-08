@@ -63,13 +63,9 @@ public static class PlaythroughStats
     }
 
     // Functions for checking if companions are unlocked
-    public static bool IsRabbitCompanionUnlocked () {
-        // TODO Check if the player chose this option
-        return false;
-    }
+    public static bool IsBunnyCompanionUnlocked { get; private set; }
+    public static bool IsSheepCompanionUnlocked { get; private set; }
 
-    public static bool IsSheepCompanionUnlocked () {
-        // TODO Check if the player chose this option
-        return false;
-    }
+    public static void UnlockBunnyCompanion () { IsBunnyCompanionUnlocked = true; }
+    public static void UnlockSheepCompanion () { IsSheepCompanionUnlocked = true; }
 }

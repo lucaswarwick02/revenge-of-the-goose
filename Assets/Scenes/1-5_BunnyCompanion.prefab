@@ -578,9 +578,8 @@ MonoBehaviour:
   NeutralArea: 0
   gateways:
   - gateway: {fileID: 7288688100972666697}
-    resultingArea: {fileID: 1829712235895486512, guid: 3b460b83940c09a4c8fee72e008c4ff5, type: 3}
     thresholdOptions:
-    - resultingArea: {fileID: 1829712235895486512, guid: 3b460b83940c09a4c8fee72e008c4ff5, type: 3}
+    - resultingArea: {fileID: 1829712235895486512, guid: 382bba8a2d1cfd6418207292d97303f2, type: 3}
       minThreshold: 0
       maxThreshold: 1
 --- !u!1 &4281774661486913855
@@ -1750,6 +1749,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3593411741781029231, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.data[2].text
+      value: You spared us! We wish to help you!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.data[3].text
+      value: Then we won't budge!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.data[2].dialogueID
+      value: Intro_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.data[3].dialogueID
+      value: StandGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.data[1].nextDialogueID
+      value: Intro_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.data[2].secondsShownFor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: dialogue.Array.data[2].responsesToWaitFor.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

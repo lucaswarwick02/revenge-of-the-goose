@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c395b66c10d7d6c46876e05d942a96e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rabbitCompanion: {fileID: 2570164132380511728}
+  bunnyCompanion: {fileID: 2570164132380511728}
   sheepCompanion: {fileID: 3632485660111402488}
 --- !u!54 &987521240307639403
 Rigidbody:
