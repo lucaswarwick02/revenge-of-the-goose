@@ -84,4 +84,8 @@ public class RabbitController : MonoBehaviour
         rb.mass = 1;
         jumpingIsActive = true;
     }
+
+    public void UnlockBunnyCompanion () {
+        PlaythroughStats.UnlockBunnyCompanion();
+    }
 }

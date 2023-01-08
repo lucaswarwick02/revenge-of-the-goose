@@ -10,6 +10,10 @@ public class PlayerCompanions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameHandler.OnMapAreaChanged += () => UpdateCompanions();
+    }
+
+    private void UpdateCompanions () {
         bunnyCompanion.SetActive(PlaythroughStats.IsBunnyCompanionUnlocked);
         sheepCompanion.SetActive(PlaythroughStats.IsSheepCompanionUnlocked);
     }
