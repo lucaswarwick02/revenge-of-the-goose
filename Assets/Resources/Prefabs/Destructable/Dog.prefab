@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  maxSightRange: 10
+  maxSightRange: 15
   attackRange: 1
   attackInterval: 3
   attackDamage: 100
@@ -215,7 +215,9 @@ MonoBehaviour:
   type: 1
   hitPoints: 100
   destructionScore: 5000
+  targetingHeight: 0.5
   destroyImmediately: 0
+  contributeToEncounters: 1
   OnDestroyed:
     m_PersistentCalls:
       m_Calls:
