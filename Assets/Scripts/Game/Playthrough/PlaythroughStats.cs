@@ -76,8 +76,14 @@ public static class PlaythroughStats
     public enum Statistic
     {
         DestructionScore,
+        Phase1AnimalsKilled,
+        Phase2AnimalsKilled,
+        Phase3AnimalsKilled,
         TotalAnimalsKilled,
         TotalAnimalsEncountered,
+        Phase1AnimalsEncountered,
+        Phase2AnimalsEncountered,
+        Phase3AnimalsEncountered,
         EnemiesKilled,
         EnemiesEncountered,
         HasBunnyCompanion_Bool,
@@ -107,9 +113,15 @@ public static class PlaythroughStats
     {
         int value = query.variable switch
         {
+            Statistic.Phase1AnimalsKilled => animalsKilledInPhases[1],
+            Statistic.Phase2AnimalsKilled => animalsKilledInPhases[2],
+            Statistic.Phase3AnimalsKilled => animalsKilledInPhases[3],
             Statistic.TotalAnimalsKilled => TotalAnimalsKilled,
             Statistic.EnemiesKilled => EnemyKillCount,
             Statistic.DestructionScore => DestructionScore,
+            Statistic.Phase1AnimalsEncountered => animalsEncounteredInPhases[1],
+            Statistic.Phase2AnimalsEncountered => animalsEncounteredInPhases[2],
+            Statistic.Phase3AnimalsEncountered => animalsEncounteredInPhases[3],
             Statistic.TotalAnimalsEncountered => TotalAnimalsEncountered,
             Statistic.EnemiesEncountered => EnemiesEncountered,
             Statistic.HasBunnyCompanion_Bool => IsBunnyCompanionUnlocked ? 1 : 0,
