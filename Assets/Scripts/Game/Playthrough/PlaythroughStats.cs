@@ -68,4 +68,58 @@ public static class PlaythroughStats
 
     public static void UnlockBunnyCompanion () { IsBunnyCompanionUnlocked = true; }
     public static void UnlockSheepCompanion () { IsSheepCompanionUnlocked = true; }
+
+    public enum Statistic
+    {
+        DestructionScore,
+        AnimalsKilled,
+        AnimalsEncountered,
+        EnemiesKilled,
+        EnemiesEncountered,
+        HasBunnyCompanion_Bool,
+        HasSheepCompanion_Bool,
+    }
+
+    public enum Predicate
+    {
+        Equal,
+        GreaterThan,
+        LessThan,
+        LessThanOrEqual,
+        GreaterThanOrEqual,
+        NotEqual,
+    }
+
+    public struct StatisticQuery
+    {
+        public Statistic variable;
+        public Predicate predicate;
+        public int value;
+    }
+
+    public static bool Query(StatisticQuery query)
+    {
+        int value = query.variable switch
+        {
+            Statistic.AnimalsKilled => AnimalKillCount,
+            Statistic.EnemiesKilled => EnemyKillCount,
+            Statistic.DestructionScore => DestructionScore,
+            Statistic.AnimalsEncountered => AnimalsEncountered,
+            Statistic.EnemiesEncountered => EnemiesEncountered,
+            Statistic.HasBunnyCompanion_Bool => IsBunnyCompanionUnlocked ? 1 : 0,
+            Statistic.HasSheepCompanion_Bool => IsSheepCompanionUnlocked ?  1 : 0,
+            _ => throw new NotImplementedException(),
+        };
+
+        return query.predicate switch
+        {
+            Predicate.GreaterThan => value > query.value,
+            Predicate.LessThan => value < query.value,
+            Predicate.LessThanOrEqual => value <= query.value,
+            Predicate.GreaterThanOrEqual => value >= query.value,
+            Predicate.Equal => value == query.value,
+            Predicate.NotEqual => value != query.value,
+            _ => throw new NotImplementedException(),
+        };
+    }
 }
