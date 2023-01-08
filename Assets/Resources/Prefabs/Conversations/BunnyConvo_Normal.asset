@@ -21,7 +21,7 @@ MonoBehaviour:
     nextDialogueID: Intro_2
   - dialogueID: Intro_2
     text: Rabbits in the forest have been telling us of your wonderful plot!
-    secondsShownFor: 2
+    secondsShownFor: 3
     responsesToWaitFor: []
     nextDialogueID: Question
   - dialogueID: Question
