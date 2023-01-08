@@ -1,10 +1,14 @@
 using Game.Utility;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+using System;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public static event Action<int> OnBulletFired;
+    public static event Action<int> OnReloadStarted;
+    public static event Action<int> OnReloadEnded;
+
     private const int SHOTS_PER_RELOAD = 2;
     private const float MIN_TIME_BETWEEN_SHOTS = 0.15f;
     private const float MIN_SHOOT_ANGLE = -45;
@@ -72,6 +76,7 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Shoot");
             Shoot();
             nextShootTime = Time.time + MIN_TIME_BETWEEN_SHOTS;
+            OnBulletFired?.Invoke(BulletsRemaining);
         }
 
         CalculateShootingInfoAndRotateArms();
@@ -89,6 +94,7 @@ public class PlayerCombat : MonoBehaviour
         {
             Reloading = true;
             animator.SetTrigger("Reload");
+            OnReloadStarted?.Invoke(BulletsRemaining);
         }
     }
 
@@ -96,6 +102,7 @@ public class PlayerCombat : MonoBehaviour
     {
         Reloading = false;
         BulletsRemaining = SHOTS_PER_RELOAD;
+        OnReloadEnded?.Invoke(BulletsRemaining);
     }
 
     /// <summary>
