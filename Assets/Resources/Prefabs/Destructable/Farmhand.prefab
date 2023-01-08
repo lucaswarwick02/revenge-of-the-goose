@@ -231,11 +231,23 @@ MonoBehaviour:
   hitPoints: 100
   destructionScore: 10000
   targetingHeight: 0.5
-  destroyImmediately: 1
+  destroyImmediately: 0
   contributeToEncounters: 1
   OnDestroyed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3272350591691959186}
+        m_TargetAssemblyTypeName: FarmhandController, Assembly-CSharp
+        m_MethodName: StartDeath
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHit:
     m_PersistentCalls:
       m_Calls:
