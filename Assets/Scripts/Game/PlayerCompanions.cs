@@ -10,7 +10,12 @@ public class PlayerCompanions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameHandler.OnMapAreaChanged += () => UpdateCompanions();
+        GameHandler.OnMapAreaChanged += UpdateCompanions;
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.OnMapAreaChanged -= UpdateCompanions;
     }
 
     private void UpdateCompanions () {
