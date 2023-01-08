@@ -10,38 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 078cbdcf0daf04748859e14c091aa370, type: 3}
-  m_Name: BunnyConvo_Sadist
+  m_Name: SheepConvo_Pacifist
   m_EditorClassIdentifier: 
-  conversationID: Rabbit_Sadist
+  conversationID: Sheep_Pacifist
   dialogue:
   - dialogueID: Intro
-    text: Greetings!
+    text: Baaa!
     secondsShownFor: 2
     responsesToWaitFor: []
     nextDialogueID: Intro_2
   - dialogueID: Intro_2
-    text: We are only humble rabbits but...
+    text: The rabbits told us of your daring plot.
     secondsShownFor: 2
     responsesToWaitFor: []
     nextDialogueID: Question
   - dialogueID: Question
-    text: ...you've already killed so many of us! You have to stop!
+    text: Will you let us to guide you to the farmer?
     secondsShownFor: 2
     responsesToWaitFor:
-    - responseID: Promise
-      text: You're right, I will try to be more careful.
-      nextDialogueID: Promise
-    - responseID: Sadist
-      text: Step aside rabbits! The farmer must get what he deserves!
-      nextDialogueID: StandGround
+    - responseID: Companion
+      text: Sure!
+      nextDialogueID: Companion
+    - responseID: Normal
+      text: Step aside sheep, I've got this under control.
+      nextDialogueID: Normal
     nextDialogueID: 
-  - dialogueID: Promise
-    text: We appreciate that, good luck!
+  - dialogueID: Companion
+    text: Baaa!
     secondsShownFor: 3
     responsesToWaitFor: []
     nextDialogueID: 
-  - dialogueID: StandGround
-    text: Then we won't budge!
+  - dialogueID: Normal
+    text: Fine...
     secondsShownFor: 3
     responsesToWaitFor: []
     nextDialogueID: 

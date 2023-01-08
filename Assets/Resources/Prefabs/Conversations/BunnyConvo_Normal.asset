@@ -15,12 +15,12 @@ MonoBehaviour:
   conversationID: Rabbit_Normal
   dialogue:
   - dialogueID: Intro
-    text: Greetings!
+    text: Greetings, Goose!
     secondsShownFor: 2
     responsesToWaitFor: []
     nextDialogueID: Intro_2
   - dialogueID: Intro_2
-    text: We heard you were after the farmer.
+    text: Rabbits in the forest have been telling us of your wonderful plot!
     secondsShownFor: 2
     responsesToWaitFor: []
     nextDialogueID: Question

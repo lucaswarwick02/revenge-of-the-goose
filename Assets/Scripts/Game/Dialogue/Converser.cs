@@ -24,15 +24,22 @@ public class Converser : MonoBehaviour
     [Serializable]
     private struct ConditionalConversation
     {
-        public PlaythroughStats.StatisticQuery condition;
+        public PlaythroughStats.StatisticQuery[] conditions;
+        public ResponseQuery[] resonsesRequired;
         public Conversation conversation;
+    }
+
+    [Serializable]
+    private struct ResponseQuery
+    {
+        public string conversation;
+        public string response;
     }
 
     [Serializable]
     private struct ConditionalEffect
     {
-        public string conversationRequired;
-        public string responseRequired;
+        public ResponseQuery responseRequired;
         public UnityEvent effect;
     }
 
@@ -56,7 +63,8 @@ public class Converser : MonoBehaviour
         conversation = null;
         foreach (var conversation in possibleConversations)
         {
-            if (PlaythroughStats.Query(conversation.condition))
+            if (conversation.conditions.All(c => PlaythroughStats.Query(c)) 
+                && conversation.resonsesRequired.All(r => Decisions.PlayerResponded(r.conversation, r.response)))
             {
                 this.conversation = conversation.conversation;
                 break;
@@ -145,9 +153,9 @@ public class Converser : MonoBehaviour
 
             foreach (ConditionalEffect effect in endEffects)
             {
-                if (effect.conversationRequired == string.Empty
-                    || (effect.responseRequired == string.Empty && Decisions.ConversationWasStarted(effect.conversationRequired))
-                    || Decisions.PlayerResponded(conversation.conversationID, effect.responseRequired))
+                if (effect.responseRequired.conversation == string.Empty
+                    || (effect.responseRequired.response == string.Empty && Decisions.ConversationWasStarted(effect.responseRequired.conversation))
+                    || Decisions.PlayerResponded(conversation.conversationID, effect.responseRequired.response))
                 {
                     effect.effect?.Invoke();
                 }
@@ -161,5 +169,10 @@ public class Converser : MonoBehaviour
     public void EnableHostile()
     {
         GameHandler.SetNeutralMode(false);
+    }
+
+    public void TurnAnimals()
+    {
+        PlaythroughStats.AnimalsTurned = true;
     }
 }

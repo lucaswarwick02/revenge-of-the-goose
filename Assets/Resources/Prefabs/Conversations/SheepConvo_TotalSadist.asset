@@ -10,38 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 078cbdcf0daf04748859e14c091aa370, type: 3}
-  m_Name: BunnyConvo_Sadist
+  m_Name: SheepConvo_TotalSadist
   m_EditorClassIdentifier: 
-  conversationID: Rabbit_Sadist
+  conversationID: Sheep_TotalSadist
   dialogue:
   - dialogueID: Intro
-    text: Greetings!
+    text: Baaa!
     secondsShownFor: 2
     responsesToWaitFor: []
     nextDialogueID: Intro_2
   - dialogueID: Intro_2
-    text: We are only humble rabbits but...
+    text: The rabbits told us of your reckless plot.
     secondsShownFor: 2
     responsesToWaitFor: []
-    nextDialogueID: Question
-  - dialogueID: Question
-    text: ...you've already killed so many of us! You have to stop!
+    nextDialogueID: Intro_3
+  - dialogueID: Intro_3
+    text: Too many animals have died for this trivial cause!
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: Threat
+  - dialogueID: Threat
+    text: We won't let this nonsense go on any longer.
     secondsShownFor: 2
     responsesToWaitFor:
-    - responseID: Promise
-      text: You're right, I will try to be more careful.
-      nextDialogueID: Promise
     - responseID: Sadist
-      text: Step aside rabbits! The farmer must get what he deserves!
-      nextDialogueID: StandGround
+      text: Step aside sheep, you can't stop me.
+      nextDialogueID: Sadist
+    - responseID: Beg
+      text: I didn't mean for so many animals to get hurt.
+      nextDialogueID: Beg
     nextDialogueID: 
-  - dialogueID: Promise
-    text: We appreciate that, good luck!
+  - dialogueID: Sadist
+    text: You'll regret this...
     secondsShownFor: 3
     responsesToWaitFor: []
     nextDialogueID: 
-  - dialogueID: StandGround
-    text: Then we won't budge!
+  - dialogueID: Beg
+    text: It's too late Goose.
     secondsShownFor: 3
     responsesToWaitFor: []
     nextDialogueID: 

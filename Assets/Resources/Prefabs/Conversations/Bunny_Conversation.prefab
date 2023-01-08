@@ -76,19 +76,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeToStartConversation: 4
   possibleConversations:
-  - condition:
-      variable: 1
-      predicate: 2
-      value: 2
+  - conditions:
+    - variable: 1
+      predicate: 3
+      value: 1
+    resonsesRequired: []
     conversation: {fileID: 11400000, guid: 6b6fddfdc3d5c4646b505684cc096e94, type: 2}
-  - condition:
-      variable: 1
-      predicate: 4
-      value: 2
+  - conditions:
+    - variable: 1
+      predicate: 1
+      value: 1
+    resonsesRequired: []
     conversation: {fileID: 11400000, guid: 255f6566d9e2e414aab42145864f8482, type: 2}
   endEffects:
-  - conversationRequired: Rabbit_Sadist
-    responseRequired: Sadist
+  - responseRequired:
+      conversation: Rabbit_Sadist
+      response: Sadist
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -104,8 +107,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - conversationRequired: Rabbit_Sadist
-    responseRequired: Normal
+  - responseRequired:
+      conversation: Rabbit_Normal
+      response: Normal
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -169,8 +173,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - conversationRequired: Rabbit_Sadist
-    responseRequired: Normal
+  - responseRequired:
+      conversation: Rabbit_Sadist
+      response: Promise
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -234,11 +239,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - conversationRequired: Rabbit_Normal
-    responseRequired: Companion
+  - responseRequired:
+      conversation: Rabbit_Normal
+      response: Companion
     effect:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1775915059614138712}
+          m_TargetAssemblyTypeName: RabbitController, Assembly-CSharp
+          m_MethodName: UnlockBunnyCompanion
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1775915059614138712 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1121805041604801164, guid: cd27b2312f2c9f441a62d49d17fcad77, type: 3}

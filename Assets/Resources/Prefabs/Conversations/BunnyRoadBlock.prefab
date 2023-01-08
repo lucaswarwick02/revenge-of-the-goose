@@ -348,14 +348,6 @@ PrefabInstance:
       value: Bunny_Conversation
       objectReference: {fileID: 0}
     - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
       propertyPath: endEffects.Array.data[1].effect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8014200872277750185}
@@ -387,26 +379,6 @@ PrefabInstance:
       propertyPath: endEffects.Array.data[2].effect.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 3339963926710405169}
-    - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7310537991564660214}
-    - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnlockBunnyCompanion
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RabbitController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409618644280618700, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5190010224543054326, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -458,14 +430,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5190010224543054326, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
   m_PrefabInstance: {fileID: 9066149314839235758}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7310537991564660214 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1775915059614138712, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
-  m_PrefabInstance: {fileID: 9066149314839235758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aed667d8c0dec34e95a7bf1ffd1b6e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -77,7 +77,153 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeToStartConversation: 3
   possibleConversations:
-  - conversation: {fileID: 0}
-  - conversation: {fileID: 0}
-  - conversation: {fileID: 0}
-  endEffects: []
+  - conditions:
+    - variable: 1
+      predicate: 3
+      value: 1
+    - variable: 2
+      predicate: 3
+      value: 4
+    resonsesRequired: []
+    conversation: {fileID: 11400000, guid: 3e8b5311caed12044941527f9a62505a, type: 2}
+  - conditions:
+    - variable: 1
+      predicate: 1
+      value: 1
+    - variable: 2
+      predicate: 3
+      value: 4
+    resonsesRequired: []
+    conversation: {fileID: 11400000, guid: a280aa0f7ac564945bb820234e4a6fec, type: 2}
+  - conditions:
+    - variable: 1
+      predicate: 3
+      value: 1
+    - variable: 2
+      predicate: 1
+      value: 4
+    resonsesRequired: []
+    conversation: {fileID: 11400000, guid: 802df3f2d5db322449167cf9e9bbbb83, type: 2}
+  - conditions:
+    - variable: 1
+      predicate: 1
+      value: 1
+    - variable: 2
+      predicate: 1
+      value: 4
+    resonsesRequired:
+    - conversation: Rabbit_Sadist
+      response: Promise
+    conversation: {fileID: 11400000, guid: 2d5f34cbdba22ba4a9ed3bb143370513, type: 2}
+  - conditions:
+    - variable: 1
+      predicate: 1
+      value: 1
+    - variable: 2
+      predicate: 1
+      value: 4
+    resonsesRequired: []
+    conversation: {fileID: 11400000, guid: ceaa6ca671cdade4b9e7a1d942ec9111, type: 2}
+  endEffects:
+  - responseRequired:
+      conversation: Sheep_TotalSadist
+      response: 
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2798355439814477575}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: TurnAnimals
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2798355439814477575}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: EnableHostile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - responseRequired:
+      conversation: Sheep_Liar
+      response: 
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2798355439814477575}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: TurnAnimals
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2798355439814477575}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: EnableHostile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - responseRequired:
+      conversation: Sheep_Sadist
+      response: Sadist
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2798355439814477575}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: TurnAnimals
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2798355439814477575}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: EnableHostile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - responseRequired:
+      conversation: Sheep_Reformed
+      response: Companion
+    effect:
+      m_PersistentCalls:
+        m_Calls: []
+  - responseRequired:
+      conversation: Sheep_Pacifict
+      response: Companion
+    effect:
+      m_PersistentCalls:
+        m_Calls: []

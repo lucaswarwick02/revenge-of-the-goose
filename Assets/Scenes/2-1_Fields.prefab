@@ -586,7 +586,7 @@ MonoBehaviour:
     - resultingArea: {fileID: 1829712235895486512, guid: ce2ddfa77416ba44e8527594d0b1e80e, type: 3}
       query:
         variable: 0
-        predicate: 5
+        predicate: 4
         value: 0
   phase: 2
 --- !u!1 &4281774661486913855
