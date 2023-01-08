@@ -12,7 +12,7 @@ public class FarmhandController : MonoBehaviour
 
     private Rigidbody rb;
     private Animator anim;
-    private AudioSource audio;
+    private AudioSource audioSource;
 
     private Transform player;
     private float nextAttackTime;
@@ -23,7 +23,7 @@ public class FarmhandController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         player = FindObjectOfType<PlayerMovement>().transform;
     }
 
@@ -46,7 +46,7 @@ public class FarmhandController : MonoBehaviour
 
     private void AttackPlayer()
     {
-        audio.Play();
+        audioSource.Play();
         anim.SetTrigger("Attack");
         PlayerHealth.InflictDamage(attackDamage, transform.position);
     }
