@@ -1,16 +1,19 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ExampleUI : MonoBehaviour
 {
-    [Header("Destruction Scoring")]
+    [Header("HUD")]
     [SerializeField] private TMP_Text destructionScoreText;
     [SerializeField] private DestructionScorePopup scorePopupPrefab;
+    [SerializeField] private Slider gooseHealthBar; 
 
     [Header("UI Panels")]
     [SerializeField] private PausePanel pausePanel;
     [SerializeField] private GameOverPanel gameOverPanel;
     [SerializeField] private DialoguePanel dialoguePanel;
+
 
     void OnEnable()
     {
@@ -42,6 +45,8 @@ public class ExampleUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) {
             pausePanel.Pause();
         }
+
+        gooseHealthBar.value = PlayerHealth.CurrentHealth / PlayerHealth.MAX_HEALTH;
     }
 
     private void OnGameOver(Vector3 deathCausePosition)
