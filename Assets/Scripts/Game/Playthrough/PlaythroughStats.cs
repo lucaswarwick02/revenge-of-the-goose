@@ -69,6 +69,7 @@ public static class PlaythroughStats
     public static void UnlockBunnyCompanion () { IsBunnyCompanionUnlocked = true; }
     public static void UnlockSheepCompanion () { IsSheepCompanionUnlocked = true; }
 
+    [Serializable]
     public enum Statistic
     {
         DestructionScore,
@@ -80,6 +81,7 @@ public static class PlaythroughStats
         HasSheepCompanion_Bool,
     }
 
+    [Serializable]
     public enum Predicate
     {
         Equal,
@@ -90,6 +92,7 @@ public static class PlaythroughStats
         NotEqual,
     }
 
+    [Serializable]
     public struct StatisticQuery
     {
         public Statistic variable;
