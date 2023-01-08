@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 4279433311305407184}
   - component: {fileID: 1829712235895486512}
   m_Layer: 0
-  m_Name: 1-4_BunnyRoadBlock
+  m_Name: 1-5_BunnyCompanion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -578,8 +578,9 @@ MonoBehaviour:
   NeutralArea: 0
   gateways:
   - gateway: {fileID: 7288688100972666697}
+    resultingArea: {fileID: 1829712235895486512, guid: 3b460b83940c09a4c8fee72e008c4ff5, type: 3}
     thresholdOptions:
-    - resultingArea: {fileID: 1829712235895486512, guid: 382bba8a2d1cfd6418207292d97303f2, type: 3}
+    - resultingArea: {fileID: 1829712235895486512, guid: 3b460b83940c09a4c8fee72e008c4ff5, type: 3}
       minThreshold: 0
       maxThreshold: 1
 --- !u!1 &4281774661486913855

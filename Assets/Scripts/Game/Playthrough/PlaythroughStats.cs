@@ -56,4 +56,20 @@ public static class PlaythroughStats
     public static void IncrementAnimalsEncountered () {
         AnimalsEncountered++;
     }
+
+    // Percentage of Animals Killed
+    public static float AnimalKillPercentage () {
+        return (AnimalsEncountered == 0) ? 0 : (float) AnimalKillCount / (float) AnimalsEncountered;
+    }
+
+    // Functions for checking if companions are unlocked
+    public static bool IsRabbitCompanionUnlocked () {
+        // TODO Check if the player chose this option
+        return false;
+    }
+
+    public static bool IsSheepCompanionUnlocked () {
+        // TODO Check if the player chose this option
+        return false;
+    }
 }

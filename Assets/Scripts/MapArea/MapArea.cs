@@ -13,21 +13,34 @@ public class MapArea : MonoBehaviour
         foreach (MapAreaChoice choice in gateways)
         {
             // When the map is loaded, set the choice trigger's to move to the corresponding node
-            choice.gateway.OnPlayerEnteredGateway += () => MoveToNextArea(choice.resultingArea);
+            choice.gateway.OnPlayerEnteredGateway += () => MoveToNextArea(choice.thresholdOptions);
         }
 
         OnNextMapAreaChosen += node => { if (node == null) { Debug.LogError("StoryNode not set!"); } else { Debug.Log("Next StoryNode = " + node.name); } };
     }
 
-    private void MoveToNextArea(MapArea newArea)
+    private void MoveToNextArea(ThresholdOption[] thresholdOptions)
     {
-        OnNextMapAreaChosen?.Invoke(newArea);
+        foreach (ThresholdOption thresholdOption in thresholdOptions) {
+            if (PlaythroughStats.AnimalKillPercentage() >= thresholdOption.minThreshold && PlaythroughStats.AnimalKillPercentage() <= thresholdOption.maxThreshold) {
+                OnNextMapAreaChosen?.Invoke(thresholdOption.resultingArea);
+                break;
+            }
+        }
     }
 
     [Serializable]
     public struct MapAreaChoice
     {
-        public ChoiceGateway gateway;
-        public MapArea resultingArea;
+        public ChoiceGateway gateway; // The physical gateway itself
+        public ThresholdOption[] thresholdOptions;
+    }
+
+    [Serializable]
+    public struct ThresholdOption
+    {
+        public MapArea resultingArea; // The next map area to be loaded
+        public float minThreshold;
+        public float maxThreshold;
     }
 }

@@ -59,9 +59,6 @@ public class GameHandler : MonoBehaviour
         CurrentMapArea = Instantiate(newArea);
         SetNeutralMode(newArea.NeutralArea);
         OnMapAreaChanged?.Invoke();
-
-        Debug.Log(PlaythroughStats.AnimalKillCount + " / " + PlaythroughStats.AnimalsEncountered + " Animals Killed");
-        Debug.Log(PlaythroughStats.EnemyKillCount + " / " + PlaythroughStats.EnemiesEncountered + " Enemies Killed");
     }
 
     public static void SetPaused(bool pause)

@@ -588,6 +588,13 @@ MonoBehaviour:
   gateways:
   - gateway: {fileID: 7288688100972666697}
     resultingArea: {fileID: 1829712235895486512, guid: 98a1213ed24dc3e4db9b116311ffb5b9, type: 3}
+    thresholdOptions:
+    - resultingArea: {fileID: 1829712235895486512, guid: e293560c45fdf54428081f2624e3bebb, type: 3}
+      minThreshold: 0
+      maxThreshold: 0.5
+    - resultingArea: {fileID: 1829712235895486512, guid: 98a1213ed24dc3e4db9b116311ffb5b9, type: 3}
+      minThreshold: 0.5
+      maxThreshold: 1
 --- !u!1 &4281774661486913855
 GameObject:
   m_ObjectHideFlags: 0
