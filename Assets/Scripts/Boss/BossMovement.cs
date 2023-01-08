@@ -23,7 +23,7 @@ public class BossMovement : MonoBehaviour
     void Start()
     {
         float environmentDelay = 25f;
-        InvokeRepeating("extendEnvironment", environmentDelay, environmentDelay);
+        InvokeRepeating("extendEnvironment", 0f, environmentDelay);
     }
 
     // Update is called once per frame
