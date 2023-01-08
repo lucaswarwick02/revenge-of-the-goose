@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructibleName: Toby the Farmer
   type: 3
-  hitPoints: 1000
+  hitPoints: 1500
   destructionScore: 25000
   targetingHeight: 0.5
   destroyImmediately: 1
@@ -281,9 +281,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e70fc265c74d6b49825e108da506565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleSpawnDistance: -1
+  obstacleDelay: 2
+  obstacleSpawnDistance: -2
   obstacles:
-  - {fileID: 8923316038243590325, guid: 93f058aaa3c88774cbbd05915ebdd7aa, type: 3}
+  - prefab: {fileID: 8923316038243590325, guid: 1b94ea7308ab550489b63bad5918e8d8, type: 3}
+    maxOffset: 2
+  - prefab: {fileID: 8923316038243590325, guid: 93f058aaa3c88774cbbd05915ebdd7aa, type: 3}
+    maxOffset: 1
 --- !u!1001 &707216090956443054
 PrefabInstance:
   m_ObjectHideFlags: 0

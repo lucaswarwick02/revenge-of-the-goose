@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class BossCombat : MonoBehaviour
 {
+    [SerializeField] private float obstacleDelay = 2f;
     [SerializeField] private float obstacleSpawnDistance;
-    [SerializeField] private GameObject[] obstacles;
+    [SerializeField] private Obstacle[] obstacles;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("InstantiateRandomObstacle", 3f, 3f);
+        InvokeRepeating("InstantiateRandomObstacle", obstacleDelay, obstacleDelay);
     }
 
     private void InstantiateRandomObstacle () {
         InstantiateObstacle(GetRandomObstacle());
     }
 
-    private void InstantiateObstacle (GameObject obstacle) {
-        float horizontalOffset = Random.Range(-3f, 3f);
-        Instantiate(obstacle, transform.position + new Vector3(horizontalOffset, 0f, obstacleSpawnDistance), Quaternion.identity);
+    private void InstantiateObstacle (Obstacle obstacle) {
+        float horizontalOffset = Random.Range(-obstacle.maxOffset, obstacle.maxOffset);
+        Instantiate(obstacle.prefab, transform.position + new Vector3(horizontalOffset, 0f, obstacleSpawnDistance), Quaternion.identity);
     }
 
-    private GameObject GetRandomObstacle () {
+    private Obstacle GetRandomObstacle () {
         return obstacles[Random.Range(0, obstacles.Length)];
+    }
+
+    [System.Serializable]
+    public struct Obstacle
+    {
+        public GameObject prefab;
+        public float maxOffset;
     }
 }
