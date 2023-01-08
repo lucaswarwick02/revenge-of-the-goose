@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 0
   spriteMeshType: 0
   alignment: 9
@@ -127,7 +127,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: farmhand_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 5
+        width: 342
+        height: 781
+      alignment: 9
+      pivot: {x: 0.55, y: 0.064020485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d351b56f40a3aa147a0d95cdce5bb728
+      internalID: -2065929814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: farmhand_1
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 5
+        width: 342
+        height: 781
+      alignment: 9
+      pivot: {x: 0.55, y: 0.064020485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe4e8d13774c4440b172103529436b1
+      internalID: -2006649337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: farmhand_3
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 7
+        width: 1051
+        height: 251
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1992032}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 127b3edb8064fca4b81ee1e5c18fc44b
+      internalID: 1884021502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -138,7 +201,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      farmhand_4: 1593344584
+      farmhand_1: -2006649337
+      farmhand_3: 1884021502
+      farmhand_0: -2065929814
+      farmhand_2: -1790791478
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
