@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 4279433311305407184}
   - component: {fileID: 1829712235895486512}
   m_Layer: 0
-  m_Name: 2-1_Farmland
+  m_Name: 2-3_Fields
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
