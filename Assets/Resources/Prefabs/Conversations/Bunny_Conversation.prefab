@@ -74,42 +74,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630dd7c8755cb6941b713a08adf29e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversationID: Rabbit
   rangeToStartConversation: 4
-  dialogue:
-  - dialogueID: Intro
-    text: Greetings!
-    secondsShownFor: 2
-    responsesToWaitFor: []
-    nextDialogueID: Intro_2
-  - dialogueID: Intro_2
-    text: We are only humble rabbits but...
-    secondsShownFor: 2
-    responsesToWaitFor: []
-    nextDialogueID: Question
-  - dialogueID: Question
-    text: ...you've already killed so many of us! You have to stop!
-    secondsShownFor: 2
-    responsesToWaitFor:
-    - responseID: Normal
-      text: You're right, I will try to be more careful.
-      nextDialogueID: Normal
-    - responseID: Sadist
-      text: Step aside rabbits! The farmer must get what he deserves!
-      nextDialogueID: StandGround
-    nextDialogueID: 
-  - dialogueID: Normal
-    text: We appreciate that, good luck!
-    secondsShownFor: 3
-    responsesToWaitFor: []
-    nextDialogueID: 
-  - dialogueID: StandGround
-    text: Then we won't budge!
-    secondsShownFor: 3
-    responsesToWaitFor: []
-    nextDialogueID: 
+  possibleConversations:
+  - condition:
+      variable: 1
+      predicate: 2
+      value: 2
+    conversation: {fileID: 11400000, guid: 6b6fddfdc3d5c4646b505684cc096e94, type: 2}
+  - condition:
+      variable: 1
+      predicate: 4
+      value: 2
+    conversation: {fileID: 11400000, guid: 255f6566d9e2e414aab42145864f8482, type: 2}
   endEffects:
-  - responseRequired: Sadist
+  - conversationRequired: Rabbit_Sadist
+    responseRequired: Sadist
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -125,7 +104,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - responseRequired: Normal
+  - conversationRequired: Rabbit_Sadist
+    responseRequired: Normal
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -189,6 +169,76 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - conversationRequired: Rabbit_Sadist
+    responseRequired: Normal
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1775915059614138712}
+          m_TargetAssemblyTypeName: RabbitController, Assembly-CSharp
+          m_MethodName: StopStandingGround
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: RabbitController, Assembly-CSharp
+          m_MethodName: StopStandingGround
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: RabbitController, Assembly-CSharp
+          m_MethodName: StopStandingGround
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: RabbitController, Assembly-CSharp
+          m_MethodName: StopStandingGround
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: RabbitController, Assembly-CSharp
+          m_MethodName: StopStandingGround
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - conversationRequired: Rabbit_Normal
+    responseRequired: Companion
+    effect:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &1775915059614138712 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1121805041604801164, guid: cd27b2312f2c9f441a62d49d17fcad77, type: 3}

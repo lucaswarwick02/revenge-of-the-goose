@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078cbdcf0daf04748859e14c091aa370, type: 3}
+  m_Name: BunnyConvo_Normal
+  m_EditorClassIdentifier: 
+  conversationID: Rabbit_Normal
+  dialogue:
+  - dialogueID: Intro
+    text: Greetings!
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: Intro_2
+  - dialogueID: Intro_2
+    text: We heard you were after the farmer.
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: Question
+  - dialogueID: Question
+    text: Will you let us help?
+    secondsShownFor: 2
+    responsesToWaitFor:
+    - responseID: Companion
+      text: Sure!
+      nextDialogueID: Companion
+    - responseID: Normal
+      text: Step aside rabbits, it's not safe for you.
+      nextDialogueID: Normal
+    nextDialogueID: 
+  - dialogueID: Companion
+    text: Brilliant!
+    secondsShownFor: 3
+    responsesToWaitFor: []
+    nextDialogueID: 
+  - dialogueID: Normal
+    text: Fine...
+    secondsShownFor: 3
+    responsesToWaitFor: []
+    nextDialogueID: 
