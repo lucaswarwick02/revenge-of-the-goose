@@ -61,6 +61,8 @@ public class PlayerCombat : MonoBehaviour
         animator = GetComponent<Animator>();
         initialGunUpDir = arms.transform.up;
 
+        BulletsRemaining = 2;
+
         if (!GameHandler.InNeutralMode) {
             CanShoot = true;
         }
@@ -71,6 +73,7 @@ public class PlayerCombat : MonoBehaviour
         if (GameHandler.IsPaused || GameHandler.InNeutralMode) return;
 
         currentGunAngle = Mathf.Clamp(currentGunAngle + Input.GetAxis("Mouse X") * rotationSensitivity, MIN_SHOOT_ANGLE, MAX_SHOOT_ANGLE);
+
 
         if (CanShoot && Input.GetMouseButtonDown(0) && !Reloading && BulletsRemaining > 0 && Time.time >= nextShootTime)
         {
