@@ -218,8 +218,10 @@ MonoBehaviour:
   destructibleName: Rabbit
   type: 2
   hitPoints: 80
-  destructionScore: 0
+  destructionScore: 500
+  targetingHeight: 0.5
   destroyImmediately: 0
+  contributeToEncounters: 1
   OnDestroyed:
     m_PersistentCalls:
       m_Calls:

@@ -194,9 +194,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructibleName: Farmhand
   type: 1
-  hitPoints: 200
-  destructionScore: 20000
+  hitPoints: 100
+  destructionScore: 10000
+  targetingHeight: 0.5
   destroyImmediately: 1
+  contributeToEncounters: 1
   OnDestroyed:
     m_PersistentCalls:
       m_Calls: []

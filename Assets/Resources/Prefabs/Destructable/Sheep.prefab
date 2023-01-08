@@ -212,7 +212,8 @@ MonoBehaviour:
   destructibleName: Sheep
   type: 2
   hitPoints: 100
-  destructionScore: 0
+  destructionScore: 1000
+  targetingHeight: 0.5
   destroyImmediately: 0
   contributeToEncounters: 1
   OnDestroyed:
