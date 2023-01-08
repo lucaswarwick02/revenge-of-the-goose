@@ -9,6 +9,7 @@ public class FarmhandController : MonoBehaviour
     [SerializeField] private float attackInterval = 3;
     [SerializeField] private float attackDamage = 20;
 
+    [SerializeField] private GameObject healthPickupPrefab;
 
     private Rigidbody rb;
     private Animator anim;
@@ -58,6 +59,8 @@ public class FarmhandController : MonoBehaviour
 
         Vector3 impactDir = Vector3.RotateTowards((hitInfo.point - origin).normalized, Vector3.up, Mathf.Deg2Rad * 30, 0);
         rb.velocity = impactDir * 4;
+
+        Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
 
         enabled = false;
     }
