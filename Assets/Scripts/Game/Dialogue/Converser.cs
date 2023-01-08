@@ -1,48 +1,37 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using static Conversation;
 
 public class Converser : MonoBehaviour
 {
     public static event Action<Vector3> OnStartConversation;
     public static event Action OnEndConversation;
 
-    [SerializeField] private string conversationID;
     [SerializeField] private float rangeToStartConversation = 3;
     [Space]
-    [SerializeField] private List<Dialogue> dialogue;
+    [SerializeField] private List<ConditionalConversation> possibleConversations;
     [SerializeField] private List<ConditionalEffect> endEffects;
 
     private ExampleUI canvas;
     private DialoguePanel dialoguePanel;
 
-    private readonly Dictionary<string, Dialogue> dialogueDict = new Dictionary<string, Dialogue>();
+    private Conversation conversation = null;
     private bool conversationStarted;
 
     [Serializable]
-    private struct Dialogue
+    private struct ConditionalConversation
     {
-        public string dialogueID;
-        public string text;
-        public float secondsShownFor;
-        public List<Response> responsesToWaitFor;
-        public string nextDialogueID;
-    }
-
-    [Serializable]
-    private struct Response
-    {
-        public string responseID;
-        public string text;
-        public string nextDialogueID;
+        public PlaythroughStats.StatisticQuery condition;
+        public Conversation conversation;
     }
 
     [Serializable]
     private struct ConditionalEffect
     {
+        public string conversationRequired;
         public string responseRequired;
         public UnityEvent effect;
     }
@@ -50,12 +39,9 @@ public class Converser : MonoBehaviour
     private void Awake()
     {
         canvas = FindObjectOfType<ExampleUI>();
-
-        foreach (Dialogue dialogue in dialogue)
-        {
-            dialogueDict.Add(dialogue.dialogueID, dialogue);
-        }
+        ChooseConversation();
     }
+
     private void Update()
     {
         if (!conversationStarted && (PlayerMovement.Position - transform.position).magnitude <= rangeToStartConversation)
@@ -65,8 +51,34 @@ public class Converser : MonoBehaviour
         }
     }
 
+    private void ChooseConversation()
+    {
+        conversation = null;
+        foreach (var conversation in possibleConversations)
+        {
+            if (PlaythroughStats.Query(conversation.condition))
+            {
+                this.conversation = conversation.conversation;
+                break;
+            }
+        }
+
+        if (conversation == null)
+        {
+            Debug.LogError("No conversation conditions were met!! Disabling the converser component.");
+            enabled = false;
+        }
+        else
+        {
+            Debug.Log("Conversation chosen: " + conversation.conversationID);
+            conversation.CompileDialogue();
+        }
+
+    }
+
     public void StartConversation()
     {
+        Decisions.RecordConversationStarted(conversation.conversationID);
         OnStartConversation?.Invoke(transform.position);
         dialoguePanel = canvas.OpenDialoguePanel();
         EnactDialogue(0);
@@ -74,7 +86,7 @@ public class Converser : MonoBehaviour
 
     private void EnactDialogue(int dialogueIndex)
     {
-        EnactDialogue(dialogue[dialogueIndex]);
+        EnactDialogue(conversation.dialogue[dialogueIndex]);
     }
 
     private void EnactDialogue(string dialogueID)
@@ -85,7 +97,7 @@ public class Converser : MonoBehaviour
         }
         else
         {
-            EnactDialogue(dialogueDict[dialogueID]);
+            EnactDialogue(conversation.dialogueDict[dialogueID]);
         }
     }
 
@@ -112,7 +124,7 @@ public class Converser : MonoBehaviour
     private void RecieveResponse(string responseID, string nextDialogueID)
     {
         // Record response for use later in story
-        Decisions.RecordPlayerResponse(conversationID, responseID);
+        Decisions.RecordPlayerResponse(conversation.conversationID, responseID);
 
         // Move to next dialogue
         if (nextDialogueID == string.Empty)
@@ -133,7 +145,9 @@ public class Converser : MonoBehaviour
 
             foreach (ConditionalEffect effect in endEffects)
             {
-                if (effect.responseRequired == string.Empty || Decisions.PlayerResponded(conversationID, effect.responseRequired))
+                if (effect.conversationRequired == string.Empty
+                    || (effect.responseRequired == string.Empty && Decisions.ConversationWasStarted(effect.conversationRequired))
+                    || Decisions.PlayerResponded(conversation.conversationID, effect.responseRequired))
                 {
                     effect.effect?.Invoke();
                 }

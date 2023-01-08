@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22590050bf13c0244bdaaab2d399a313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeutralArea: 0
+  NeutralArea: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
     thresholdOptions:

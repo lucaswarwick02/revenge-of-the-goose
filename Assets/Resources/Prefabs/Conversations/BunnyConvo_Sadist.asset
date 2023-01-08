@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078cbdcf0daf04748859e14c091aa370, type: 3}
+  m_Name: BunnyConvo_Sadist
+  m_EditorClassIdentifier: 
+  conversationID: Rabbit_Sadist
+  dialogue:
+  - dialogueID: Intro
+    text: Greetings!
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: Intro_2
+  - dialogueID: Intro_2
+    text: We are only humble rabbits but...
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: Question
+  - dialogueID: Question
+    text: ...you've already killed so many of us! You have to stop!
+    secondsShownFor: 2
+    responsesToWaitFor:
+    - responseID: Normal
+      text: You're right, I will try to be more careful.
+      nextDialogueID: Normal
+    - responseID: Sadist
+      text: Step aside rabbits! The farmer must get what he deserves!
+      nextDialogueID: StandGround
+    nextDialogueID: 
+  - dialogueID: Normal
+    text: We appreciate that, good luck!
+    secondsShownFor: 3
+    responsesToWaitFor: []
+    nextDialogueID: 
+  - dialogueID: StandGround
+    text: Then we won't budge!
+    secondsShownFor: 3
+    responsesToWaitFor: []
+    nextDialogueID: 
