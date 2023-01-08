@@ -53,7 +53,6 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
-        GameHandler.OnMapAreaChanged += OnMapAreaChanged;
         GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -88,7 +87,6 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDisable()
     {
-        GameHandler.OnMapAreaChanged -= OnMapAreaChanged;
         GameHandler.OnNeutralModeChange -= OnNeutralModeChanged;
     }
 
@@ -179,7 +177,7 @@ public class PlayerCombat : MonoBehaviour
         raycastDir = (raycastBarrelPos - raycastPivotPos).normalized;
 
         // Set crosshair position
-        if (Physics.Raycast(raycastBarrelPos, raycastDir, out RaycastHit hit, maxShootingDistance, ~(1 << LayerMask.NameToLayer("NotPlayerShootable"))))
+        if (Physics.Raycast(raycastBarrelPos, raycastDir, out RaycastHit hit, maxShootingDistance, (1 << LayerMask.NameToLayer("PlayerObstacle")) | (1 << LayerMask.NameToLayer("PlayerShootable"))))
         {
             mouseCursor.MoveCursorOverWorldPosition("crosshair", hit.point);
         }
@@ -187,12 +185,6 @@ public class PlayerCombat : MonoBehaviour
         {
             mouseCursor.MoveCursorOverWorldPosition("crosshair", raycastBarrelPos + raycastDir * maxShootingDistance);
         }
-    }
-
-    private void OnMapAreaChanged()
-    {
-        Reloading = false;
-        BulletsRemaining = SHOTS_PER_RELOAD;
     }
 
     private void OnNeutralModeChanged(bool inNeutralMode)
