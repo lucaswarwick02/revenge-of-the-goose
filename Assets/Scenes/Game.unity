@@ -2077,6 +2077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goose
       objectReference: {fileID: 0}
+    - target: {fileID: 8946951807613291755, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
+      propertyPath: volumeProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c319b56da2e67a4a8cdff97f3f0e3d3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f9b479391ff1fc4f81ea5b03e80e4c2, type: 3}
 --- !u!1 &1446418572
