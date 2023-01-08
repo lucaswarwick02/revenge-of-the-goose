@@ -22,6 +22,7 @@ public class HealthPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
+            PlayerHealth.PickupHealth();
             Destroy(gameObject);
         }
     }

@@ -49,6 +49,11 @@ public class PlayerHealth : MonoBehaviour
         INSTANCE = this;
     }
 
+    public static void PickupHealth () {
+        CurrentHealth = Mathf.Clamp(CurrentHealth + 10, 0, MAX_HEALTH);
+        INSTANCE.UpdateHealthVignette();
+    }
+
     private void Update()
     {
         if (Time.time > canHealTime)
