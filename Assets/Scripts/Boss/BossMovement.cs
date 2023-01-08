@@ -4,38 +4,61 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 4f;
     [SerializeField] private GameObject repeatingEnvironment;
 
     BossManager bossManager;
+    Transform player;
 
     private int numberOfEnvironments = 1;
     private float environmentOffset = 35.6f;
 
     private void Awake() {
         bossManager = GetComponent<BossManager>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        float environmentDelay = (100 / speed) - 5f;
-        float firstDelay = ((100 - 30) / speed) - 5f;
+        float environmentDelay = (100 / getSpeed()) - 5f;
+        float firstDelay = ((100 - 30) / getSpeed()) - 5f;
         InvokeRepeating("extendEnvironment", firstDelay, environmentDelay);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!bossManager.CombatEnabled) return;
+        if (GameHandler.InNeutralMode) return;
         
-        transform.position += Vector3.forward * Time.deltaTime * speed;
+        transform.position += Vector3.forward * Time.deltaTime * getSpeed();
     }
 
     private void extendEnvironment () {
-        if (!bossManager.CombatEnabled) return;
+        if (GameHandler.InNeutralMode) return;
 
         Instantiate(repeatingEnvironment, new Vector3(0, 0, (numberOfEnvironments * 100) + environmentOffset), Quaternion.identity);
         numberOfEnvironments++;
+    }
+
+    private float getSpeed () {
+        if (GameHandler.InNeutralMode) return 0f;
+
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (distance > 20) {
+            // Off the map
+            return 0f;
+        }
+        else if (distance > 10.5f) {
+            // Too far away
+            return 3f;
+        }
+        else if (distance < 5) {
+            // Too close
+            return 7f;
+        }
+        else {
+            // Perfect distance
+            return 5f;
+        }
     }
 }

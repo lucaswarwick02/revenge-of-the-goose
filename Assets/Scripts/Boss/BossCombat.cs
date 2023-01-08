@@ -7,10 +7,12 @@ public class BossCombat : MonoBehaviour
     [SerializeField] private float maxObstacleDelay = 1.5f;
     [SerializeField] private float minObstacleDelay = 3f;
     [SerializeField] private float obstacleSpawnDistance;
-    [SerializeField] private Obstacle[] obstacles;
+    [SerializeField] private GameObject[] obstacles;
 
     Destructible destructible;
     BossManager bossManager;
+
+    Transform player;
 
     private float timer;
     private float maxHitPoints;
@@ -18,6 +20,8 @@ public class BossCombat : MonoBehaviour
     private void Awake() {
         destructible = GetComponent<Destructible>();
         bossManager = GetComponent<BossManager>();
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Start() {
@@ -27,8 +31,8 @@ public class BossCombat : MonoBehaviour
 
     private void Update()
     {
-        if (!bossManager.CombatEnabled) return;
-        
+        if (GameHandler.InNeutralMode) return;
+
         timer -= Time.deltaTime;
         if (timer < 0) {
             InstantiateRandomObstacle();
@@ -44,19 +48,11 @@ public class BossCombat : MonoBehaviour
         InstantiateObstacle(GetRandomObstacle());
     }
 
-    private void InstantiateObstacle (Obstacle obstacle) {
-        float horizontalOffset = Random.Range(-obstacle.maxOffset, obstacle.maxOffset);
-        Instantiate(obstacle.prefab, transform.position + new Vector3(horizontalOffset, 0f, obstacleSpawnDistance), Quaternion.identity);
+    private void InstantiateObstacle (GameObject obstacle) {
+        Instantiate(obstacle, transform.position + new Vector3(player.position.x, 0f, obstacleSpawnDistance), Quaternion.identity);
     }
 
-    private Obstacle GetRandomObstacle () {
+    private GameObject GetRandomObstacle () {
         return obstacles[Random.Range(0, obstacles.Length)];
-    }
-
-    [System.Serializable]
-    public struct Obstacle
-    {
-        public GameObject prefab;
-        public float maxOffset;
     }
 }

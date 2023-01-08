@@ -18,17 +18,25 @@ public class BossBar : MonoBehaviour
         INSTANCE = this;
     }
 
+    private void OnEnable() {
+        GameHandler.OnNeutralModeChange += SetActive;
+    }
+
+    private void OnDisable() {
+        GameHandler.OnNeutralModeChange -= SetActive;
+    }
+
     private void Update() {
         if (destructable == null || slider.value <= 0f) {
-            HideBossBar();
+            SetActive(false);
             return;
         }
 
         if (Vector3.Magnitude(player.position - destructable.position) <= 24f) {
-            ShowBossBar();
+            SetActive(true);
         }
         else {
-            HideBossBar();
+            SetActive(false);
         }
     }
 
@@ -43,13 +51,10 @@ public class BossBar : MonoBehaviour
         INSTANCE.slider.value = value;
     }
 
-    private void HideBossBar () {
-        slider.gameObject.SetActive(false);
-        bossName.gameObject.SetActive(false);
-    }
-
-    private void ShowBossBar () {
-        slider.gameObject.SetActive(true);
-        bossName.gameObject.SetActive(true);
+    private void SetActive (bool active) {
+        if (active && GameHandler.InNeutralMode) return;
+        
+        slider.gameObject.SetActive(active);
+        bossName.gameObject.SetActive(active);
     }
 }

@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22590050bf13c0244bdaaab2d399a313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeutralArea: 0
+  NeutralArea: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
     thresholdOptions: []
@@ -281,7 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96db325b2aa081e438d60277f574ca9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
   repeatingEnvironment: {fileID: 3185835037929504910, guid: 24dbc985c1af60944a5445963a12cd6a, type: 3}
 --- !u!114 &4851218477596046605
 MonoBehaviour:
@@ -299,10 +298,8 @@ MonoBehaviour:
   minObstacleDelay: 3
   obstacleSpawnDistance: -2
   obstacles:
-  - prefab: {fileID: 8923316038243590325, guid: 1b94ea7308ab550489b63bad5918e8d8, type: 3}
-    maxOffset: 2
-  - prefab: {fileID: 8923316038243590325, guid: 93f058aaa3c88774cbbd05915ebdd7aa, type: 3}
-    maxOffset: 1
+  - {fileID: 8923316038243590325, guid: 1b94ea7308ab550489b63bad5918e8d8, type: 3}
+  - {fileID: 8923316038243590325, guid: 93f058aaa3c88774cbbd05915ebdd7aa, type: 3}
 --- !u!114 &5796335214009613274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,20 +314,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeToStartConversation: 5
   possibleConversations:
-  - condition:
-      variable: 0
-      predicate: 4
-      value: 0
+  - conditions: []
+    resonsesRequired: []
     conversation: {fileID: 11400000, guid: ea76e87879856bd40b09a4f2260573ef, type: 2}
   endEffects:
-  - conversationRequired: BeforeBoss
-    responseRequired: 
+  - responseRequired:
+      conversation: 
+      response: 
     effect:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8156275265754734709}
-          m_TargetAssemblyTypeName: BossManager, Assembly-CSharp
-          m_MethodName: EnableCombat
+        - m_Target: {fileID: 5796335214009613274}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: EnableHostile
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
