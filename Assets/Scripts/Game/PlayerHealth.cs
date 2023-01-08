@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
         Vignette vignette;
         volumeProfile.TryGet(out vignette);
         ClampedFloatParameter intensity = vignette.intensity;
-        intensity.value = 1f - percentage;
+        intensity.value = (1f - percentage) * 0.5f;
         vignette.intensity = intensity;
     }
 }
