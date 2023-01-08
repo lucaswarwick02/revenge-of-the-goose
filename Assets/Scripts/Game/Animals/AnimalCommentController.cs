@@ -6,10 +6,8 @@ public class AnimalCommentController : MonoBehaviour
 {
     public static List<AnimalCommenter> animalCommenters = new List<AnimalCommenter>();
 
-    private Dictionary<int, List<string>> commentsDict = new Dictionary<int, List<string>>{
-        {1, new List<string>{"Thank you!", "Our Saviour!"}}
-    };
-    private List<string> currentComments;
+    private string[] animalKilledComments = {"No!", "Don't kill us!", "Please stop!", "Ahhh!"};
+    private string[] enemyKilledComments = {"Yes!"};
  
     private void Awake()
     {
@@ -19,36 +17,25 @@ public class AnimalCommentController : MonoBehaviour
 
     private void OnAnimalKilled(int totalAnimalsKilled, Vector3 killEventPosition)
     {
-        List<string> attemptedComments;
-        if (commentsDict.TryGetValue(totalAnimalsKilled, out attemptedComments)) {
-            currentComments = attemptedComments;
-        }
+        // Remove where animal commenter is > 15 away
+        List<AnimalCommenter> closeAnimalCommenters = animalCommenters.FindAll(
+            animalCommenter => Vector3.Magnitude(animalCommenter.gameObject.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position) < 15);
 
-        foreach (AnimalCommenter animalCommenter in animalCommenters)
-        {
-            if (animalCommenter.enabled)
-            {
-                string randomComment = currentComments[Random.Range(0, currentComments.Count)];
-                animalCommenter.Comment(randomComment);
-            }
+        foreach (AnimalCommenter animalCommenter in closeAnimalCommenters) {
+            // Pick random comment
+            animalCommenter.Comment(animalKilledComments[Random.Range(0, animalKilledComments.Length)]);
         }
     }
 
     private void OnEnemyKilled(int totalEnemiesKilled, Vector3 killEventPosition)
     {
-        List<string> attemptedComments;
-        if (commentsDict.TryGetValue(totalEnemiesKilled, out attemptedComments))
-        {
-            currentComments = attemptedComments;
-        }
+        // Remove where animal commenter is > 15 away
+        List<AnimalCommenter> closeAnimalCommenters = animalCommenters.FindAll(
+            animalCommenter => Vector3.Magnitude(animalCommenter.gameObject.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position) < 15);
 
-        foreach (AnimalCommenter animalCommenter in animalCommenters)
-        {
-            if (animalCommenter.enabled)
-            {
-                string randomComment = currentComments[Random.Range(0, currentComments.Count)];
-                animalCommenter.Comment(randomComment);
-            }
+        foreach (AnimalCommenter animalCommenter in closeAnimalCommenters) {
+            // Pick random comment
+            animalCommenter.Comment(enemyKilledComments[Random.Range(0, enemyKilledComments.Length)]);
         }
     }
 }

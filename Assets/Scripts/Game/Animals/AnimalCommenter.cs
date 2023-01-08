@@ -14,8 +14,9 @@ public class AnimalCommenter : MonoBehaviour
     {
         if (currentComment != null)
         {
-            Debug.LogWarning("Can't create comment as one was already present");
-            return;
+            // Debug.LogWarning("Can't create comment as one was already present");
+            Destroy(currentComment);
+            // return;
         }
 
         currentComment = Instantiate(commentPrefab, canvas.transform.Find("CommentHolder").transform);
