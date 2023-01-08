@@ -22,9 +22,8 @@ public class BossMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float environmentDelay = (100 / getSpeed()) - 5f;
-        float firstDelay = ((100 - 30) / getSpeed()) - 5f;
-        InvokeRepeating("extendEnvironment", firstDelay, environmentDelay);
+        float environmentDelay = 25f;
+        InvokeRepeating("extendEnvironment", environmentDelay, environmentDelay);
     }
 
     // Update is called once per frame
