@@ -2,6 +2,7 @@ using Game.Utility;
 using System.Linq;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class PlayerCombat : MonoBehaviour
 
     public int BulletsRemaining { get; private set; }
 
+    public bool Shooting { get; private set; }
+
     public bool Reloading { get; private set; }
 
     public bool CanShoot { get; private set; }
@@ -72,11 +75,12 @@ public class PlayerCombat : MonoBehaviour
 
         if (CanShoot && Input.GetMouseButtonDown(0) && !Reloading && BulletsRemaining > 0 && Time.time >= nextShootTime)
         {
-            BulletsRemaining--;
-            animator.SetTrigger("Shoot");
             Shoot();
             nextShootTime = Time.time + MIN_TIME_BETWEEN_SHOTS;
-            OnBulletFired?.Invoke(BulletsRemaining);
+        }
+        else if (Input.GetButtonDown("Reload") && BulletsRemaining < SHOTS_PER_RELOAD && !Shooting)
+        {
+            Reload();
         }
 
         CalculateShootingInfoAndRotateArms();
@@ -88,14 +92,51 @@ public class PlayerCombat : MonoBehaviour
         GameHandler.OnNeutralModeChange -= OnNeutralModeChanged;
     }
 
+    private void Shoot()
+    {
+        Shooting = true;
+        animator.SetTrigger("Shoot");
+
+        BulletsRemaining--;
+
+        // Get all colliders hit (in order of distance from player), excluding those on the "NotPlayerShootable" layer
+        RaycastHit[] hits = Physics.RaycastAll(raycastBarrelPos, raycastDir, maxShootingDistance + shootingDistanceLeniency, LayerMask.GetMask("PlayerShootable")).OrderBy(h => h.distance).ToArray();
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+
+            Destructible destructibleObj = hit.collider.gameObject.GetComponentInParent<Destructible>();
+
+            if (destructibleObj is not null)
+            {
+                float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - raycastBarrelPos).magnitude);
+                destructibleObj.InflictDamage(damage, hit, raycastBarrelPos);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        OnBulletFired?.Invoke(BulletsRemaining);
+    }
+
     public void FinishShooting()
     {
+        Shooting = false;
+
         if (BulletsRemaining < 1)
         {
-            Reloading = true;
-            animator.SetTrigger("Reload");
-            OnReloadStarted?.Invoke(BulletsRemaining);
+            Reload();
         }
+    }
+
+    private void Reload()
+    {
+        Reloading = true;
+        animator.SetTrigger("Reload");
+        OnReloadStarted?.Invoke(BulletsRemaining);
     }
 
     public void FinishReloading()
@@ -145,29 +186,6 @@ public class PlayerCombat : MonoBehaviour
         else
         {
             mouseCursor.MoveCursorOverWorldPosition("crosshair", raycastBarrelPos + raycastDir * maxShootingDistance);
-        }
-    }
-
-    private void Shoot()
-    {
-        // Get all colliders hit (in order of distance from player), excluding those on the "NotPlayerShootable" layer
-        RaycastHit[] hits = Physics.RaycastAll(raycastBarrelPos, raycastDir, maxShootingDistance + shootingDistanceLeniency, LayerMask.GetMask("PlayerShootable")).OrderBy(h => h.distance).ToArray();
-
-        for (int i = 0; i < hits.Length; i++)
-        {
-            RaycastHit hit = hits[i];
-
-            Destructible destructibleObj = hit.collider.gameObject.GetComponentInParent<Destructible>();
-
-            if (destructibleObj is not null)
-            {
-                float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - raycastBarrelPos).magnitude);
-                destructibleObj.InflictDamage(damage, hit, raycastBarrelPos);
-            }
-            else
-            {
-                break;
-            }
         }
     }
 
