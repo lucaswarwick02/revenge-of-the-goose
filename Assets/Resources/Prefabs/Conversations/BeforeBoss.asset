@@ -15,7 +15,23 @@ MonoBehaviour:
   conversationID: BeforeBoss
   dialogue:
   - dialogueID: Intro_1
-    text: GET FUCKED
+    text: What have you done?!
     secondsShownFor: 2
     responsesToWaitFor: []
+    nextDialogueID: Intro_2
+  - dialogueID: Intro_2
+    text: You've destroyed everything!
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: Intro_3
+  - dialogueID: Intro_3
+    text: Just leave me alone!
+    secondsShownFor: 2
+    responsesToWaitFor:
+    - responseID: Pacifist
+      text: This is for my brothers!
+      nextDialogueID: 
+    - responseID: Sadist
+      text: You'll die for what you've done!
+      nextDialogueID: 
     nextDialogueID: 
