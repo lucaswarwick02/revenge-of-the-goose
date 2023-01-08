@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static PlaythroughStats;
 
 public class MapArea : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class MapArea : MonoBehaviour
     private void MoveToNextArea(ThresholdOption[] thresholdOptions)
     {
         foreach (ThresholdOption thresholdOption in thresholdOptions) {
-            if (PlaythroughStats.AnimalKillPercentage() >= thresholdOption.minThreshold && PlaythroughStats.AnimalKillPercentage() <= thresholdOption.maxThreshold) {
+            if (PlaythroughStats.Query(thresholdOption.query)) {
                 OnNextMapAreaChosen?.Invoke(thresholdOption.resultingArea);
                 break;
             }
@@ -42,7 +43,6 @@ public class MapArea : MonoBehaviour
     public struct ThresholdOption
     {
         public MapArea resultingArea; // The next map area to be loaded
-        public float minThreshold;
-        public float maxThreshold;
+        public StatisticQuery query;
     }
 }

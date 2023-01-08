@@ -589,11 +589,15 @@ MonoBehaviour:
   - gateway: {fileID: 7288688100972666697}
     thresholdOptions:
     - resultingArea: {fileID: 1829712235895486512, guid: e293560c45fdf54428081f2624e3bebb, type: 3}
-      minThreshold: 0
-      maxThreshold: 0.5
+      query:
+        variable: 1
+        predicate: 3
+        value: 2
     - resultingArea: {fileID: 1829712235895486512, guid: 98a1213ed24dc3e4db9b116311ffb5b9, type: 3}
-      minThreshold: 0.5
-      maxThreshold: 1
+      query:
+        variable: 1
+        predicate: 1
+        value: 2
   phase: 1
 --- !u!1 &4281774661486913855
 GameObject:
