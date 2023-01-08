@@ -5,42 +5,49 @@ using UnityEngine;
 
 public static class PlaythroughStats
 {
-    public static void Reset()
-    {
-        DestructionScore = 0;
-        EnemyKillCount = 0;
-        animalsKilledInPhases[GameHandler.CurrentPhase] = 0;
-    }
+    public static bool AnimalsTurned { get; set; }
+
+    public static int DestructionScore { get; private set; }
+
+    public static int EnemyKillCount { get; private set; }
+
+    public static int EnemiesEncountered { get; private set; }
+
+    public static bool IsBunnyCompanionUnlocked { get; private set; }
+
+    public static bool IsSheepCompanionUnlocked { get; private set; }
+
+    public static Dictionary<int, int> animalsKilledInPhases;
+
+    public static Dictionary<int, int> animalsEncounteredInPhases;
+
+    public static int TotalAnimalsKilled { get { return animalsKilledInPhases.Sum(x => x.Value); } }
+    public static int TotalAnimalsEncountered { get { return animalsEncounteredInPhases.Sum(x => x.Value); } }
 
     // Event for when the destruction score changes <new score, score change, world position of destruction event>
     public static event Action<int, int, Vector3> OnDestructionScoreChanged;
 
-    public static int DestructionScore { get; private set; }
+    // Event for when the enemy kill count is incremented <new count, world position of kill event>
+    public static event Action<int, Vector3> OnEnemyKilled;
+
+    // Event for when the animal kill count is incremented <new count, world position of kill event>
+    public static event Action<int, Vector3> OnAnimalKilled;
+
     public static void AddDestructionScore(int scoreGained, Vector3 atPosition)
     {
         DestructionScore += scoreGained;
         OnDestructionScoreChanged?.Invoke(DestructionScore, scoreGained, atPosition);
     }
 
-
-    // Event for when the enemy kill count is incremented <new count, world position of kill event>
-    public static event Action<int, Vector3> OnEnemyKilled;
-
-    public static int EnemyKillCount { get; private set; }
     public static void IncrementEnemyKillCount(Vector3 atPosition)
     {
         EnemyKillCount++;
         OnEnemyKilled?.Invoke(EnemyKillCount, atPosition);
     }
 
-    public static int EnemiesEncountered { get; private set; }
     public static void IncrementEnemiesEncountered() {
         EnemiesEncountered++;
     }
-
-
-    // Event for when the animal kill count is incremented <new count, world position of kill event>
-    public static event Action<int, Vector3> OnAnimalKilled;
 
     public static void IncrementAnimalKillCount(Vector3 atPosition)
     {
@@ -52,25 +59,35 @@ public static class PlaythroughStats
         animalsEncounteredInPhases[GameHandler.CurrentPhase]++;
     }
 
-    // Percentage of Animals Killed
     public static float AnimalKillPercentage () {
         return (animalsEncounteredInPhases[GameHandler.CurrentPhase] == 0) ? 0 : (float) animalsKilledInPhases[GameHandler.CurrentPhase] / (float) animalsEncounteredInPhases[GameHandler.CurrentPhase];
     }
 
-    public static Dictionary<int, int> animalsKilledInPhases = new Dictionary<int, int>{
-        {1, 0},
-        {2, 0},
-        {3, 0}
-    };
+    public static void UnlockBunnyCompanion() { IsBunnyCompanionUnlocked = true; }
 
-    public static Dictionary<int, int> animalsEncounteredInPhases = new Dictionary<int, int>{
-        {1, 0},
-        {2, 0},
-        {3, 0}
-    };
+    public static void UnlockSheepCompanion() { IsSheepCompanionUnlocked = true; }
 
-    public static int TotalAnimalsKilled { get{ return animalsKilledInPhases.Sum(x => x.Value); } }
-    public static int TotalAnimalsEncountered { get{ return animalsEncounteredInPhases.Sum(x => x.Value); }}
+    public static void Reset()
+    {
+        AnimalsTurned = false;
+        DestructionScore = 0;
+        EnemyKillCount = 0;
+        EnemiesEncountered = 0;
+        animalsKilledInPhases = new Dictionary<int, int>
+        {
+            {1, 0},
+            {2, 0},
+            {3, 0}
+        };
+        animalsEncounteredInPhases = new Dictionary<int, int>
+        {
+            {1, 0},
+            {2, 0},
+            {3, 0}
+        };
+        IsSheepCompanionUnlocked = false;
+        IsBunnyCompanionUnlocked = false;
+    }
 
     [Serializable]
     public enum Statistic
@@ -140,11 +157,4 @@ public static class PlaythroughStats
             _ => throw new NotImplementedException(),
         };
     }
-
-    // Functions for checking if companions are unlocked
-    public static bool IsBunnyCompanionUnlocked { get; private set; }
-    public static bool IsSheepCompanionUnlocked { get; private set; }
-
-    public static void UnlockBunnyCompanion () { IsBunnyCompanionUnlocked = true; }
-    public static void UnlockSheepCompanion () { IsSheepCompanionUnlocked = true; }
 }
