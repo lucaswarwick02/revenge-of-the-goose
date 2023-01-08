@@ -7,6 +7,7 @@ public class Destructible : MonoBehaviour
     [SerializeField] private DestructableType type;
     [SerializeField] private float hitPoints = 100;
     [SerializeField] private int destructionScore;
+    [SerializeField] private float targetingHeight = 0.5f;
     [Space]
     [SerializeField] private bool destroyImmediately = true;
     [SerializeField] private bool contributeToEncounters = true;
@@ -15,6 +16,8 @@ public class Destructible : MonoBehaviour
     public UnityEvent<RaycastHit> OnHit;
 
     public bool IsDestroyed { get; private set; }
+
+    public float TargetingHeight => targetingHeight;
 
     private void Start() {
         if (type == DestructableType.Boss) {

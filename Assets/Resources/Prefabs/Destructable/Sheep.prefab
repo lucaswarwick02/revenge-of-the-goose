@@ -144,8 +144,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.38, y: 0.2063845, z: 0}
-  m_Center: {x: 0, y: 0.145206, z: 0}
+  m_Size: {x: 0.85, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &8923316038243590325
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe832b1410cef774dadd53cf517cf1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commentPosition: {x: -0.18, y: 0.63, z: 0.37}
+  commentPosition: {x: -0.36, y: 1.38, z: 0.8}
   commentPrefab: {fileID: 5806053105845556579, guid: 5f1d4b9fc28aca1409779d6bb04be914, type: 3}
 --- !u!65 &7303807506793078874
 BoxCollider:
@@ -270,7 +270,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.76, y: 0.5, z: 0.3}
+  m_Size: {x: 1.7, y: 0.5, z: 0.3}
   m_Center: {x: 0, y: 0.25, z: 0.15}
 --- !u!54 &4266101814370703392
 Rigidbody:
