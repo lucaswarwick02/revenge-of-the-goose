@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 4261026963598807623}
   - component: {fileID: 4136913732132495899}
   - component: {fileID: 499434619486325575}
+  - component: {fileID: 4851218477596046605}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
@@ -268,6 +269,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   repeatingEnvironment: {fileID: 3185835037929504910, guid: 24dbc985c1af60944a5445963a12cd6a, type: 3}
+--- !u!114 &4851218477596046605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827909547567425485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e70fc265c74d6b49825e108da506565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleSpawnDistance: -1
+  obstacles:
+  - {fileID: 8923316038243590325, guid: 93f058aaa3c88774cbbd05915ebdd7aa, type: 3}
 --- !u!1001 &707216090956443054
 PrefabInstance:
   m_ObjectHideFlags: 0

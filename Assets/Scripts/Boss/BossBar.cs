@@ -24,7 +24,7 @@ public class BossBar : MonoBehaviour
             return;
         }
 
-        if (Vector3.Magnitude(player.position - destructable.position) <= 12f) {
+        if (Vector3.Magnitude(player.position - destructable.position) <= 24f) {
             ShowBossBar();
         }
         else {
