@@ -548,7 +548,8 @@ MonoBehaviour:
   NeutralArea: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
-    resultingArea: {fileID: 1829712235895486512, guid: 2bf25706fe9eb784abee46dc09d0bdd4, type: 3}
+    thresholdOptions: []
+  phase: 2
 --- !u!1 &5527701816609597571
 GameObject:
   m_ObjectHideFlags: 0

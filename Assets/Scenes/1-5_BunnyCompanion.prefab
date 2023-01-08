@@ -582,6 +582,7 @@ MonoBehaviour:
     - resultingArea: {fileID: 1829712235895486512, guid: 382bba8a2d1cfd6418207292d97303f2, type: 3}
       minThreshold: 0
       maxThreshold: 1
+  phase: 1
 --- !u!1 &4281774661486913855
 GameObject:
   m_ObjectHideFlags: 0

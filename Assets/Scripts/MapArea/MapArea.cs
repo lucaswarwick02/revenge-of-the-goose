@@ -8,6 +8,8 @@ public class MapArea : MonoBehaviour
     [SerializeField] public bool NeutralArea;
     [SerializeField] private MapAreaChoice[] gateways;
 
+    public int phase;
+
     private void OnEnable()
     {
         foreach (MapAreaChoice choice in gateways)

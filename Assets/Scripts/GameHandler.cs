@@ -17,6 +17,8 @@ public class GameHandler : MonoBehaviour
 
     public static bool InNeutralMode { get; private set; }
 
+    public static int CurrentPhase { get; private set; }
+
     [SerializeField] private MapArea startMapArea;
 
     private void Awake()
@@ -57,6 +59,7 @@ public class GameHandler : MonoBehaviour
         }
 
         CurrentMapArea = Instantiate(newArea);
+        CurrentPhase = newArea.phase;
         SetNeutralMode(newArea.NeutralArea);
         OnMapAreaChanged?.Invoke();
     }

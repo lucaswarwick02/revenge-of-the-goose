@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class PlaythroughStats
@@ -7,14 +9,13 @@ public static class PlaythroughStats
     {
         DestructionScore = 0;
         EnemyKillCount = 0;
-        AnimalKillCount = 0;
+        animalsKilledInPhases[GameHandler.CurrentPhase] = 0;
     }
 
     // Event for when the destruction score changes <new score, score change, world position of destruction event>
     public static event Action<int, int, Vector3> OnDestructionScoreChanged;
 
     public static int DestructionScore { get; private set; }
-
     public static void AddDestructionScore(int scoreGained, Vector3 atPosition)
     {
         DestructionScore += scoreGained;
@@ -26,7 +27,6 @@ public static class PlaythroughStats
     public static event Action<int, Vector3> OnEnemyKilled;
 
     public static int EnemyKillCount { get; private set; }
-
     public static void IncrementEnemyKillCount(Vector3 atPosition)
     {
         EnemyKillCount++;
@@ -34,7 +34,6 @@ public static class PlaythroughStats
     }
 
     public static int EnemiesEncountered { get; private set; }
-
     public static void IncrementEnemiesEncountered() {
         EnemiesEncountered++;
     }
@@ -43,38 +42,42 @@ public static class PlaythroughStats
     // Event for when the animal kill count is incremented <new count, world position of kill event>
     public static event Action<int, Vector3> OnAnimalKilled;
 
-    public static int AnimalKillCount { get; private set; }
-
     public static void IncrementAnimalKillCount(Vector3 atPosition)
     {
-        AnimalKillCount++;
-        OnAnimalKilled?.Invoke(AnimalKillCount, atPosition);
+        animalsKilledInPhases[GameHandler.CurrentPhase]++;
+        OnAnimalKilled?.Invoke(animalsKilledInPhases[GameHandler.CurrentPhase], atPosition);
     }
 
-    public static int AnimalsEncountered { get; private set; }
-
     public static void IncrementAnimalsEncountered () {
-        AnimalsEncountered++;
+        animalsEncounteredInPhases[GameHandler.CurrentPhase]++;
     }
 
     // Percentage of Animals Killed
     public static float AnimalKillPercentage () {
-        return (AnimalsEncountered == 0) ? 0 : (float) AnimalKillCount / (float) AnimalsEncountered;
+        return (animalsEncounteredInPhases[GameHandler.CurrentPhase] == 0) ? 0 : (float) animalsKilledInPhases[GameHandler.CurrentPhase] / (float) animalsEncounteredInPhases[GameHandler.CurrentPhase];
     }
 
-    // Functions for checking if companions are unlocked
-    public static bool IsBunnyCompanionUnlocked { get; private set; }
-    public static bool IsSheepCompanionUnlocked { get; private set; }
+    public static Dictionary<int, int> animalsKilledInPhases = new Dictionary<int, int>{
+        {1, 0},
+        {2, 0},
+        {3, 0}
+    };
 
-    public static void UnlockBunnyCompanion () { IsBunnyCompanionUnlocked = true; }
-    public static void UnlockSheepCompanion () { IsSheepCompanionUnlocked = true; }
+    public static Dictionary<int, int> animalsEncounteredInPhases = new Dictionary<int, int>{
+        {1, 0},
+        {2, 0},
+        {3, 0}
+    };
+
+    public static int TotalAnimalsKilled { get{ return animalsKilledInPhases.Sum(x => x.Value); } }
+    public static int TotalAnimalsEncountered { get{ return animalsEncounteredInPhases.Sum(x => x.Value); }}
 
     [Serializable]
     public enum Statistic
     {
         DestructionScore,
-        AnimalsKilled,
-        AnimalsEncountered,
+        TotalAnimalsKilled,
+        TotalAnimalsEncountered,
         EnemiesKilled,
         EnemiesEncountered,
         HasBunnyCompanion_Bool,
@@ -104,10 +107,10 @@ public static class PlaythroughStats
     {
         int value = query.variable switch
         {
-            Statistic.AnimalsKilled => AnimalKillCount,
+            Statistic.TotalAnimalsKilled => TotalAnimalsKilled,
             Statistic.EnemiesKilled => EnemyKillCount,
             Statistic.DestructionScore => DestructionScore,
-            Statistic.AnimalsEncountered => AnimalsEncountered,
+            Statistic.TotalAnimalsEncountered => TotalAnimalsEncountered,
             Statistic.EnemiesEncountered => EnemiesEncountered,
             Statistic.HasBunnyCompanion_Bool => IsBunnyCompanionUnlocked ? 1 : 0,
             Statistic.HasSheepCompanion_Bool => IsSheepCompanionUnlocked ?  1 : 0,
@@ -125,4 +128,11 @@ public static class PlaythroughStats
             _ => throw new NotImplementedException(),
         };
     }
+
+    // Functions for checking if companions are unlocked
+    public static bool IsBunnyCompanionUnlocked { get; private set; }
+    public static bool IsSheepCompanionUnlocked { get; private set; }
+
+    public static void UnlockBunnyCompanion () { IsBunnyCompanionUnlocked = true; }
+    public static void UnlockSheepCompanion () { IsSheepCompanionUnlocked = true; }
 }
