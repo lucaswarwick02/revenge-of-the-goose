@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class BossCombat : MonoBehaviour
 {
-    [SerializeField] private Destructible destructible;
     [SerializeField] private float maxObstacleDelay = 1.5f;
     [SerializeField] private float minObstacleDelay = 3f;
     [SerializeField] private float obstacleSpawnDistance;
     [SerializeField] private Obstacle[] obstacles;
 
+    Destructible destructible;
+    BossManager bossManager;
+
     private float timer;
     private float maxHitPoints;
+
+    private void Awake() {
+        destructible = GetComponent<Destructible>();
+        bossManager = GetComponent<BossManager>();
+    }
 
     private void Start() {
         maxHitPoints = destructible.getHitPoints();
@@ -20,6 +27,8 @@ public class BossCombat : MonoBehaviour
 
     private void Update()
     {
+        if (!bossManager.CombatEnabled) return;
+        
         timer -= Time.deltaTime;
         if (timer < 0) {
             InstantiateRandomObstacle();

@@ -180,8 +180,10 @@ GameObject:
   - component: {fileID: 2455133395591191760}
   - component: {fileID: 4261026963598807623}
   - component: {fileID: 4136913732132495899}
+  - component: {fileID: 8156275265754734709}
   - component: {fileID: 499434619486325575}
   - component: {fileID: 4851218477596046605}
+  - component: {fileID: 5796335214009613274}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
@@ -255,6 +257,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 0.625, z: 1.5}
   m_Center: {x: 0, y: 0.3125, z: 0.25}
+--- !u!114 &8156275265754734709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827909547567425485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46108e28b90b35642914cd009ba01811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &499434619486325575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e70fc265c74d6b49825e108da506565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructible: {fileID: 4261026963598807623}
   maxObstacleDelay: 1
   minObstacleDelay: 3
   obstacleSpawnDistance: -2
@@ -290,6 +303,43 @@ MonoBehaviour:
     maxOffset: 2
   - prefab: {fileID: 8923316038243590325, guid: 93f058aaa3c88774cbbd05915ebdd7aa, type: 3}
     maxOffset: 1
+--- !u!114 &5796335214009613274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827909547567425485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630dd7c8755cb6941b713a08adf29e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeToStartConversation: 5
+  possibleConversations:
+  - condition:
+      variable: 0
+      predicate: 4
+      value: 0
+    conversation: {fileID: 11400000, guid: ea76e87879856bd40b09a4f2260573ef, type: 2}
+  endEffects:
+  - conversationRequired: BeforeBoss
+    responseRequired: 
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8156275265754734709}
+          m_TargetAssemblyTypeName: BossManager, Assembly-CSharp
+          m_MethodName: EnableCombat
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &707216090956443054
 PrefabInstance:
   m_ObjectHideFlags: 0
