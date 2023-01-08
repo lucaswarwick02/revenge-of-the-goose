@@ -6,6 +6,7 @@ public class BossMovement : MonoBehaviour
 {
     [SerializeField] private GameObject repeatingEnvironment;
 
+    BossCombat bossCombat;
     BossManager bossManager;
     Transform player;
 
@@ -13,6 +14,7 @@ public class BossMovement : MonoBehaviour
     private float environmentOffset = 35.6f;
 
     private void Awake() {
+        bossCombat = GetComponent<BossCombat>();
         bossManager = GetComponent<BossManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -44,6 +46,9 @@ public class BossMovement : MonoBehaviour
         if (GameHandler.InNeutralMode) return 0f;
 
         float distance = Vector3.Distance(transform.position, player.position);
+
+        bossCombat.canAttack = distance < 20f;
+
         if (distance > 20) {
             // Off the map
             return 0f;

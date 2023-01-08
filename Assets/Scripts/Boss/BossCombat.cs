@@ -17,6 +17,8 @@ public class BossCombat : MonoBehaviour
     private float timer;
     private float maxHitPoints;
 
+    public bool canAttack = true;
+
     private void Awake() {
         destructible = GetComponent<Destructible>();
         bossManager = GetComponent<BossManager>();
@@ -49,6 +51,8 @@ public class BossCombat : MonoBehaviour
     }
 
     private void InstantiateObstacle (GameObject obstacle) {
+        if (!canAttack) return;
+        
         Instantiate(obstacle, transform.position + new Vector3(player.position.x, 0f, obstacleSpawnDistance), Quaternion.identity);
     }
 
