@@ -281,7 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e70fc265c74d6b49825e108da506565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleDelay: 2
+  destructible: {fileID: 4261026963598807623}
+  maxObstacleDelay: 1
+  minObstacleDelay: 3
   obstacleSpawnDistance: -2
   obstacles:
   - prefab: {fileID: 8923316038243590325, guid: 1b94ea7308ab550489b63bad5918e8d8, type: 3}

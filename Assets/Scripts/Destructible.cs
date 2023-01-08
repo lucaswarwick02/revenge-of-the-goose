@@ -78,4 +78,6 @@ public class Destructible : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public float getHitPoints() { return hitPoints; }
 }

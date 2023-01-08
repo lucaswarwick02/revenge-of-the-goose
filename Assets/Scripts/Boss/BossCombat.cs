@@ -4,14 +4,31 @@ using UnityEngine;
 
 public class BossCombat : MonoBehaviour
 {
-    [SerializeField] private float obstacleDelay = 2f;
+    [SerializeField] private Destructible destructible;
+    [SerializeField] private float maxObstacleDelay = 1.5f;
+    [SerializeField] private float minObstacleDelay = 3f;
     [SerializeField] private float obstacleSpawnDistance;
     [SerializeField] private Obstacle[] obstacles;
 
-    // Start is called before the first frame update
-    void Start()
+    private float timer;
+    private float maxHitPoints;
+
+    private void Start() {
+        maxHitPoints = destructible.getHitPoints();
+        ResetTimer();
+    }
+
+    private void Update()
     {
-        InvokeRepeating("InstantiateRandomObstacle", obstacleDelay, obstacleDelay);
+        timer -= Time.deltaTime;
+        if (timer < 0) {
+            InstantiateRandomObstacle();
+            ResetTimer();
+        }
+    }
+
+    private void ResetTimer () {
+        timer = Mathf.Lerp(maxObstacleDelay, minObstacleDelay, destructible.getHitPoints() / maxHitPoints);
     }
 
     private void InstantiateRandomObstacle () {
