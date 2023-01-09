@@ -2813,6 +2813,7 @@ GameObject:
   - component: {fileID: 1556502562}
   - component: {fileID: 1556502561}
   - component: {fileID: 1556502565}
+  - component: {fileID: 1556502566}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2925,6 +2926,19 @@ MonoBehaviour:
   pausePanel: {fileID: 1213962738}
   gameOverPanel: {fileID: 1775183047}
   dialoguePanel: {fileID: 350512779}
+--- !u!114 &1556502566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556502560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485802c93db239348bfd7ad7108e9d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HUD: {fileID: 1830540062}
 --- !u!1 &1562005524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3583,7 +3597,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1830540063}
-  - component: {fileID: 1830540067}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -3613,18 +3626,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1830540067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830540062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 485802c93db239348bfd7ad7108e9d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1854115007
 GameObject:
   m_ObjectHideFlags: 0

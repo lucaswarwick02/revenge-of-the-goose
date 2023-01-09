@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -42,6 +43,31 @@ public class PlayerHealth : MonoBehaviour
     private static void Die(Transform killer)
     {
         OnPlayerDie?.Invoke(killer);
+    }
+
+    public static void ResetHealth()
+    {
+        CurrentHealth = MAX_HEALTH;
+
+        if (INSTANCE != null)
+        {
+            INSTANCE.UpdateHealthVignette();
+        }
+    }
+
+    public static void Load(SaveModel saveModel)
+    {
+        CurrentHealth = saveModel.PlayerHealth;
+
+        if (INSTANCE != null)
+        {
+            INSTANCE.UpdateHealthVignette();
+        }
+    }
+
+    public static void SaveToModel(ref SaveModel saveModel)
+    {
+        saveModel.PlayerHealth = CurrentHealth;
     }
 
     private void Awake()

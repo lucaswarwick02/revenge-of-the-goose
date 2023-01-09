@@ -64,6 +64,7 @@ public class GameHandler : MonoBehaviour
         IsPaused = false;
         PlaythroughStats.ResetPlaythrough();
         Decisions.ResetDecisions();
+        PlayerHealth.ResetHealth();
 
         UpdateScene(startMapArea);
 
@@ -79,6 +80,7 @@ public class GameHandler : MonoBehaviour
             IsPaused = false;
             PlaythroughStats.Load(LastCheckpoint.Value);
             Decisions.Load(LastCheckpoint.Value);
+            PlayerHealth.Load(LastCheckpoint.Value);
 
             UpdateScene(LastCheckpoint.Value.CheckpointMapArea);
 
@@ -98,6 +100,7 @@ public class GameHandler : MonoBehaviour
         newSave.CheckpointMapArea = CurrentMapArea;
         PlaythroughStats.SaveToModel(ref newSave);
         Decisions.SaveToModel(ref newSave);
+        PlayerHealth.SaveToModel(ref newSave);
         LastCheckpoint = newSave;
 
         Debug.Log($"Game successfully saved at {CurrentMapArea.name}");

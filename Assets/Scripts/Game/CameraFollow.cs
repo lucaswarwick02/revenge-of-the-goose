@@ -27,11 +27,23 @@ public class CameraFollow : MonoBehaviour
 
     private void Awake()
     {
-        SetPlayerMode();
-
         GameHandler.OnGameOver += OnGameOver;
+        GameHandler.OnGameLoaded += OnGameLoaded;
         Converser.OnStartConversation += OnStartConversation;
         Converser.OnEndConversation += SetPlayerMode;
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.OnGameOver -= OnGameOver;
+        GameHandler.OnGameLoaded -= OnGameLoaded;
+        Converser.OnStartConversation -= OnStartConversation;
+        Converser.OnEndConversation -= SetPlayerMode;
+    }
+
+    private void OnGameLoaded()
+    {
+        SetPlayerMode();
 
         if (player)
         {
@@ -49,13 +61,6 @@ public class CameraFollow : MonoBehaviour
             Debug.LogError("Could not find player!");
             enabled = false;
         }
-    }
-
-    private void OnDisable()
-    {
-        GameHandler.OnGameOver -= OnGameOver;
-        Converser.OnStartConversation -= OnStartConversation;
-        Converser.OnEndConversation -= SetPlayerMode;
     }
 
     void Update()

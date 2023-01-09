@@ -17,6 +17,16 @@ public class DestructionScorePopup : MonoBehaviour
 
     private Vector3 worldPosAfterPopup;
 
+    private void Awake()
+    {
+        GameHandler.OnGameOver += OnGameOver;
+    }
+
+    private void OnDisable()
+    {
+        GameHandler.OnGameOver -= OnGameOver;
+    }
+
     public void Initialise(int scoreToDisplay, Vector3 destructionEventPosition, Vector2 destructionScoreTextScreenPos, Action onMerged)
     {
         scoreText.text = $"{scoreToDisplay}";
@@ -51,7 +61,7 @@ public class DestructionScorePopup : MonoBehaviour
         float duration = mergeAnimationCurve.keys[^1].time;
         float timePassed = 0;
 
-        while (enabled && timePassed <= duration)
+        while (enabled && timePassed <= duration && !GameHandler.IsGameOver)
         {
             Vector2 destructionEventScreenPos = Camera.main.WorldToScreenPoint(worldPosAfterPopup);
             transform.position = Vector2.Lerp(destructionEventScreenPos, destructionScoreTextScreenPos, mergeAnimationCurve.Evaluate(timePassed));
@@ -61,6 +71,17 @@ public class DestructionScorePopup : MonoBehaviour
             yield return null;
         }
 
+        if (!GameHandler.IsGameOver)
+        {
+            onMerged?.Invoke();
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void OnGameOver(Transform killer)
+    {
+        StopAllCoroutines();
         onMerged?.Invoke();
         Destroy(gameObject);
     }
