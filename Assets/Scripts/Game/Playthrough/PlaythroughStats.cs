@@ -67,26 +67,33 @@ public static class PlaythroughStats
 
     public static void UnlockSheepCompanion() { IsSheepCompanionUnlocked = true; }
 
-    public static void Reset()
+    public static void ResetPlaythrough()
     {
-        AnimalsTurned = false;
-        DestructionScore = 0;
-        EnemyKillCount = 0;
-        EnemiesEncountered = 0;
-        animalsKilledInPhases = new Dictionary<int, int>
-        {
-            {1, 0},
-            {2, 0},
-            {3, 0}
-        };
-        animalsEncounteredInPhases = new Dictionary<int, int>
-        {
-            {1, 0},
-            {2, 0},
-            {3, 0}
-        };
-        IsSheepCompanionUnlocked = false;
-        IsBunnyCompanionUnlocked = false;
+        Load(SaveModel.NewEmptySave());
+    }
+
+    public static void SaveToModel(ref SaveModel saveModel)
+    {
+        saveModel.AnimalsTurned = AnimalsTurned;
+        saveModel.DestructionScore = DestructionScore;
+        saveModel.EnemyKillCount = EnemyKillCount;
+        saveModel.EnemiesEncountered = EnemiesEncountered;
+        saveModel.IsBunnyCompanionUnlocked = IsBunnyCompanionUnlocked;
+        saveModel.IsSheepCompanionUnlocked = IsSheepCompanionUnlocked;
+        saveModel.AnimalsKilledInPhases = new Dictionary<int, int>(animalsKilledInPhases);
+        saveModel.AnimalsEncounteredInPhases = new Dictionary<int, int>(animalsEncounteredInPhases);
+    }
+
+    public static void Load(SaveModel saveModel)
+    {
+        AnimalsTurned = saveModel.AnimalsTurned;
+        DestructionScore = saveModel.DestructionScore;
+        EnemyKillCount = saveModel.EnemyKillCount;
+        EnemiesEncountered = saveModel.EnemiesEncountered;
+        IsBunnyCompanionUnlocked = saveModel.IsBunnyCompanionUnlocked;
+        IsSheepCompanionUnlocked = saveModel.IsSheepCompanionUnlocked;
+        animalsKilledInPhases = saveModel.AnimalsKilledInPhases;
+        animalsEncounteredInPhases = saveModel.AnimalsEncounteredInPhases;
     }
 
     [Serializable]

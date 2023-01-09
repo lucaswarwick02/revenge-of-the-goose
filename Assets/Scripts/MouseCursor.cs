@@ -14,8 +14,6 @@ public class MouseCursor : MonoBehaviour
     {
         GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
 
-        Cursor.visible = false;
-
         for (int i = 0; i < mouseCursors.Length; i++)
         {
             MouseCursorInfo cursor = mouseCursors[i];

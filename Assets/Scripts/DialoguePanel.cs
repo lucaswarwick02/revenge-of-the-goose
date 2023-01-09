@@ -25,15 +25,11 @@ public class DialoguePanel : MonoBehaviour
     private void OnEnable()
     {
         GameHandler.SetPaused(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     private void OnDisable()
     {
         GameHandler.SetPaused(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     public void OpenDialogue(string text, float secondsShownFor, Action onComplete)

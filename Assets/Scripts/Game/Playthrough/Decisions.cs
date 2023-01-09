@@ -3,9 +3,19 @@ using UnityEngine;
 
 public static class Decisions
 {
-    public static void Reset()
+    public static void ResetDecisions()
     {
-        conversationResponses = new ();
+        Load(SaveModel.NewEmptySave());
+    }
+
+    public static void Load(SaveModel saveModel)
+    {
+        conversationResponses = saveModel.ConversationResponses;
+    }
+
+    public static void SaveToModel(ref SaveModel saveModel)
+    {
+        saveModel.ConversationResponses = new Dictionary<string, List<string>>(conversationResponses);
     }
 
     private static Dictionary<string, List<string>> conversationResponses = new ();

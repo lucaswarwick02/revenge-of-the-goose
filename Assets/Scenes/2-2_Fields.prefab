@@ -832,6 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NeutralArea: 0
+  IsCheckpoint: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
     thresholdOptions:

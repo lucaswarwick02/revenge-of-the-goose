@@ -18,12 +18,14 @@ public class ExampleUI : MonoBehaviour
     void OnEnable()
     {
         PlaythroughStats.OnDestructionScoreChanged += UpdateDestructionScore;
+        GameHandler.OnGameLoaded += UpdateDestructionScore;
         GameHandler.OnGameOver += OnGameOver;
     }
 
     void OnDisable()
     {
         PlaythroughStats.OnDestructionScoreChanged -= UpdateDestructionScore;
+        GameHandler.OnGameLoaded -= UpdateDestructionScore;
         GameHandler.OnGameOver -= OnGameOver;
     }
 
@@ -34,6 +36,11 @@ public class ExampleUI : MonoBehaviour
             DestructionScorePopup scorePopup = Instantiate(scorePopupPrefab, transform);
             scorePopup.Initialise(deltaScore, destructionEventPosition, (Vector2)destructionScoreText.transform.position, () => SetDestructionScore(newScore));
         }
+    }
+
+    private void UpdateDestructionScore()
+    {
+        SetDestructionScore(PlaythroughStats.DestructionScore);
     }
 
     private void SetDestructionScore(int score)

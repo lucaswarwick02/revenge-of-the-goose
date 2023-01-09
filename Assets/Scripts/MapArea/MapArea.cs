@@ -7,6 +7,7 @@ public class MapArea : MonoBehaviour
     public static event Action<MapArea> OnNextMapAreaChosen;
 
     [SerializeField] public bool NeutralArea;
+    [SerializeField] public bool IsCheckpoint;
     [SerializeField] private MapAreaChoice[] gateways;
 
     public int phase;

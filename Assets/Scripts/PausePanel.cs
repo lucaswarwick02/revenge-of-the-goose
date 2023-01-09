@@ -5,27 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class PausePanel : MonoBehaviour
 {
+    [SerializeField] private GameObject checkpointButton;
+
+    private GameHandler gameHandler;
+
     private void Awake()
     {
+        gameHandler = FindObjectOfType<GameHandler>();
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        checkpointButton.SetActive(GameHandler.AnyCheckpointReached);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnPause();
+        }
     }
 
     public void Pause() {
         if (GameHandler.IsPaused) return;
-
         gameObject.SetActive(true);
-
         GameHandler.SetPaused(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     public void UnPause () {
         gameObject.SetActive(false);
-
         GameHandler.SetPaused(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+    }
+
+    public void LoadLastCheckpoint()
+    {
+        gameHandler.LoadCheckpoint();
+        GameHandler.SetPaused(false);
     }
 
     public void Continue () {
