@@ -7,6 +7,8 @@ public class PlayerCompanions : MonoBehaviour
     public static PlayerCompanions INSTANCE;
 
     public Transform bunnySpot;
+    
+    public GameObject bunnyCompanion;
 
     private void Awake() {
         INSTANCE = this;
@@ -24,6 +26,6 @@ public class PlayerCompanions : MonoBehaviour
     }
 
     private void UpdateCompanions () {
-        //
+        if (bunnyCompanion) bunnyCompanion.transform.position = bunnySpot.position;
     }
 }

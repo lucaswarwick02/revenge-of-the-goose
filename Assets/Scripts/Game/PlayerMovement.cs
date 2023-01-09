@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnMapAreaChanged()
     {
         transform.position = Vector3.zero;
+        // GetComponent<PlayerCompanions>()
     }
 
     private void OnNeutralModeChanged(bool inNeutralMode)

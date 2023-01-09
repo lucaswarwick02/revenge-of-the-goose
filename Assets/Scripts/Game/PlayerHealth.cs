@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public static void PickupHealth () {
-        CurrentHealth = Mathf.Clamp(CurrentHealth + 10, 0, MAX_HEALTH);
+        CurrentHealth = Mathf.Clamp(CurrentHealth + 20, 0, MAX_HEALTH);
         INSTANCE.UpdateHealthVignette();
     }
 

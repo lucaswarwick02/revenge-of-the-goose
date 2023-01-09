@@ -58,15 +58,17 @@ public class RabbitController : MonoBehaviour
 
     private void Jump()
     {
-        float jumpSpeed = UnityEngine.Random.value * (maxJumpSpeed - minJumpSpeed) + minJumpSpeed;
         if (IsCompanion) {
             // Move towards player
             Vector3 difference = PlayerCompanions.INSTANCE.bunnySpot.position - transform.position;
             float angle = Mathf.Atan2(-difference.x, -difference.z) * Mathf.Rad2Deg;
             angle -= 180;
+
+            float jumpSpeed = getCompanionSpeed(difference);
             rb.velocity = jumpSpeed * (Quaternion.Euler(0, angle, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
         }
         else {
+            float jumpSpeed = UnityEngine.Random.value * (maxJumpSpeed - minJumpSpeed) + minJumpSpeed;
             rb.velocity = jumpSpeed * (Quaternion.Euler(0, UnityEngine.Random.value * 360, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
         }
     }
@@ -108,14 +110,30 @@ public class RabbitController : MonoBehaviour
         Destroy(GetComponent<AnimalCommenter>());
         Destroy(GetComponent<BoxCollider>());
 
+        transform.parent = null;
         IsCompanion = true;
+        PlayerCompanions.INSTANCE.bunnyCompanion = gameObject;
 
-        // Set to movement speed to keep up with goose speed
-        minJumpInterval = 0.1f;
-        maxJumpInterval = 0.1f;
-        minJumpSpeed = 3f;
-        maxJumpSpeed = 3f;
+        // Set movement speed to keep up with goose speed
+        minJumpInterval = 0f;
+        maxJumpInterval = 0f;
 
-        anim.speed = 2.5f;
+        anim.speed = 4f;
+    }
+
+    private float getCompanionSpeed (Vector3 difference) {
+        float distance = Vector3.Magnitude(difference);
+        if (distance > 10) {
+            // High speed
+            return 6f;
+        }
+        else if (distance < 1) {
+            // Low speed;
+            return 2f;
+        }
+        else {
+            // Normal speed
+            return 4f;
+        }
     }
 }
