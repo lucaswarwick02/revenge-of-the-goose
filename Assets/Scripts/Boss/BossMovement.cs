@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossMovement : MonoBehaviour
 {
     [SerializeField] private GameObject repeatingEnvironment;
+    [SerializeField] private Transform environmentCheck;
+    private float environmentCheckRadius = 1f;
 
     BossCombat bossCombat;
     BossManager bossManager;
@@ -19,17 +21,13 @@ public class BossMovement : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        float environmentDelay = 25f;
-        InvokeRepeating("extendEnvironment", 0f, environmentDelay);
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (GameHandler.InNeutralMode) return;
+
+        bool doesEnvironmentExist = Physics.CheckSphere(environmentCheck.position, environmentCheckRadius, LayerMask.GetMask("Environment"));
+        if (!doesEnvironmentExist) extendEnvironment();
         
         transform.position += Vector3.forward * Time.deltaTime * getSpeed();
     }
