@@ -71,7 +71,7 @@ public class FarmhandController : MonoBehaviour
         Vector3 impactDir = Vector3.RotateTowards((hitInfo.point - origin).normalized, Vector3.up, Mathf.Deg2Rad * 30, 0);
         rb.velocity = impactDir * 4;
 
-        if (healthPickupPrefab) Instantiate(healthPickupPrefab, transform.position, Quaternion.identity);
+        if (healthPickupPrefab) Instantiate(healthPickupPrefab, transform.position, Quaternion.identity, GameHandler.CurrentMapAreaInstance.transform);
 
         enabled = false;
     }
