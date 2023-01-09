@@ -51,15 +51,17 @@ public class SheepController : MonoBehaviour
     }
 
     public void MakeCompanion () {
+        if (GetComponent<CompanionFollow>()) return;
+        
         PlaythroughStats.UnlockSheepCompanion();
 
         Destroy(GetComponent<Destructible>());
         Destroy(GetComponent<AnimalCommenter>());
         Destroy(GetComponent<BoxCollider>());
+        Destroy(GetComponent<Converser>());
         transform.parent = null;
 
-        gameObject.AddComponent<CompanionFollow>();
-        GetComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.GetSheepSpot());
+        gameObject.AddComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.GetSheepSpot());
 
         Destroy(this);
     }

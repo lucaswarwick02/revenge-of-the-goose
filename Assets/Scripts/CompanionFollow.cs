@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CompanionFollow : MonoBehaviour
 {
-    private float jumpAngle = 50;
+    private float jumpAngle = 35;
     private Rigidbody rb;
 
     private bool isJumping = false;
@@ -26,13 +26,16 @@ public class CompanionFollow : MonoBehaviour
     }
 
     private void Update() {
+        if (followTarget == null) {
+            Debug.Log(gameObject.name);
+        }
         difference = followTarget.position - transform.position;
         distance = Vector3.Magnitude(difference);
 
         if (distance < 0.65f) return;
 
         if (isJumping) {
-            isJumping = rb.velocity != Vector3.zero;
+            isJumping = Vector3.Magnitude(rb.velocity) > 0.75f;
         }
         else {
             isJumping = true;
@@ -64,17 +67,13 @@ public class CompanionFollow : MonoBehaviour
             // High speed
             return 10f;
         }
-        else if (distance < 1) {
-            // Super low speed
-            return 2f;
-        }
         else if (distance < 2) {
             // Low speed
             return 3f;
         }
         else {
             // Normal speed
-            return 5f;
+            return 7f;
         }
     }
 }

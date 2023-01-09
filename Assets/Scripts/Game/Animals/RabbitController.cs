@@ -86,6 +86,8 @@ public class RabbitController : MonoBehaviour
     }
 
     public void MakeCompanion () {
+        if (GetComponent<CompanionFollow>()) return;
+        
         PlaythroughStats.UnlockBunnyCompanion();
         
         Destroy(GetComponent<Destructible>());
@@ -93,8 +95,7 @@ public class RabbitController : MonoBehaviour
         Destroy(GetComponent<BoxCollider>());
         transform.parent = null;
 
-        gameObject.AddComponent<CompanionFollow>();
-        GetComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.GetBunnySpot());
+        gameObject.AddComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.GetBunnySpot());
 
         Destroy(this);
     }
