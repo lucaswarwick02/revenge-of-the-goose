@@ -10,7 +10,9 @@ public class CrosshairController : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+    }
 
+    private void OnEnable() {
         PlayerCombat.OnReloadStarted += DoReloadAnimation;
         PlayerCombat.OnBulletFired += UpdateBulletBox;
         PlayerCombat.OnReloadEnded += UpdateBulletBox;
