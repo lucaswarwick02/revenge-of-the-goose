@@ -19,8 +19,6 @@ public class RabbitController : MonoBehaviour
 
     public bool IsDead { get; set; }
 
-    public bool IsCompanion { get; private set; }
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,10 +32,8 @@ public class RabbitController : MonoBehaviour
             if (jumpingIsActive && Time.time > nextJumpTime)
             {
                 Vector3 difference = PlayerCompanions.INSTANCE.bunnySpot.position - transform.position;
-                if (!(IsCompanion && Vector3.Magnitude(difference) < 1f)) {
-                    nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
-                    StartJump();
-                }
+                nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
+                StartJump();
             }
 
             if (rb.velocity.x > 0.01f)
@@ -58,19 +54,8 @@ public class RabbitController : MonoBehaviour
 
     private void Jump()
     {
-        if (IsCompanion) {
-            // Move towards player
-            Vector3 difference = PlayerCompanions.INSTANCE.bunnySpot.position - transform.position;
-            float angle = Mathf.Atan2(-difference.x, -difference.z) * Mathf.Rad2Deg;
-            angle -= 180;
-
-            float jumpSpeed = getCompanionSpeed(difference);
-            rb.velocity = jumpSpeed * (Quaternion.Euler(0, angle, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
-        }
-        else {
-            float jumpSpeed = UnityEngine.Random.value * (maxJumpSpeed - minJumpSpeed) + minJumpSpeed;
-            rb.velocity = jumpSpeed * (Quaternion.Euler(0, UnityEngine.Random.value * 360, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
-        }
+        float jumpSpeed = UnityEngine.Random.value * (maxJumpSpeed - minJumpSpeed) + minJumpSpeed;
+        rb.velocity = jumpSpeed * (Quaternion.Euler(0, UnityEngine.Random.value * 360, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
     }
 
     public void StartDeath(RaycastHit hitInfo, Vector3 origin)
@@ -101,39 +86,17 @@ public class RabbitController : MonoBehaviour
         jumpingIsActive = true;
     }
 
-    public void UnlockBunnyCompanion () {
-        PlaythroughStats.UnlockBunnyCompanion();
-    }
-
     public void MakeCompanion () {
+        PlaythroughStats.UnlockBunnyCompanion();
+        
         Destroy(GetComponent<Destructible>());
         Destroy(GetComponent<AnimalCommenter>());
         Destroy(GetComponent<BoxCollider>());
 
         transform.parent = null;
-        IsCompanion = true;
         PlayerCompanions.INSTANCE.bunnyCompanion = gameObject;
 
-        // Set movement speed to keep up with goose speed
-        minJumpInterval = 0f;
-        maxJumpInterval = 0f;
-
-        anim.speed = 4f;
-    }
-
-    private float getCompanionSpeed (Vector3 difference) {
-        float distance = Vector3.Magnitude(difference);
-        if (distance > 10) {
-            // High speed
-            return 6f;
-        }
-        else if (distance < 1) {
-            // Low speed;
-            return 2f;
-        }
-        else {
-            // Normal speed
-            return 4f;
-        }
+        gameObject.AddComponent<CompanionFollow>();
+        Destroy(this);
     }
 }
