@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7411241922848267220
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.04709816
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541321628024724392, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: attackRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: attackDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: attackInterval
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: startAttackDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: healthPickupPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212203946987230527, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: hitPoints
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923316038243590325, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: m_Name
+      value: Farmhand_Boss Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+--- !u!1 &2094167142111165281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8923316038243590325, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+  m_PrefabInstance: {fileID: 7411241922848267220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2745443747606191283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094167142111165281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630dd7c8755cb6941b713a08adf29e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeToStartConversation: 6
+  possibleConversations:
+  - conditions:
+    - variable: 0
+      predicate: 4
+      value: 0
+    resonsesRequired: []
+    conversation: {fileID: 11400000, guid: a5fc355f1dc39be4aaeb389e5ba2f743, type: 2}
+  endEffects:
+  - responseRequired:
+      conversation: BossMonologue
+      response: 
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2745443747606191283}
+          m_TargetAssemblyTypeName: Converser, Assembly-CSharp
+          m_MethodName: EnableHostile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
