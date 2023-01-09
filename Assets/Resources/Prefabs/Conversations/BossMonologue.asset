@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078cbdcf0daf04748859e14c091aa370, type: 3}
+  m_Name: BossMonologue
+  m_EditorClassIdentifier: 
+  conversationID: BossMonologue
+  dialogue:
+  - dialogueID: 1
+    text: No, no, no... I can't die like this...
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: 2
+  - dialogueID: 2
+    text: Not at the hands of a filthy goose!
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: 3
+  - dialogueID: 3
+    text: You're a savage!
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: 4
+  - dialogueID: 4
+    text: You're a maniac!
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: 5
+  - dialogueID: 5
+    text: You win... Happy?
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: 6
+  - dialogueID: 6
+    text: ... Just kill me.
+    secondsShownFor: 2
+    responsesToWaitFor: []
+    nextDialogueID: 
