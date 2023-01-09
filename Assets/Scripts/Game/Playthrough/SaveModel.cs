@@ -6,8 +6,6 @@ public struct SaveModel
 
     public MapArea CheckpointMapArea { get; set; }
 
-    public float PlayerHealth { get; set; }
-
     #endregion
 
     #region Stats

@@ -9,10 +9,12 @@ public class MouseCursor : MonoBehaviour
 
     [SerializeField] private RectTransform canvas;
     [SerializeField] private MouseCursorInfo[] mouseCursors;
-
+    
     private void OnEnable()
     {
         GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
+        GameHandler.OnGameOver += Deactivate;
+        GameHandler.OnGameLoaded += Activate;
 
         for (int i = 0; i < mouseCursors.Length; i++)
         {
@@ -43,6 +45,8 @@ public class MouseCursor : MonoBehaviour
     private void OnDisable()
     {
         GameHandler.OnNeutralModeChange -= OnNeutralModeChanged;
+        GameHandler.OnGameOver -= Deactivate;
+        GameHandler.OnGameLoaded -= Activate;
     }
 
     public void MoveCursorOverWorldPosition(string cursorID, Vector3 worldPosition)
@@ -57,6 +61,22 @@ public class MouseCursor : MonoBehaviour
         foreach (MouseCursorInfo cursor in cursorInstances.Values)
         {
             cursor.Instance.gameObject.SetActive(inNeutralMode == cursor.usedInNeutralMode);
+        }
+    }
+
+    private void Deactivate(Transform killer)
+    {
+        foreach (MouseCursorInfo cursor in cursorInstances.Values)
+        {
+            cursor.Instance.gameObject.SetActive(GameHandler.InNeutralMode == cursor.usedInNeutralMode);
+        }
+    }
+
+    private void Activate()
+    {
+        foreach (MouseCursorInfo cursor in cursorInstances.Values)
+        {
+            cursor.Instance.gameObject.SetActive(GameHandler.InNeutralMode == cursor.usedInNeutralMode);
         }
     }
 
