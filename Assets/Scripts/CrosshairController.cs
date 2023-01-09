@@ -18,6 +18,7 @@ public class CrosshairController : MonoBehaviour
         PlayerCombat.OnReloadStarted += DoReloadAnimation;
         PlayerCombat.OnBulletFired += UpdateBulletBox;
         PlayerCombat.OnReloadEnded += UpdateBulletBox;
+        GameHandler.OnGameOver += Disable;
     }
 
     private void OnDisable()
@@ -26,6 +27,7 @@ public class CrosshairController : MonoBehaviour
         PlayerCombat.OnReloadStarted -= DoReloadAnimation;
         PlayerCombat.OnBulletFired -= UpdateBulletBox;
         PlayerCombat.OnReloadEnded -= UpdateBulletBox;
+        GameHandler.OnGameOver -= Disable;
     }
 
     private void ForceUpdate()
@@ -42,5 +44,10 @@ public class CrosshairController : MonoBehaviour
     {
         bulletIcon1.SetActive(bulletsRemaining > 0);
         bulletIcon2.SetActive(bulletsRemaining > 1);
+    }
+
+    private void Disable(Transform killer)
+    {
+        gameObject.SetActive(false);
     }
 }
