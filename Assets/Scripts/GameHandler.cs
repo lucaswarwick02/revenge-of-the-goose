@@ -33,6 +33,9 @@ public class GameHandler : MonoBehaviour
     {
         MapArea.OnNextMapAreaChosen += UpdateScene;
         PlayerHealth.OnPlayerDie += OnPlayerDied;
+
+        OnMapAreaChanged += ResetGooseData;
+
         UpdateScene(startMapArea);
     }
 
@@ -40,6 +43,13 @@ public class GameHandler : MonoBehaviour
     {
         MapArea.OnNextMapAreaChosen -= UpdateScene;
         PlayerHealth.OnPlayerDie -= OnPlayerDied;
+
+        OnMapAreaChanged -= ResetGooseData;
+    }
+
+    public static void ResetGooseData () {
+        // TODO Force instant reload
+        // TODO Set goose to max health
     }
 
     public static void SetNeutralMode(bool isNeutral)

@@ -19,6 +19,8 @@ public class RabbitController : MonoBehaviour
 
     public bool IsDead { get; set; }
 
+    public bool IsCompanion { get; private set; }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,10 +31,13 @@ public class RabbitController : MonoBehaviour
     {
         if (!IsDead)
         {
-            if (jumpingIsActive &&Time.time > nextJumpTime)
+            if (jumpingIsActive && Time.time > nextJumpTime)
             {
-                nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
-                StartJump();
+                Vector3 difference = PlayerCompanions.INSTANCE.bunnySpot.position - transform.position;
+                if (!(IsCompanion && Vector3.Magnitude(difference) < 1f)) {
+                    nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
+                    StartJump();
+                }
             }
 
             if (rb.velocity.x > 0.01f)
@@ -54,7 +59,16 @@ public class RabbitController : MonoBehaviour
     private void Jump()
     {
         float jumpSpeed = UnityEngine.Random.value * (maxJumpSpeed - minJumpSpeed) + minJumpSpeed;
-        rb.velocity = jumpSpeed * (Quaternion.Euler(0, UnityEngine.Random.value * 360, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
+        if (IsCompanion) {
+            // Move towards player
+            Vector3 difference = PlayerCompanions.INSTANCE.bunnySpot.position - transform.position;
+            float angle = Mathf.Atan2(-difference.x, -difference.z) * Mathf.Rad2Deg;
+            angle -= 180;
+            rb.velocity = jumpSpeed * (Quaternion.Euler(0, angle, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
+        }
+        else {
+            rb.velocity = jumpSpeed * (Quaternion.Euler(0, UnityEngine.Random.value * 360, 0) * (Quaternion.Euler(-jumpAngle, 0, 0) * Vector3.forward));
+        }
     }
 
     public void StartDeath(RaycastHit hitInfo, Vector3 origin)
@@ -87,5 +101,21 @@ public class RabbitController : MonoBehaviour
 
     public void UnlockBunnyCompanion () {
         PlaythroughStats.UnlockBunnyCompanion();
+    }
+
+    public void MakeCompanion () {
+        Destroy(GetComponent<Destructible>());
+        Destroy(GetComponent<AnimalCommenter>());
+        Destroy(GetComponent<BoxCollider>());
+
+        IsCompanion = true;
+
+        // Set to movement speed to keep up with goose speed
+        minJumpInterval = 0.1f;
+        maxJumpInterval = 0.1f;
+        minJumpSpeed = 3f;
+        maxJumpSpeed = 3f;
+
+        anim.speed = 2.5f;
     }
 }

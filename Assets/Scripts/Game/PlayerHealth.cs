@@ -63,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
         INSTANCE.UpdateHealthVignette();
     }
 
-    private void UpdateHealthVignette ()
+    public void UpdateHealthVignette ()
     {
         targetVignetteIntensity = vignetteIntensityCurve.Evaluate(1 - CurrentHealth / MAX_HEALTH);
     }

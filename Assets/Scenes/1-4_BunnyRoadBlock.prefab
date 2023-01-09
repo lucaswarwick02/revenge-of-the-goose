@@ -1710,6 +1710,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BunnyRoadBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 1654812046958795153, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665531372242443938, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768388598457224066, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3593411741781029231, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1754,6 +1766,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7424901446648476186, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[6].m_Target
+      value: 
+      objectReference: {fileID: 8460724611407343030}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[6].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
+      value: MakeCompanion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
+      value: RabbitController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952959417727181410, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: endEffects.Array.data[3].effect.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344942226160848554, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
 --- !u!4 &2432202560995594543 stripped
@@ -1761,6 +1809,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3593411741781029231, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
   m_PrefabInstance: {fileID: 1161567681885986880}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8460724611407343030 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7310537991564660214, guid: 5fd79c0e73e1c0147a638f10e2225e0b, type: 3}
+  m_PrefabInstance: {fileID: 1161567681885986880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aed667d8c0dec34e95a7bf1ffd1b6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1199868494725242358
 PrefabInstance:
   m_ObjectHideFlags: 0
