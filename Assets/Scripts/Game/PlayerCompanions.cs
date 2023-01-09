@@ -4,31 +4,20 @@ using UnityEngine;
 
 public class PlayerCompanions : MonoBehaviour
 {
-    public static PlayerCompanions INSTANCE;
+    [SerializeField] private Transform bunnySpot;
+    [SerializeField] private Transform sheepSpot;
 
-    public Transform bunnySpot;
-    public Transform sheepSpot;
-    
-    public GameObject bunnyCompanion;
-    public GameObject sheepCompanion;
+    private static PlayerCompanions _instance;
 
     private void Awake() {
-        INSTANCE = this;
+        _instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameHandler.OnMapAreaChanged += UpdateCompanions;
+    public static Transform GetBunnySpot () {
+        return _instance.bunnySpot;
     }
 
-    private void OnDisable()
-    {
-        GameHandler.OnMapAreaChanged -= UpdateCompanions;
-    }
-
-    private void UpdateCompanions () {
-        if (bunnyCompanion) bunnyCompanion.transform.position = bunnySpot.position;
-        if (sheepCompanion) sheepCompanion.transform.position = bunnySpot.position;
+    public static Transform GetSheepSpot () {
+        return _instance.sheepSpot;
     }
 }

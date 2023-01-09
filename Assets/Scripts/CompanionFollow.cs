@@ -8,26 +8,49 @@ public class CompanionFollow : MonoBehaviour
     private Rigidbody rb;
 
     private bool isJumping = false;
+    private Vector3 difference;
+    private float distance;
+
+    private Transform followTarget;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable() {
+        GameHandler.OnMapAreaChanged += MoveToFollowTarget;
+    }
+
+    private void OnDisable() {
+        GameHandler.OnMapAreaChanged -= MoveToFollowTarget;
+    }
+
     private void Update() {
+        difference = followTarget.position - transform.position;
+        distance = Vector3.Magnitude(difference);
+
+        if (distance < 0.65f) return;
+
         if (isJumping) {
             isJumping = rb.velocity != Vector3.zero;
         }
         else {
+            isJumping = true;
             Jump();
         }
     }
 
+    private void MoveToFollowTarget () {
+        transform.position = followTarget.position;
+    }
+
+    public void SetFollowTarget (Transform target) {
+        followTarget = target;
+    }
+
     private void Jump()
     {
-        isJumping = true;
-
         // Move towards player
-        Vector3 difference = PlayerCompanions.INSTANCE.bunnySpot.position - transform.position;
         float angle = Mathf.Atan2(-difference.x, -difference.z) * Mathf.Rad2Deg;
         angle -= 180;
 
@@ -39,15 +62,19 @@ public class CompanionFollow : MonoBehaviour
         float distance = Vector3.Magnitude(difference);
         if (distance > 10) {
             // High speed
-            return 6f;
+            return 10f;
         }
         else if (distance < 1) {
-            // Low speed;
+            // Super low speed
             return 2f;
+        }
+        else if (distance < 2) {
+            // Low speed
+            return 3f;
         }
         else {
             // Normal speed
-            return 4f;
+            return 5f;
         }
     }
 }

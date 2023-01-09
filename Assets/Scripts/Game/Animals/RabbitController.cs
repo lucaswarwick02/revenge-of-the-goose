@@ -31,7 +31,6 @@ public class RabbitController : MonoBehaviour
         {
             if (jumpingIsActive && Time.time > nextJumpTime)
             {
-                Vector3 difference = PlayerCompanions.INSTANCE.bunnySpot.position - transform.position;
                 nextJumpTime = Time.time + UnityEngine.Random.value * (maxJumpInterval - minJumpInterval) + minJumpInterval;
                 StartJump();
             }
@@ -92,11 +91,11 @@ public class RabbitController : MonoBehaviour
         Destroy(GetComponent<Destructible>());
         Destroy(GetComponent<AnimalCommenter>());
         Destroy(GetComponent<BoxCollider>());
-
         transform.parent = null;
-        PlayerCompanions.INSTANCE.bunnyCompanion = gameObject;
 
         gameObject.AddComponent<CompanionFollow>();
+        GetComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.GetBunnySpot());
+
         Destroy(this);
     }
 }
