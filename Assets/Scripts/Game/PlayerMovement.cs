@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
 
+    private bool beingKnockedBack;
+    private float knockbackFinishTime;
+    private Vector3 knockbackVector;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,16 +34,36 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (GameHandler.IsPaused) return;
 
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 velocity = new Vector3(h, 0, v);
-        velocity.Normalize();
+        if (GameHandler.IsPaused)
+        {
+            return;
+        }
 
-        rb.velocity = velocity * speed;
+        if (beingKnockedBack)
+        {
+            if (Time.time >= knockbackFinishTime)
+            {
+                beingKnockedBack = false;
+            }
+            rb.velocity = knockbackVector;
+            animator.SetFloat("Speed", 0);
+        }
+        else
+        {
+            Vector3 velocity = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            rb.velocity = velocity.normalized * speed;
 
-        animator.SetFloat("Speed", rb.velocity.magnitude);
+            animator.SetFloat("Speed", rb.velocity.magnitude);
+        }
+    }
+
+    public void Knockback(Vector3 dir, float speed, float duration)
+    {
+        beingKnockedBack = true;
+        knockbackVector = dir * speed;
+        Debug.Log("Knockback: " + knockbackVector);
+        knockbackFinishTime = Time.time + duration;
     }
 
     private void OnMapAreaChanged()

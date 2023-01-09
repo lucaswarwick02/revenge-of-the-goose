@@ -50,7 +50,9 @@ MonoBehaviour:
   type: 0
   hitPoints: 100
   destructionScore: 2000
+  targetingHeight: 0.5
   destroyImmediately: 1
+  contributeToEncounters: 1
   OnDestroyed:
     m_PersistentCalls:
       m_Calls: []
@@ -80,8 +82,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 0.625, z: 1.5}
-  m_Center: {x: 0, y: 0.3125, z: 0.25}
+  m_Size: {x: 3.2, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0.5}
 --- !u!1001 &7528330982450823761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +135,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6338043411626658470, guid: 946465a5be80b7c4383b0bc3b8a5acc4, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6292013
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338043411626658470, guid: 946465a5be80b7c4383b0bc3b8a5acc4, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3261719
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338043411626658470, guid: 946465a5be80b7c4383b0bc3b8a5acc4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1840808346, guid: 7fa90ae2aa85cd24fb8568150026f728, type: 3}
+    - target: {fileID: 6338043411626658470, guid: 946465a5be80b7c4383b0bc3b8a5acc4, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6414339831302033696, guid: 946465a5be80b7c4383b0bc3b8a5acc4, type: 3}
       propertyPath: m_Name
       value: Tractor_Scene
@@ -144,19 +162,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6414339831302033696, guid: 946465a5be80b7c4383b0bc3b8a5acc4, type: 3}
   m_PrefabInstance: {fileID: 7528330982450823761}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &722885530581296853
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3566377237662471025}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.6, z: 0}
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &792710037664617697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +177,19 @@ MonoBehaviour:
   effects:
   - {fileID: 7165324616688830759, guid: b348dc00140741f40a47e43431ca06b6, type: 3}
   - {fileID: 7165324616688830759, guid: 7f9fb0478dd356c44866718b1dcca09e, type: 3}
+--- !u!65 &1447405745618299475
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3566377237662471025}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6292013, y: 1.2207031, z: 0}
+  m_Center: {x: 0.004545212, y: 0.5126953, z: 0}
 --- !u!4 &4322885239645837681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6019052228316371744, guid: 946465a5be80b7c4383b0bc3b8a5acc4, type: 3}
