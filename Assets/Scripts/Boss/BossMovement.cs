@@ -46,6 +46,6 @@ public class BossMovement : MonoBehaviour
     }
 
     private float getSpeed () {
-        return GameHandler.InNeutralMode ? 0f : 4f;
+        return GameHandler.InNeutralMode ? 0f : 3.5f;
     }
 }
