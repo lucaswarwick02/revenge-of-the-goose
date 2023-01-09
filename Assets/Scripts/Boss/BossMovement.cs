@@ -15,6 +15,8 @@ public class BossMovement : MonoBehaviour
     private int numberOfEnvironments = 1;
     private float environmentOffset = 35.6f;
 
+    private float loseDistance = 20f;
+
     private void Awake() {
         bossCombat = GetComponent<BossCombat>();
         bossManager = GetComponent<BossManager>();
@@ -30,6 +32,10 @@ public class BossMovement : MonoBehaviour
         if (!doesEnvironmentExist) extendEnvironment();
         
         transform.position += Vector3.forward * Time.deltaTime * getSpeed();
+
+        if (Vector3.Distance(transform.position, player.position) > loseDistance) {
+            GameHandler.LoseBossFight(player);
+        }
     }
 
     private void extendEnvironment () {
@@ -40,27 +46,6 @@ public class BossMovement : MonoBehaviour
     }
 
     private float getSpeed () {
-        if (GameHandler.InNeutralMode) return 0f;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        bossCombat.canAttack = distance < 20f;
-
-        if (distance > 20) {
-            // Off the map
-            return 0f;
-        }
-        else if (distance > 10.5f) {
-            // Too far away
-            return 3f;
-        }
-        else if (distance < 5) {
-            // Too close
-            return 7f;
-        }
-        else {
-            // Perfect distance
-            return 5f;
-        }
+        return GameHandler.InNeutralMode ? 0f : 4.5f;
     }
 }

@@ -85,4 +85,9 @@ public class GameHandler : MonoBehaviour
         IsGameOver = true;
         OnGameOver?.Invoke(killer);
     }
+
+    public static void LoseBossFight (Transform player) {
+        IsGameOver = true;
+        OnGameOver?.Invoke(player);
+    }
 }
