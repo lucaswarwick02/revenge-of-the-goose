@@ -672,6 +672,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8642386cac6fb449b0e1e180838004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeProfile: {fileID: 11400000, guid: 5c319b56da2e67a4a8cdff97f3f0e3d3, type: 2}
+  vignetteIntensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.00076293945
+      value: 0.0015869141
+      inSlope: 0.091501914
+      outSlope: 0.59773827
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.040363874
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.3
+      inSlope: 0.59773827
+      outSlope: 0.5770767
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.057905912
+    - serializedVersion: 3
+      time: 1
+      value: 0.8
+      inSlope: 1.57264
+      outSlope: 1.57264
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.061139595
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &4187847514466876658
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,25 +5,26 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerHealth : MonoBehaviour
 {
+    private const float VIGNETTE_LERP_SPEED = 5f;
+
+    public static PlayerHealth INSTANCE;
+
     public const float MAX_HEALTH = 100;
-    public const float DELAY_BEFORE_HEALTH_GAIN = 3;
-    public const float HEALTH_GAIN_PER_SECOND = 5;
 
     public static event Action<float, float, Vector3> OnPlayerTakeDamage;
 
     public static event Action<Vector3> OnPlayerDie;
 
-    private static float canHealTime;
-
     [SerializeField] private VolumeProfile volumeProfile;
+    [SerializeField] private AnimationCurve vignetteIntensityCurve;
+
+    private Vignette vignette;
+    private float targetVignetteIntensity;
 
     public static float CurrentHealth { get; private set; }
 
-    public static PlayerHealth INSTANCE;
-
     public static bool InflictDamage(float amount, Vector3 origin)
     {
-        canHealTime = Time.time + DELAY_BEFORE_HEALTH_GAIN;
         CurrentHealth -= amount;
         OnPlayerTakeDamage?.Invoke(CurrentHealth, amount, origin);
 
@@ -47,6 +48,14 @@ public class PlayerHealth : MonoBehaviour
     {
         CurrentHealth = MAX_HEALTH;
         INSTANCE = this;
+        volumeProfile.TryGet(out vignette);
+    }
+
+    private void Update()
+    {
+        var intensity = vignette.intensity;
+        intensity.value = Mathf.Lerp(intensity.value, targetVignetteIntensity, VIGNETTE_LERP_SPEED * Time.unscaledDeltaTime);
+        vignette.intensity = intensity;
     }
 
     public static void PickupHealth () {
@@ -54,22 +63,8 @@ public class PlayerHealth : MonoBehaviour
         INSTANCE.UpdateHealthVignette();
     }
 
-    private void Update()
+    private void UpdateHealthVignette ()
     {
-        if (Time.time > canHealTime)
-        {
-            CurrentHealth = Mathf.Clamp(CurrentHealth + HEALTH_GAIN_PER_SECOND * Time.deltaTime, 0, MAX_HEALTH);
-            UpdateHealthVignette();
-        }
-    }
-
-    private void UpdateHealthVignette () {
-        float percentage = CurrentHealth / MAX_HEALTH;
-
-        Vignette vignette;
-        volumeProfile.TryGet(out vignette);
-        ClampedFloatParameter intensity = vignette.intensity;
-        intensity.value = (1f - percentage) * 0.5f;
-        vignette.intensity = intensity;
+        targetVignetteIntensity = vignetteIntensityCurve.Evaluate(1 - CurrentHealth / MAX_HEALTH);
     }
 }
