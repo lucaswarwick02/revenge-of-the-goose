@@ -60,7 +60,7 @@ public class DogController : MonoBehaviour
     private void AttackPlayer()
     {
         anim.SetTrigger("Attack");
-        PlayerHealth.InflictDamage(attackDamage, transform.position);
+        PlayerHealth.InflictDamage(attackDamage, transform);
     }
 
     public void Bark()

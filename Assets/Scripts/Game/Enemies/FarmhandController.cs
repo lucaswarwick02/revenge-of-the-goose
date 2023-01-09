@@ -60,7 +60,7 @@ public class FarmhandController : MonoBehaviour
     {
         audioSource.Play();
         anim.SetTrigger("Attack");
-        PlayerHealth.InflictDamage(attackDamage, transform.position);
+        PlayerHealth.InflictDamage(attackDamage, transform);
     }
 
     public void StartDeath(RaycastHit hitInfo, Vector3 origin)

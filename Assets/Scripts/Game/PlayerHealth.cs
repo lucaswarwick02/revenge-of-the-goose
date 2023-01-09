@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
     public static event Action<float, float, Vector3> OnPlayerTakeDamage;
 
-    public static event Action<Vector3> OnPlayerDie;
+    public static event Action<Transform> OnPlayerDie;
 
     [SerializeField] private VolumeProfile volumeProfile;
     [SerializeField] private AnimationCurve vignetteIntensityCurve;
@@ -23,25 +23,25 @@ public class PlayerHealth : MonoBehaviour
 
     public static float CurrentHealth { get; private set; }
 
-    public static bool InflictDamage(float amount, Vector3 origin)
+    public static bool InflictDamage(float amount, Transform enemy)
     {
         CurrentHealth -= amount;
-        OnPlayerTakeDamage?.Invoke(CurrentHealth, amount, origin);
+        OnPlayerTakeDamage?.Invoke(CurrentHealth, amount, enemy.position);
 
         INSTANCE.UpdateHealthVignette();
 
         if (CurrentHealth <= 0)
         {
-            Die(origin);
+            Die(enemy);
             return true;
         }
 
         return false;
     }
 
-    private static void Die(Vector3 origin)
+    private static void Die(Transform killer)
     {
-        OnPlayerDie?.Invoke(origin);
+        OnPlayerDie?.Invoke(killer);
     }
 
     private void Awake()

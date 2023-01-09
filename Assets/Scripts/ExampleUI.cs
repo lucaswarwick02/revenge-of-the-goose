@@ -49,7 +49,7 @@ public class ExampleUI : MonoBehaviour
         gooseHealthBar.value = PlayerHealth.CurrentHealth / PlayerHealth.MAX_HEALTH;
     }
 
-    private void OnGameOver(Vector3 deathCausePosition)
+    private void OnGameOver(Transform killer)
     {
         gameOverPanel.gameObject.SetActive(true);
     }

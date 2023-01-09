@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 7303807506793078874}
   - component: {fileID: 4266101814370703392}
   - component: {fileID: 4753680620180607054}
+  - component: {fileID: 3696507790410003265}
   m_Layer: 7
   m_Name: Dog
   m_TagString: Untagged
@@ -297,3 +298,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3696507790410003265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923316038243590325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63c48c431cd75d44b914d9ab316debf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusOffset: {x: 0, y: 0.5, z: 0.3}
+  focusFOV: 30

@@ -9,14 +9,9 @@ public class CameraFollow : MonoBehaviour
     private const float PLAYER_OFFSET = -4.5f;
     private const float PLAYER_FOV = 40;
 
-    private const float CONVERSATION_OFFSET = -7.5f;
-    private const float CONVERSATION_FOV = 30;
-
-    private const float GAME_OVER_OFFSET = -7f;
-    private const float GAME_OVER_FOV = 20;
-
     [SerializeField] private Transform player;
     [SerializeField] private GameObject gooseBoundaryPrefab;
+    [SerializeField] private float cameraTargetZOffset;
 
     private enum Mode
     {
@@ -25,9 +20,9 @@ public class CameraFollow : MonoBehaviour
     }
 
     private Mode currentMode;
-    private Transform target;
+    private CameraFocusComponent focusTarget;
+
     private Vector3 targetPos;
-    private float targetOffset;
     private float targetFOV;
 
     private void Awake()
@@ -67,11 +62,11 @@ public class CameraFollow : MonoBehaviour
     {
         if (currentMode == Mode.Player)
         {
-            UpdateTargetPosition(player.position);
+            UpdateTargetPosition(player.position + Vector3.forward * PLAYER_OFFSET);
         }
-        else if (target != null)
+        else if (focusTarget != null)
         {
-            UpdateTargetPosition(target.position);
+            UpdateTargetPosition(focusTarget.FocusPosition + Vector3.forward * cameraTargetZOffset, freeX: true);
         }
 
         transform.position = Vector3.Lerp(transform.position, targetPos, FOLLOW_LERP_SPEED * Time.unscaledDeltaTime);
@@ -82,29 +77,18 @@ public class CameraFollow : MonoBehaviour
     {
         currentMode = Mode.Player;
         targetFOV = PLAYER_FOV;
-        targetOffset = PLAYER_OFFSET;
     }
 
-    public void SetTargetMode(Transform target, float offset, float FOV)
+    public void SetTargetMode(CameraFocusComponent focusTarget)
     {
         currentMode = Mode.Target;
-        this.target = target;
-        targetOffset = offset;
-        targetFOV = FOV;
+        this.focusTarget = focusTarget;
+        targetFOV = focusTarget.FocusFOV;
     }
 
-    public void SetTargetMode(Vector3 position, float offset, float FOV)
+    private void UpdateTargetPosition(Vector3 targetPosition, bool doInstantly = false, bool freeX = false)
     {
-        currentMode = Mode.Target;
-        target = null;
-        targetOffset = offset;
-        targetFOV = FOV;
-        UpdateTargetPosition(position);
-    }
-
-    private void UpdateTargetPosition(Vector3 targetPosition, bool doInstantly = false)
-    {
-        targetPos = new Vector3(0, transform.position.y, targetPosition.z + targetOffset);
+        targetPos = new Vector3(freeX ? targetPosition.x : 0, transform.position.y, targetPosition.z);
 
         if (doInstantly)
         {
@@ -112,13 +96,27 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    private void OnStartConversation(Vector3 converserPos)
+    private void OnStartConversation(Transform converser)
     {
-        SetTargetMode(converserPos, CONVERSATION_OFFSET, CONVERSATION_FOV);
+        if (converser.TryGetComponent(out CameraFocusComponent focusTarget))
+        {
+            SetTargetMode(focusTarget);
+        }
+        else
+        {
+            Debug.LogError("No focus target could be found!");
+        }
     }
 
-    private void OnGameOver(Vector3 killerPos)
+    private void OnGameOver(Transform killer)
     {
-        SetTargetMode(killerPos, GAME_OVER_OFFSET, GAME_OVER_FOV);
+        if (killer.TryGetComponent(out CameraFocusComponent focusTarget))
+        {
+            SetTargetMode(focusTarget);
+        }
+        else
+        {
+            Debug.LogError("No focus target could be found!");
+        }
     }
 }

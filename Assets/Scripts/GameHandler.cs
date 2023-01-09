@@ -7,7 +7,7 @@ public class GameHandler : MonoBehaviour
 
     public static event Action<bool> OnNeutralModeChange;
 
-    public static event Action<Vector3> OnGameOver;
+    public static event Action<Transform> OnGameOver;
 
     public static bool IsGameOver { get; private set; }
 
@@ -80,9 +80,9 @@ public class GameHandler : MonoBehaviour
         Time.timeScale = pause ? 0 : 1;
     }
 
-    private void OnPlayerDied(Vector3 deathCausePosition)
+    private void OnPlayerDied(Transform killer)
     {
         IsGameOver = true;
-        OnGameOver?.Invoke(deathCausePosition);
+        OnGameOver?.Invoke(killer);
     }
 }

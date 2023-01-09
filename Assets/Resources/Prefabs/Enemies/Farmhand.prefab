@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 4701682460295094211}
   - component: {fileID: 7303807506793078874}
   - component: {fileID: 7907802549512033148}
+  - component: {fileID: 4130609904425317813}
   m_Layer: 7
   m_Name: Farmhand
   m_TagString: Untagged
@@ -463,6 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 12
   attackInterval: 5
+  startAttackDelay: 1.5
   attackDamage: 10
   healthPickupPrefab: {fileID: 8923316038243590325, guid: 761245f29c950f24db57f7f47394925b, type: 3}
 --- !u!114 &4212203946987230527
@@ -659,3 +661,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4130609904425317813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923316038243590325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63c48c431cd75d44b914d9ab316debf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusOffset: {x: 0, y: 1.14, z: 0.64}
+  focusFOV: 30

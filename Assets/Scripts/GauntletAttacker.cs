@@ -41,7 +41,7 @@ public class GauntletAttacker : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            PlayerHealth.InflictDamage(damage, transform.position);
+            PlayerHealth.InflictDamage(damage, transform);
             other.transform.GetComponentInParent<PlayerMovement>().Knockback(Vector3.RotateTowards(Vector3.back, attackDir, Mathf.Deg2Rad * 10, 0), speed / 2, .2f);
         }
     }

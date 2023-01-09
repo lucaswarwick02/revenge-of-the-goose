@@ -7,7 +7,7 @@ using static Conversation;
 
 public class Converser : MonoBehaviour
 {
-    public static event Action<Vector3> OnStartConversation;
+    public static event Action<Transform> OnStartConversation;
     public static event Action OnEndConversation;
 
     [SerializeField] private float rangeToStartConversation = 3;
@@ -88,7 +88,7 @@ public class Converser : MonoBehaviour
     public void StartConversation()
     {
         Decisions.RecordConversationStarted(conversation.conversationID);
-        OnStartConversation?.Invoke(transform.position);
+        OnStartConversation?.Invoke(transform);
         dialoguePanel = canvas.OpenDialoguePanel();
         EnactDialogue(0);
     }

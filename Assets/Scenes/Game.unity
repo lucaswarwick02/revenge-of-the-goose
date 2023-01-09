@@ -644,6 +644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 346937030}
   gooseBoundaryPrefab: {fileID: 7402911117813462253, guid: 654e3eb369b0eac4ab1bc6b54e4e1984, type: 3}
+  cameraTargetZOffset: -6
 --- !u!1 &771163938
 GameObject:
   m_ObjectHideFlags: 0
