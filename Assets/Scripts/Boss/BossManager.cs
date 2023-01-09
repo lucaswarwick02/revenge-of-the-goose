@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossManager : MonoBehaviour
 {
     [SerializeField] private GameObject farmhandBossPrefab;
+    [SerializeField] private GameObject darkGroupPrefab;
+    [SerializeField] private Vector3 darkGroupOffset = new Vector3(0, 0, 10);
 
     private void OnEnable() {
         GetComponent<Destructible>().OnDestroyed.AddListener(CreateFarmhandBoss);
@@ -24,6 +26,10 @@ public class BossManager : MonoBehaviour
             Destroy(dog.gameObject);
         }
 
+        // Spawn in the dying farmer
         Instantiate(farmhandBossPrefab, transform.position, Quaternion.identity);
+
+        // Spawn in the dark group behind the farmer
+        Instantiate(darkGroupPrefab, transform.position + darkGroupOffset, Quaternion.identity);
     }
 }
