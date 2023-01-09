@@ -7,6 +7,7 @@ public class FarmhandController : MonoBehaviour
 {
     [SerializeField] private float attackRange = 15;
     [SerializeField] private float attackInterval = 3;
+    [SerializeField] private float startAttackDelay = 1.5f;
     [SerializeField] private float attackDamage = 20;
 
     [SerializeField] private GameObject healthPickupPrefab;
@@ -17,6 +18,7 @@ public class FarmhandController : MonoBehaviour
 
     private Transform player;
     private float nextAttackTime;
+    private bool seenPlayerForFirstTime = false;
 
     public bool IsDead { get; set; }
 
@@ -34,15 +36,24 @@ public class FarmhandController : MonoBehaviour
         {
             if (InAttackRangeOfPlayer() && Time.time >= nextAttackTime)
             {
-                nextAttackTime = Time.time + attackInterval;
-                AttackPlayer();
+                if (!seenPlayerForFirstTime)
+                {
+                    seenPlayerForFirstTime = true;
+                    nextAttackTime = Time.time + startAttackDelay;
+                    anim.SetTrigger("Alert");
+                }
+                else
+                {
+                    nextAttackTime = Time.time + attackInterval;
+                    AttackPlayer();
+                }
             }
         }
     }
 
     private bool InAttackRangeOfPlayer()
     {
-        return (player.transform.position - transform.position).magnitude <= attackRange;
+        return player.transform.position.z < transform.position.z && (player.transform.position - transform.position).magnitude <= attackRange;
     }
 
     private void AttackPlayer()
