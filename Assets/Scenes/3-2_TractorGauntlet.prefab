@@ -737,8 +737,13 @@ MonoBehaviour:
   NeutralArea: 0
   gateways:
   - gateway: {fileID: 7288688100972666697}
-    thresholdOptions: []
-  phase: 1
+    thresholdOptions:
+    - resultingArea: {fileID: 1829712235895486512, guid: 8c021c5969dc4984a9484f7d39824663, type: 3}
+      query:
+        variable: 0
+        predicate: 4
+        value: 0
+  phase: 3
 --- !u!1 &4281774661486913855
 GameObject:
   m_ObjectHideFlags: 0
@@ -5508,7 +5513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849251915129463375, guid: 5be15d857fc136c4fa3399c052c36c72, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 71.87
+      value: 82.35
       objectReference: {fileID: 0}
     - target: {fileID: 4849251915129463375, guid: 5be15d857fc136c4fa3399c052c36c72, type: 3}
       propertyPath: m_LocalRotation.w
