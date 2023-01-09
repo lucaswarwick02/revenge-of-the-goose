@@ -2,7 +2,6 @@ using Game.Utility;
 using System.Linq;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -61,7 +60,7 @@ public class PlayerCombat : MonoBehaviour
         animator = GetComponent<Animator>();
         initialGunUpDir = arms.transform.up;
 
-        BulletsRemaining = 2;
+        BulletsRemaining = SHOTS_PER_RELOAD;
 
         if (!GameHandler.InNeutralMode) {
             CanShoot = true;
