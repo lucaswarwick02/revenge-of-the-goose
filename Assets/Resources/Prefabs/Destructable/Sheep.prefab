@@ -109,7 +109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6955963616815573304}
-  - component: {fileID: 5852042692391569635}
+  - component: {fileID: 2917650007297609530}
   m_Layer: 6
   m_Name: ModelContainer
   m_TagString: Untagged
@@ -126,14 +126,14 @@ Transform:
   m_GameObject: {fileID: 8802559812465712827}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1091235313991077317}
   m_Father: {fileID: 2541321628024724392}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
---- !u!65 &5852042692391569635
+--- !u!65 &2917650007297609530
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,8 +144,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.85, y: 0.5, z: 0}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Size: {x: 1.22, y: 1.03, z: 0}
+  m_Center: {x: 0, y: 0.47, z: 0}
 --- !u!1 &8923316038243590325
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe832b1410cef774dadd53cf517cf1db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commentPosition: {x: -0.36, y: 1.38, z: 0.8}
+  commentPosition: {x: -0.36, y: 1.01, z: 0.61}
   commentPrefab: {fileID: 5806053105845556579, guid: 5f1d4b9fc28aca1409779d6bb04be914, type: 3}
 --- !u!65 &7303807506793078874
 BoxCollider:
@@ -271,7 +271,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7, y: 0.5, z: 0.3}
+  m_Size: {x: 1.22, y: 0.5, z: 0.3}
   m_Center: {x: 0, y: 0.25, z: 0.15}
 --- !u!54 &4266101814370703392
 Rigidbody:
