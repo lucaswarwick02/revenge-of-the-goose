@@ -26,7 +26,6 @@ public class PlayerCombat : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private float baseDamage;
     [SerializeField] private AnimationCurve damageMultiplierByNumberOfCollisionsBefore;
-    [SerializeField] private AnimationCurve damageMultiplierByDistance;
 
     private Animator animator;
     private MouseCursor mouseCursor;
@@ -109,7 +108,7 @@ public class PlayerCombat : MonoBehaviour
 
             if (destructibleObj is not null)
             {
-                float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i) * damageMultiplierByDistance.Evaluate((hit.point - raycastBarrelPos).magnitude);
+                float damage = baseDamage * damageMultiplierByNumberOfCollisionsBefore.Evaluate(i);
                 destructibleObj.InflictDamage(damage, hit, raycastBarrelPos);
             }
             else

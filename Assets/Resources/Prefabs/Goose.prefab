@@ -627,17 +627,17 @@ MonoBehaviour:
       time: 0
       value: 1
       inSlope: -0.13821387
-      outSlope: -0.13821387
-      tangentMode: 0
+      outSlope: -0.25
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0.05130908
     - serializedVersion: 3
       time: 4
       value: 0
-      inSlope: -0.42897892
+      inSlope: -0.25
       outSlope: -0.42897892
-      tangentMode: 0
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0.02738911
       outWeight: 0
@@ -691,8 +691,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bunnySpot: {fileID: 4688483512155172366}
   sheepSpot: {fileID: 2317163076717046866}
-  bunnyCompanion: {fileID: 0}
-  sheepCompanion: {fileID: 0}
 --- !u!54 &987521240307639403
 Rigidbody:
   m_ObjectHideFlags: 0
