@@ -87,7 +87,12 @@ MonoBehaviour:
   IsCheckpoint: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
-    thresholdOptions: []
+    thresholdOptions:
+    - resultingArea: {fileID: 1829712235895486512, guid: 2bf25706fe9eb784abee46dc09d0bdd4, type: 3}
+      query:
+        variable: 0
+        predicate: 4
+        value: 0
   phase: 1
 --- !u!1001 &707216090956443054
 PrefabInstance:
@@ -248,6 +253,10 @@ PrefabInstance:
       propertyPath: hitPoints
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 3406955284120902325, guid: 1c107a714562d01408b459db8a93369b, type: 3}
+      propertyPath: destructionScore
+      value: 150000
+      objectReference: {fileID: 0}
     - target: {fileID: 3924808348442612770, guid: 1c107a714562d01408b459db8a93369b, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -300,6 +309,10 @@ PrefabInstance:
       propertyPath: possibleConversations.Array.data[0].conditions.Array.data[0].predicate
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7301799093638801543, guid: 1c107a714562d01408b459db8a93369b, type: 3}
+      propertyPath: choiceGateway
+      value: 
+      objectReference: {fileID: 480859107569043432}
     - target: {fileID: 7301799093638801543, guid: 1c107a714562d01408b459db8a93369b, type: 3}
       propertyPath: darkGroupPrefab
       value: 

@@ -7,6 +7,8 @@ public class BossManager : MonoBehaviour
     [SerializeField] private GameObject farmhandBossPrefab;
     [SerializeField] private GameObject darkGroupPrefab;
     [SerializeField] private Vector3 darkGroupOffset = new Vector3(0, 0, 10);
+    [SerializeField] private Transform choiceGateway;
+    [SerializeField] private Vector3 choiceGatewayOffset = new Vector3(0, 0, 12.5f);
 
     private void OnEnable() {
         GetComponent<Destructible>().OnDestroyed.AddListener(CreateFarmhandBoss);
@@ -31,5 +33,7 @@ public class BossManager : MonoBehaviour
 
         // Spawn in the dark group behind the farmer
         Instantiate(darkGroupPrefab, transform.position + darkGroupOffset, Quaternion.identity);
+        choiceGateway.position = transform.position + choiceGatewayOffset;
+        choiceGateway.gameObject.SetActive(true);
     }
 }
