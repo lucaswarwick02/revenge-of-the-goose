@@ -249,6 +249,14 @@ PrefabInstance:
       propertyPath: repeatingEnvironment
       value: 
       objectReference: {fileID: 703868384411892906, guid: 3e66ebd49a46b1b4ab981c4f44eb4e77, type: 3}
+    - target: {fileID: 3246144991473494761, guid: 1c107a714562d01408b459db8a93369b, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246144991473494761, guid: 1c107a714562d01408b459db8a93369b, type: 3}
+      propertyPath: m_Size.z
+      value: 6.82
+      objectReference: {fileID: 0}
     - target: {fileID: 3406955284120902325, guid: 1c107a714562d01408b459db8a93369b, type: 3}
       propertyPath: hitPoints
       value: 500
