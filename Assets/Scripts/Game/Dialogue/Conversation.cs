@@ -7,15 +7,15 @@ public class Conversation : ScriptableObject
 {
     public string conversationID;
     public List<Dialogue> dialogue;
-    
-    [HideInInspector] public readonly Dictionary<string, Dialogue> dialogueDict = new Dictionary<string, Dialogue>();
 
-    public void CompileDialogue()
+    public Dictionary<string, Dialogue> CompileDialogue()
     {
+        var dict = new Dictionary<string, Dialogue>();
         foreach (Dialogue dialogue in dialogue)
         {
-            dialogueDict.Add(dialogue.dialogueID, dialogue);
+            dict.Add(dialogue.dialogueID, dialogue);
         }
+        return dict;
     }
 
     [Serializable]

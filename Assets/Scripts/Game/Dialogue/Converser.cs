@@ -20,6 +20,7 @@ public class Converser : MonoBehaviour
 
     private Conversation conversation = null;
     private bool conversationStarted;
+    private Dictionary<string, Dialogue> dialogueDict;
 
     [Serializable]
     private struct ConditionalConversation
@@ -79,7 +80,7 @@ public class Converser : MonoBehaviour
         else
         {
             Debug.Log("Conversation chosen: " + conversation.conversationID);
-            conversation.CompileDialogue();
+            dialogueDict = conversation.CompileDialogue();
         }
 
     }
@@ -105,7 +106,7 @@ public class Converser : MonoBehaviour
         }
         else
         {
-            EnactDialogue(conversation.dialogueDict[dialogueID]);
+            EnactDialogue(dialogueDict[dialogueID]);
         }
     }
 
