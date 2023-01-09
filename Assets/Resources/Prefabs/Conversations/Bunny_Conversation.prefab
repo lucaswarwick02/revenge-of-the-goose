@@ -331,6 +331,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusOffset: {x: 0, y: 0, z: -1.5}
   focusFOV: 20
+--- !u!114 &6330534452682369756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195693520319988459}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771623b7089a5d74580698a556a90891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1775915059614138712 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1121805041604801164, guid: cd27b2312f2c9f441a62d49d17fcad77, type: 3}

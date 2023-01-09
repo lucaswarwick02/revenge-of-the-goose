@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
@@ -11,6 +12,9 @@ public class RabbitController : MonoBehaviour
     [SerializeField] private float maxJumpSpeed = 3;
     [SerializeField] private float jumpAngle = 50;
     [SerializeField] private Transform image;
+    [Space]
+    [SerializeField] private BoxCollider obstacleCollider;
+    [SerializeField] private BoxCollider imageCollider;
 
     private Rigidbody rb;
     private Animator anim;
@@ -85,18 +89,19 @@ public class RabbitController : MonoBehaviour
         jumpingIsActive = true;
     }
 
-    public void MakeCompanion () {
-        if (GetComponent<CompanionFollow>()) return;
-        
+    public void MakeCompanion()
+    {
         PlaythroughStats.UnlockBunnyCompanion();
-        
-        Destroy(GetComponent<Destructible>());
-        Destroy(GetComponent<AnimalCommenter>());
-        Destroy(GetComponent<BoxCollider>());
+
         transform.parent = null;
+        obstacleCollider.enabled = false;
+        imageCollider.gameObject.layer = 1 << LayerMask.GetMask("Companion");
 
-        gameObject.AddComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.GetBunnySpot());
+        GetComponent<Destructible>().enabled = false;
+        GetComponent<Converser>().enabled = false;
+        GetComponent<CompanionFollow>().enabled = true;
+        GetComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.RegisterAsBunnyCompanion(gameObject));
 
-        Destroy(this);
+        enabled = false;
     }
 }

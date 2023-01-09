@@ -644,39 +644,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  damageMultiplierByDistance:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0
-      outSlope: 0
-      tangentMode: 65
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 8
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 2
-      inWeight: 0.33333334
-      outWeight: 0.5540793
-    - serializedVersion: 3
-      time: 16
-      value: -0.0016479492
-      inSlope: -0.2643652
-      outSlope: -0.2643652
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.03358519
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &4949441530995270849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +658,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bunnySpot: {fileID: 4688483512155172366}
   sheepSpot: {fileID: 2317163076717046866}
+  bunnyCompanionPrefab: {fileID: 1775915059614138712, guid: f78edb97f38f9ff48abd613950cb081e, type: 3}
+  sheepCompanionPrefab: {fileID: 8933732547433069563, guid: 25e4ed300f2944c4a9655245e44e63aa, type: 3}
 --- !u!54 &987521240307639403
 Rigidbody:
   m_ObjectHideFlags: 0

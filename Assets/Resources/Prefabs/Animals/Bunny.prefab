@@ -203,6 +203,8 @@ MonoBehaviour:
   maxJumpSpeed: 4
   jumpAngle: 50
   image: {fileID: 1091235313991077317}
+  obstacleCollider: {fileID: 7303807506793078874}
+  imageCollider: {fileID: 5852042692391569635}
 --- !u!114 &4212203946987230527
 MonoBehaviour:
   m_ObjectHideFlags: 0

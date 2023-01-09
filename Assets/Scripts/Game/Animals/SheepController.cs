@@ -7,6 +7,9 @@ using UnityEngine;
 public class SheepController : MonoBehaviour
 {
     [SerializeField] private Transform image;
+    [Space]
+    [SerializeField] private BoxCollider obstacleCollider;
+    [SerializeField] private BoxCollider imageCollider;
 
     private Rigidbody rb;
     private Animator anim;
@@ -50,19 +53,19 @@ public class SheepController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void MakeCompanion () {
-        if (GetComponent<CompanionFollow>()) return;
-        
+    public void MakeCompanion()
+    {
         PlaythroughStats.UnlockSheepCompanion();
 
-        Destroy(GetComponent<Destructible>());
-        Destroy(GetComponent<AnimalCommenter>());
-        Destroy(GetComponent<BoxCollider>());
-        Destroy(GetComponent<Converser>());
         transform.parent = null;
+        obstacleCollider.enabled = false;
+        imageCollider.gameObject.layer = 1 << LayerMask.GetMask("Companion");
 
-        gameObject.AddComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.GetSheepSpot());
+        GetComponent<Destructible>().enabled = false;
+        GetComponent<Converser>().enabled = false;
+        GetComponent<CompanionFollow>().enabled = true;
+        GetComponent<CompanionFollow>().SetFollowTarget(PlayerCompanions.RegisterAsSheepCompanion(gameObject));
 
-        Destroy(this);
+        enabled = false;
     }
 }
