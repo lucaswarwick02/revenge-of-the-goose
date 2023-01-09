@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackerPrefab: {fileID: 0}
-  spawnInterval: 0
+  spawnInterval: 2

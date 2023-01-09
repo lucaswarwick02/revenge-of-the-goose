@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5e95a2a7e307241ae62c56291e5524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 15
-  attackInterval: 3
+  attackRange: 13
+  attackInterval: 5
   attackDamage: 10
   healthPickupPrefab: {fileID: 8923316038243590325, guid: 761245f29c950f24db57f7f47394925b, type: 3}
 --- !u!114 &4212203946987230527
