@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63c48c431cd75d44b914d9ab316debf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focusOffset: {x: 0, y: 0.3, z: 0.2}
+  focusOffset: {x: 0, y: 0, z: -1.5}
   focusFOV: 20
 --- !u!114 &1775915059614138712 stripped
 MonoBehaviour:

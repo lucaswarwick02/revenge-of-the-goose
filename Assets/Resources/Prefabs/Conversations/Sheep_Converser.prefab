@@ -239,5 +239,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63c48c431cd75d44b914d9ab316debf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focusOffset: {x: 0, y: 0.56, z: 0.33}
-  focusFOV: 30
+  focusOffset: {x: 0, y: 0.27, z: -0.61}
+  focusFOV: 20

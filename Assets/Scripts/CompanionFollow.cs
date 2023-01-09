@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CompanionFollow : MonoBehaviour
 {
+
     private float jumpAngle = 35;
     private Rigidbody rb;
 
@@ -12,9 +13,11 @@ public class CompanionFollow : MonoBehaviour
     private float distance;
 
     private Transform followTarget;
+    private Transform image;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
+        image = GetComponentInChildren<SpriteRenderer>().transform;
     }
 
     private void OnEnable() {
@@ -40,6 +43,16 @@ public class CompanionFollow : MonoBehaviour
         else {
             isJumping = true;
             Jump();
+        }
+
+
+        if (rb.velocity.x > 0.01f)
+        {
+            image.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (rb.velocity.x < -0.01f)
+        {
+            image.localScale = new Vector3(1, 1, 1);
         }
     }
 

@@ -12,7 +12,9 @@ public class CrosshairController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
+        GameHandler.OnMapAreaChanged += ForceUpdate;
         PlayerCombat.OnReloadStarted += DoReloadAnimation;
         PlayerCombat.OnBulletFired += UpdateBulletBox;
         PlayerCombat.OnReloadEnded += UpdateBulletBox;
@@ -20,9 +22,15 @@ public class CrosshairController : MonoBehaviour
 
     private void OnDisable()
     {
+        GameHandler.OnMapAreaChanged -= ForceUpdate;
         PlayerCombat.OnReloadStarted -= DoReloadAnimation;
         PlayerCombat.OnBulletFired -= UpdateBulletBox;
         PlayerCombat.OnReloadEnded -= UpdateBulletBox;
+    }
+
+    private void ForceUpdate()
+    {
+        UpdateBulletBox(PlayerCombat.BulletsRemaining);
     }
 
     private void DoReloadAnimation(int bulletsRemaining)

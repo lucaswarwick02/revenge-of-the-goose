@@ -39,7 +39,7 @@ public class PlayerCombat : MonoBehaviour
     private float currentGunAngle;
     private float nextShootTime;
 
-    public int BulletsRemaining { get; private set; }
+    public static int BulletsRemaining { get; private set; }
 
     public bool Shooting { get; private set; }
 
@@ -53,7 +53,6 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
-
         Cursor.lockState = CursorLockMode.Locked;
 
         mouseCursor = FindObjectOfType<MouseCursor>();
