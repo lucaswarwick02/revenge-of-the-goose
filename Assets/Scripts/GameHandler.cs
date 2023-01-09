@@ -109,6 +109,11 @@ public class GameHandler : MonoBehaviour
     {
         if (CurrentMapAreaInstance != null)
         {
+            foreach (ParticleSystem ps in FindObjectsOfType<ParticleSystem>())
+            {
+                ps.Clear();
+            }
+
             Destroy(CurrentMapAreaInstance.gameObject, 0);
         }
 
@@ -123,6 +128,7 @@ public class GameHandler : MonoBehaviour
         }
 
         OnMapAreaChanged?.Invoke();
+
     }
 
     public static void SetPaused(bool pause)
