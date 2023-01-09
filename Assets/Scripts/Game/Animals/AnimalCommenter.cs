@@ -48,6 +48,7 @@ public class AnimalCommenter : MonoBehaviour
     {
         GetComponent<Destructible>().OnDestroyed.RemoveListener(DisableSafely);
         AnimalCommentController.animalCommenters.Remove(this);
+        Destroy(currentComment);
     }
 
     private void Update()
