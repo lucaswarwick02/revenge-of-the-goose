@@ -15,7 +15,7 @@ public class BossMovement : MonoBehaviour
     private int numberOfEnvironments = 1;
     private float environmentOffset = 35.6f;
 
-    private float loseDistance = 20f;
+    private float loseDistance = 30f;
 
     private void Awake() {
         bossCombat = GetComponent<BossCombat>();
@@ -46,6 +46,6 @@ public class BossMovement : MonoBehaviour
     }
 
     private float getSpeed () {
-        return GameHandler.InNeutralMode ? 0f : 4.5f;
+        return GameHandler.InNeutralMode ? 0f : 4f;
     }
 }
