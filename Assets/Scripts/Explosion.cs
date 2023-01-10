@@ -16,6 +16,7 @@ public class Explosion : MonoBehaviour
 
     public void Trigger()
     {
+        Time.timeScale = 0;
         FindObjectOfType<Canvas>().gameObject.SetActive(false);
         StartCoroutine(DoAnimation());
     }
