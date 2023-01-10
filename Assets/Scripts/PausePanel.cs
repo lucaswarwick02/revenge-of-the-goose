@@ -42,7 +42,7 @@ public class PausePanel : MonoBehaviour
     public void LoadLastCheckpoint()
     {
         gameHandler.LoadCheckpoint();
-        GameHandler.SetPaused(false);
+        UnPause();
     }
 
     public void Continue () {
