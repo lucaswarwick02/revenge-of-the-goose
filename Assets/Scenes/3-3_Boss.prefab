@@ -422,6 +422,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: attackDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
       propertyPath: attackInterval
       value: 4
       objectReference: {fileID: 0}
@@ -527,14 +531,6 @@ PrefabInstance:
       propertyPath: choiceGateway
       value: 
       objectReference: {fileID: 480859107569043432}
-    - target: {fileID: 7301799093638801543, guid: 1c107a714562d01408b459db8a93369b, type: 3}
-      propertyPath: darkGroupPrefab
-      value: 
-      objectReference: {fileID: 1653066978246193824, guid: 80c4acf160b7f8545bf0c667b85e31c2, type: 3}
-    - target: {fileID: 7301799093638801543, guid: 1c107a714562d01408b459db8a93369b, type: 3}
-      propertyPath: farmhandBossPrefab
-      value: 
-      objectReference: {fileID: 2094167142111165281, guid: 5849c26e48ae52444b82fa971bd24ab9, type: 3}
     - target: {fileID: 7991305774691823423, guid: 1c107a714562d01408b459db8a93369b, type: 3}
       propertyPath: m_Name
       value: FarmerBoss
@@ -600,6 +596,10 @@ PrefabInstance:
     - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
       propertyPath: attackRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: attackDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
       propertyPath: attackInterval
@@ -674,6 +674,10 @@ PrefabInstance:
     - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
       propertyPath: attackRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: attackDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
       propertyPath: attackInterval
@@ -2377,6 +2381,10 @@ PrefabInstance:
     - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
       propertyPath: attackRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
+      propertyPath: attackDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3272350591691959186, guid: a1961b51bf96fc6458a6c58f29e61a27, type: 3}
       propertyPath: attackInterval

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class BossCombat : MonoBehaviour
 {
+    [Header("Shooting")]
+    [SerializeField] private float attackInterval = 4;
+    [SerializeField] private float startAttackDelay = 1.5f;
+    [SerializeField] private float attackDamage = 20;
+
+    [Header("Object Spawning")]
     [SerializeField] private float maxObstacleDelay = 1.5f;
     [SerializeField] private float minObstacleDelay = 3f;
     [SerializeField] private float obstacleSpawnDistance;
@@ -13,15 +19,20 @@ public class BossCombat : MonoBehaviour
     BossManager bossManager;
 
     Transform player;
+    Animator anim;
+    AudioSource audioSource;
 
     private float timer;
     private float maxHitPoints;
+    private float nextAttackTime;
 
-    public bool canAttack = true;
+    public bool canSpawnObstacles = true;
 
     private void Awake() {
         destructible = GetComponent<Destructible>();
         bossManager = GetComponent<BossManager>();
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -29,6 +40,7 @@ public class BossCombat : MonoBehaviour
     private void Start() {
         maxHitPoints = destructible.getHitPoints();
         ResetTimer();
+        nextAttackTime = Time.time + startAttackDelay;
     }
 
     private void Update()
@@ -40,6 +52,12 @@ public class BossCombat : MonoBehaviour
             InstantiateRandomObstacle();
             ResetTimer();
         }
+
+        if (Time.time >= nextAttackTime)
+        {
+            nextAttackTime = Time.time + attackInterval;
+            AttackPlayer();
+        }
     }
 
     private void ResetTimer () {
@@ -50,8 +68,15 @@ public class BossCombat : MonoBehaviour
         InstantiateObstacle(GetRandomObstacle());
     }
 
+    private void AttackPlayer()
+    {
+        audioSource.Play();
+        anim.SetTrigger("Attack");
+        PlayerHealth.InflictDamage(attackDamage, transform);
+    }
+
     private void InstantiateObstacle (GameObject obstacle) {
-        if (!canAttack) return;
+        if (!canSpawnObstacles) return;
         
         Instantiate(obstacle, transform.position + new Vector3(player.position.x, 0f, obstacleSpawnDistance), Quaternion.identity);
     }
