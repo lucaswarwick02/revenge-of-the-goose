@@ -19,6 +19,8 @@ public class DogController : MonoBehaviour
 
     public bool IsDead { get; set; }
 
+    [SerializeField] private AudioSource barkSound;
+
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
@@ -66,6 +68,7 @@ public class DogController : MonoBehaviour
     public void Bark()
     {
         // make bark noise
+        barkSound.Play();
     }
 
     public void StartDeath(RaycastHit hitInfo, Vector3 origin)

@@ -14,6 +14,12 @@ public class SheepController : MonoBehaviour
     private Rigidbody rb;
     private Animator anim;
 
+    [SerializeField] private bool makeSounds;
+    [SerializeField] private AudioSource sheepSound;
+    private float minSoundDelay = 3f;
+    private float maxSoundDelay = 6f;
+    private float currentSoundDelay = 0f;
+
     public bool IsDead { get; set; }
 
     private void Awake()
@@ -34,6 +40,14 @@ public class SheepController : MonoBehaviour
             {
                 image.localScale = new Vector3(1, 1, 1);
             }
+
+            if (makeSounds && (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position)<= 15f)) {
+                currentSoundDelay -= Time.deltaTime;
+                if (currentSoundDelay < 0) {
+                    SheepSound();
+                    currentSoundDelay = Random.Range(minSoundDelay, maxSoundDelay);
+                }
+            }
         }
     }
 
@@ -46,6 +60,10 @@ public class SheepController : MonoBehaviour
         rb.velocity = impactDir * 4;
 
         enabled = false;
+    }
+
+    public void SheepSound() {
+        sheepSound.Play();
     }
 
     private void Destroy()
