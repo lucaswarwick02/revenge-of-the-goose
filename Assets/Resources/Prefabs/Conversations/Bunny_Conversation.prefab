@@ -103,7 +103,7 @@ MonoBehaviour:
           m_CallState: 2
   - responseRequired:
       conversationID: Rabbit_Sadist
-      responseID: Normal
+      responseID: Promise
     effect:
       m_PersistentCalls:
         m_Calls:
