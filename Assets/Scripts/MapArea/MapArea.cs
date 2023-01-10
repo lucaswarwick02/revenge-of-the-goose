@@ -51,6 +51,6 @@ public class MapArea : MonoBehaviour
     public struct MapAreaCondition
     {
         public MapArea resultingArea; // The next map area to be loaded
-        public QueryConditions[] conditions;
+        public QueryCondition_Base[] conditions;
     }
 }

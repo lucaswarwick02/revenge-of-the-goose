@@ -93,22 +93,10 @@ MonoBehaviour:
     possibleMapAreas:
     - resultingArea: {fileID: 1829712235895486512, guid: 0d64d9b448063234697ca54b5f1bfd50, type: 3}
       conditions:
-      - {fileID: 0}
-    - resultingArea: {fileID: 1829712235895486512, guid: 0d64d9b448063234697ca54b5f1bfd50, type: 3}
+      - {fileID: 11400000, guid: da7417b79a36617449d190de1209c29f, type: 2}
+    - resultingArea: {fileID: 1829712235895486512, guid: da5c793446714aa4e9109fff51a58368, type: 3}
       conditions:
-      - {fileID: 0}
-    - resultingArea: {fileID: 0}
-      conditions:
-      - {fileID: 0}
-    - resultingArea: {fileID: 0}
-      conditions:
-      - {fileID: 0}
-    - resultingArea: {fileID: 0}
-      conditions:
-      - {fileID: 0}
-    - resultingArea: {fileID: 0}
-      conditions:
-      - {fileID: 0}
+      - {fileID: 11400000, guid: 243474a7838c63a44a0037850e0b90a0, type: 2}
     noMapConditionsMet:
       m_PersistentCalls:
         m_Calls:
