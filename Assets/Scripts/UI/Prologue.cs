@@ -17,7 +17,7 @@ public class Prologue : MonoBehaviour
 
     private int partIndex = 0;
 
-    private float partTime = 5f;
+    private float partTime = 7f;
     private float currentTime;
 
     private bool isFadeActive = true;
@@ -37,33 +37,32 @@ public class Prologue : MonoBehaviour
     private void Update() {
         if (isFadeActive) return;
 
-        if (OnLastPart()) return;
-
         currentTime -= Time.deltaTime;
         UpdateProgressBar();
         if (currentTime < 0) {
-            partIndex = Mathf.Clamp(partIndex + 1, 0, parts.Length - 1);
+            partIndex++;
             currentTime = partTime;
             UpdateParts();
         }
     }
 
     private void UpdateParts () {
+        if (partIndex == parts.Length)
+        {
+            Play();
+            return;
+        }
+
         foreach (GameObject part in parts) {
             part.SetActive(false);
         }
 
-        playButton.SetActive(OnLastPart());
-
         parts[partIndex].SetActive(true);
-    }
-
-    private bool OnLastPart () {
-        return partIndex == parts.Length - 1;
     }
 
     public void Play ()
     {
+        progressBar.gameObject.SetActive(false);
         StartCoroutine("fadeToWhite", fade.GetComponent<Image>());
     }
 
