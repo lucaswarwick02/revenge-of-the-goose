@@ -11,6 +11,8 @@ public class BackgroundMusic : MonoBehaviour
     [SerializeField] private AudioClip MetalMusic;
     [SerializeField] private AudioClip NeutralMusic;
 
+    private AudioClip currentPlaying;
+
     AudioSource audioSource;
 
     private void Awake() {
@@ -18,6 +20,7 @@ public class BackgroundMusic : MonoBehaviour
 
         MainMenu.OnMainMenuAnimationSoftComplete += StartMainMenuMusic;
         GameHandler.OnNeutralModeChange += OnNeutralModeChanged;
+        Converser.OnStartConversation += ForceNeutralMusic;
         DontDestroyOnLoad(gameObject);
         audioSource = GetComponent<AudioSource>();
     }
@@ -26,6 +29,7 @@ public class BackgroundMusic : MonoBehaviour
     {
         MainMenu.OnMainMenuAnimationSoftComplete -= StartMainMenuMusic;
         GameHandler.OnNeutralModeChange -= OnNeutralModeChanged;
+        Converser.OnStartConversation -= ForceNeutralMusic;
     }
 
     private void StartMainMenuMusic()
@@ -37,6 +41,11 @@ public class BackgroundMusic : MonoBehaviour
         INSTANCE.OnNeutralModeChanged(true);
     }
 
+    public static void ForceNeutralMusic(Transform converser)
+    {
+        ForceNeutralMusic();
+    }
+
     private void OnNeutralModeChanged(bool inNeutralMode)
     {
         PlayMusic(inNeutralMode ? NeutralMusic : MetalMusic);
@@ -44,7 +53,11 @@ public class BackgroundMusic : MonoBehaviour
 
     private void PlayMusic(AudioClip audioClip, float newVolume = 1)
     {
-        StartCoroutine(PlayNewTrack(audioClip, newVolume));
+        if (audioClip != currentPlaying)
+        {
+            StartCoroutine(PlayNewTrack(audioClip, newVolume));
+            currentPlaying = audioClip;
+        }
     }
 
     private void StopMusic()
