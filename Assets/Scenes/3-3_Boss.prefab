@@ -474,7 +474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3406955284120902325, guid: 1c107a714562d01408b459db8a93369b, type: 3}
       propertyPath: hitPoints
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3406955284120902325, guid: 1c107a714562d01408b459db8a93369b, type: 3}
       propertyPath: destructionScore
