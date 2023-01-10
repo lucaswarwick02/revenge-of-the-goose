@@ -22,6 +22,7 @@ public class EpilogueController : MonoBehaviour
 
     private void Awake()
     {
+        BackgroundMusic.StopMusic();
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

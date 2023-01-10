@@ -41,6 +41,11 @@ public class BackgroundMusic : MonoBehaviour
         INSTANCE.OnNeutralModeChanged(true);
     }
 
+    public static void StopMusic()
+    {
+        INSTANCE.PlayMusic(null);
+    }
+
     public static void ForceNeutralMusic(Transform converser)
     {
         ForceNeutralMusic();
@@ -58,11 +63,6 @@ public class BackgroundMusic : MonoBehaviour
             StartCoroutine(PlayNewTrack(audioClip, newVolume));
             currentPlaying = audioClip;
         }
-    }
-
-    private void StopMusic()
-    {
-        StartCoroutine(PlayNewTrack(null));
     }
 
     private IEnumerator PlayNewTrack(AudioClip audioClip, float newVolume = 1)

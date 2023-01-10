@@ -27,6 +27,7 @@ public class MainMenu : MonoBehaviour
     }
 
     private void Update() {
+        BackgroundMusic.StopMusic();
         if (intro.time < 5.9f && Input.GetKeyDown(KeyCode.Escape)) {
             intro.time = 6f;
         }
