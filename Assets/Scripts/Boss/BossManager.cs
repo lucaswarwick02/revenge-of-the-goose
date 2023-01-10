@@ -33,11 +33,10 @@ public class BossManager : MonoBehaviour
             Destroy(dog.gameObject);
         }
 
-        // Spawn in the dying farmer
-        Instantiate(farmhandBossPrefab, transform.position, Quaternion.identity);
+        GameObject farmhandBoss = Instantiate(farmhandBossPrefab, transform.position, Quaternion.identity);
+        farmhandBoss.transform.parent = GameObject.FindObjectOfType<MapArea>().transform;
+        GameObject darkGroup = Instantiate(darkGroupPrefab, transform.position + darkGroupOffset, Quaternion.identity);
 
-        // Spawn in the dark group behind the farmer
-        Instantiate(darkGroupPrefab, transform.position + darkGroupOffset, Quaternion.identity);
         choiceGateway.position = transform.position + choiceGatewayOffset;
         choiceGateway.gameObject.SetActive(true);
 
