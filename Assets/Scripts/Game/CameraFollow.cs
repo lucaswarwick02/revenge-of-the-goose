@@ -31,6 +31,7 @@ public class CameraFollow : MonoBehaviour
         GameHandler.OnGameLoaded += OnGameLoaded;
         Converser.OnStartConversation += OnStartConversation;
         Converser.OnEndConversation += SetPlayerMode;
+        GameHandler.OnMapAreaChanged += ResetPosition;
     }
 
     private void OnDisable()
@@ -39,6 +40,12 @@ public class CameraFollow : MonoBehaviour
         GameHandler.OnGameLoaded -= OnGameLoaded;
         Converser.OnStartConversation -= OnStartConversation;
         Converser.OnEndConversation -= SetPlayerMode;
+        GameHandler.OnMapAreaChanged -= ResetPosition;
+    }
+
+    private void ResetPosition()
+    {
+        transform.position = new Vector3(0, transform.position.y, 0);
     }
 
     private void OnGameLoaded()

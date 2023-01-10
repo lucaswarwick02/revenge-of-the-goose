@@ -19,6 +19,9 @@ public class ExampleUI : MonoBehaviour
     [SerializeField] private GameObject fade;
     [SerializeField] private float fadeDuration = 2f;
 
+    [Header("New Map Area Animation")]
+    [SerializeField] private Image screenDarkenImage;
+
     private void Start() {
         StartCoroutine("fadeFromWhite", fade.GetComponent<Image>());
     }
@@ -29,6 +32,9 @@ public class ExampleUI : MonoBehaviour
         PlaythroughStats.OnDestructionScoreChanged += UpdateDestructionScore;
         GameHandler.OnGameLoaded += UpdateDestructionScore;
         GameHandler.OnGameOver += OnGameOver;
+
+        GameHandler.OnMapAreaStartChanging += DarkenScreen;
+        GameHandler.OnMapAreaChanged += UndarkenScreen;
     }
 
     void OnDisable()
@@ -36,6 +42,9 @@ public class ExampleUI : MonoBehaviour
         PlaythroughStats.OnDestructionScoreChanged -= UpdateDestructionScore;
         GameHandler.OnGameLoaded -= UpdateDestructionScore;
         GameHandler.OnGameOver -= OnGameOver;
+
+        GameHandler.OnMapAreaStartChanging -= DarkenScreen;
+        GameHandler.OnMapAreaChanged -= UndarkenScreen;
     }
 
     private void UpdateDestructionScore(int newScore, int deltaScore, Vector3 destructionEventPosition)
@@ -95,5 +104,32 @@ public class ExampleUI : MonoBehaviour
         }
 
         fade.SetActive(false);
+    }
+
+    private void DarkenScreen()
+    {
+        if (screenDarkenImage.color.a == 0)
+        {
+            StartCoroutine(ScreenDarkenImageFade(0, 1, 0.5f));
+        }
+    }
+
+    private void UndarkenScreen()
+    {
+        if (screenDarkenImage.color.a == 1)
+        {
+            StartCoroutine(ScreenDarkenImageFade(1, 0, 0.5f));
+        }
+    }
+
+    private IEnumerator ScreenDarkenImageFade(float fromOpacity, float toOpacity, float duration)
+    {
+        float timePassed = 0;
+        while (screenDarkenImage.color.a != toOpacity)
+        {
+            screenDarkenImage.color = new Color(screenDarkenImage.color.r, screenDarkenImage.color.g, screenDarkenImage.color.b, Mathf.Lerp(fromOpacity, toOpacity, timePassed / duration));
+            timePassed += Time.unscaledDeltaTime;
+            yield return null;
+        }
     }
 }

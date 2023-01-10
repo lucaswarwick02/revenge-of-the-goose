@@ -1,8 +1,13 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    public const float NEW_AREA_SWITCH_TIME = 1;
+
+    public static event Action OnMapAreaStartChanging;
+
     public static event Action OnMapAreaChanged;
 
     public static event Action<bool> OnNeutralModeChange;
@@ -66,10 +71,7 @@ public class GameHandler : MonoBehaviour
         Decisions.ResetDecisions();
         PlayerHealth.ResetHealth();
 
-        UpdateScene(startMapArea);
-
-        Debug.Log($"New game successfully started at {CurrentMapArea.name}");
-        OnGameLoaded?.Invoke();
+        UpdateScene(startMapArea, () => OnGameLoaded?.Invoke(), false);
     }
 
     public void LoadCheckpoint()
@@ -81,10 +83,7 @@ public class GameHandler : MonoBehaviour
             PlaythroughStats.Load(LastCheckpoint.Value);
             Decisions.Load(LastCheckpoint.Value);
 
-            UpdateScene(LastCheckpoint.Value.CheckpointMapArea);
-
-            Debug.Log($"Checkpoint successfully loaded at {CurrentMapArea.name}");
-            OnGameLoaded?.Invoke();
+            UpdateScene(LastCheckpoint.Value.CheckpointMapArea, () => OnGameLoaded?.Invoke());
         }
         else
         {
@@ -107,6 +106,25 @@ public class GameHandler : MonoBehaviour
 
     private void UpdateScene(MapArea newArea)
     {
+        StartCoroutine(UpdateSceneRoutine(newArea, null));
+    }
+
+    private void UpdateScene(MapArea newArea, Action callback, bool useSwitchTime = true)
+    {
+        StartCoroutine(UpdateSceneRoutine(newArea, callback, useSwitchTime));
+    }
+
+    private IEnumerator UpdateSceneRoutine(MapArea newArea, Action callback, bool useSwitchTime = true)
+    {
+        Time.timeScale = 0;
+
+        if (useSwitchTime)
+        {
+            OnMapAreaStartChanging?.Invoke();
+        }
+
+        yield return new WaitForSecondsRealtime(useSwitchTime? NEW_AREA_SWITCH_TIME : 0);
+
         if (CurrentMapAreaInstance != null)
         {
             foreach (ParticleSystem ps in FindObjectsOfType<ParticleSystem>())
@@ -127,8 +145,9 @@ public class GameHandler : MonoBehaviour
             SaveGame();
         }
 
+        Time.timeScale = 1;
         OnMapAreaChanged?.Invoke();
-
+        callback?.Invoke();
     }
 
     public static void SetPaused(bool pause)
