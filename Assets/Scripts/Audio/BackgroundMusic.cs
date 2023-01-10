@@ -16,6 +16,13 @@ public class BackgroundMusic : MonoBehaviour
     AudioSource audioSource;
 
     private void Awake() {
+
+        if (INSTANCE != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         INSTANCE = this;
 
         MainMenu.OnMainMenuAnimationSoftComplete += StartMainMenuMusic;
