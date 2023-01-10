@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Prologue : MonoBehaviour
 {
     [SerializeField] private GameObject[] parts;
-
+    [Space]
     [SerializeField] private Button leftArrow;
     [SerializeField] private Button rightArrow;
     [SerializeField] private GameObject playButton;
+    [Space]
+    [SerializeField] int gameSceneIndex;
+    [Space]
+    [SerializeField] private GameObject fade;
+    [SerializeField] private float fadeDuration = 2f;
 
     private int partIndex = 0;
 
@@ -17,6 +23,10 @@ public class Prologue : MonoBehaviour
     void Start()
     {
         UpdateParts();
+
+        BackgroundMusic.ForceNeutralMusic();
+
+        StartCoroutine("fadeFromWhite", fade.GetComponent<Image>());
     }
 
     public void LeftArrow () {
@@ -43,5 +53,44 @@ public class Prologue : MonoBehaviour
         playButton.SetActive(onLastPart);
 
         parts[partIndex].SetActive(true);
+    }
+
+    public void Play ()
+    {
+        StartCoroutine("fadeToWhite", fade.GetComponent<Image>());
+    }
+
+    IEnumerator fadeFromWhite(Image image)
+    {
+        float counter = 0;
+        Color spriteColor = image.color;
+
+        while (counter < fadeDuration)
+        {
+            counter += Time.deltaTime;
+            image.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, Mathf.Lerp(1, 0, counter / fadeDuration));
+
+            yield return null;
+        }
+
+        fade.SetActive(false);
+    }
+
+    IEnumerator fadeToWhite(Image image)
+    {
+        float counter = 0;
+        Color spriteColor = image.color;
+
+        fade.SetActive(true);
+
+        while (counter < fadeDuration)
+        {
+            counter += Time.deltaTime;
+            image.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, Mathf.Lerp(0, 1, counter / fadeDuration));
+
+            yield return null;
+        }
+
+        SceneManager.LoadScene(gameSceneIndex);
     }
 }

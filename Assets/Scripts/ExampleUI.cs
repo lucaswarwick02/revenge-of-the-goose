@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,14 @@ public class ExampleUI : MonoBehaviour
     [SerializeField] private PausePanel pausePanel;
     [SerializeField] private GameOverPanel gameOverPanel;
     [SerializeField] private DialoguePanel dialoguePanel;
+
+    [Header("Fade")]
+    [SerializeField] private GameObject fade;
+    [SerializeField] private float fadeDuration = 2f;
+
+    private void Start() {
+        StartCoroutine("fadeFromWhite", fade.GetComponent<Image>());
+    }
 
 
     void OnEnable()
@@ -70,5 +79,21 @@ public class ExampleUI : MonoBehaviour
     public void CloseDialoguePanel()
     {
         dialoguePanel.gameObject.SetActive(false);
+    }
+
+    IEnumerator fadeFromWhite(Image image)
+    {
+        float counter = 0;
+        Color spriteColor = image.color;
+
+        while (counter < fadeDuration)
+        {
+            counter += Time.deltaTime;
+            image.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, Mathf.Lerp(1, 0, counter / fadeDuration));
+
+            yield return null;
+        }
+
+        fade.SetActive(false);
     }
 }

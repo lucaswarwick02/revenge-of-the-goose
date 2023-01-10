@@ -33,6 +33,10 @@ public class BackgroundMusic : MonoBehaviour
         PlayMusic(MetalMusic);
     }
 
+    public static void ForceNeutralMusic () {
+        INSTANCE.OnNeutralModeChanged(true);
+    }
+
     private void OnNeutralModeChanged(bool inNeutralMode)
     {
         PlayMusic(inNeutralMode ? NeutralMusic : MetalMusic);
