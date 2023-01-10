@@ -41,7 +41,7 @@ public class SheepController : MonoBehaviour
                 image.localScale = new Vector3(1, 1, 1);
             }
 
-            if (makeSounds && (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position)<= 15f)) {
+            if (makeSounds && (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position) <= 7.5f)) {
                 currentSoundDelay -= Time.deltaTime;
                 if (currentSoundDelay < 0) {
                     SheepSound();
