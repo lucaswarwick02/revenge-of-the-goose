@@ -90,17 +90,25 @@ MonoBehaviour:
   IsCheckpoint: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
-    thresholdOptions:
+    possibleMapAreas:
     - resultingArea: {fileID: 1829712235895486512, guid: 0d64d9b448063234697ca54b5f1bfd50, type: 3}
-      query:
-        variable: 0
-        predicate: 1
-        value: 2147483647
-    - resultingArea: {fileID: 1829712235895486512, guid: da5c793446714aa4e9109fff51a58368, type: 3}
-      query:
-        variable: 0
-        predicate: 1
-        value: 0
+      conditions:
+      - {fileID: 0}
+    - resultingArea: {fileID: 1829712235895486512, guid: 0d64d9b448063234697ca54b5f1bfd50, type: 3}
+      conditions:
+      - {fileID: 0}
+    - resultingArea: {fileID: 0}
+      conditions:
+      - {fileID: 0}
+    - resultingArea: {fileID: 0}
+      conditions:
+      - {fileID: 0}
+    - resultingArea: {fileID: 0}
+      conditions:
+      - {fileID: 0}
+    - resultingArea: {fileID: 0}
+      conditions:
+      - {fileID: 0}
     noMapConditionsMet:
       m_PersistentCalls:
         m_Calls:

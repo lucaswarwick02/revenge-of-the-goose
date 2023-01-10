@@ -25,22 +25,14 @@ public class Converser : MonoBehaviour
     [Serializable]
     private struct ConditionalConversation
     {
-        public PlaythroughStats.StatisticQuery[] conditions;
-        public ResponseQuery[] resonsesRequired;
+        public QueryConditions[] conditions;
         public Conversation conversation;
-    }
-
-    [Serializable]
-    private struct ResponseQuery
-    {
-        public string conversation;
-        public string response;
     }
 
     [Serializable]
     private struct ConditionalEffect
     {
-        public ResponseQuery responseRequired;
+        public Decisions.ResponseQuery responseRequired;
         public UnityEvent effect;
     }
 
@@ -64,8 +56,7 @@ public class Converser : MonoBehaviour
         conversation = null;
         foreach (var conversation in possibleConversations)
         {
-            if (conversation.conditions.All(c => PlaythroughStats.Query(c)) 
-                && conversation.resonsesRequired.All(r => Decisions.PlayerResponded(r.conversation, r.response)))
+            if (conversation.conditions.All(q => q.Query()))
             {
                 this.conversation = conversation.conversation;
                 break;
@@ -154,9 +145,7 @@ public class Converser : MonoBehaviour
 
             foreach (ConditionalEffect effect in endEffects)
             {
-                if (effect.responseRequired.conversation == string.Empty
-                    || (effect.responseRequired.response == string.Empty && Decisions.ConversationWasStarted(effect.responseRequired.conversation))
-                    || Decisions.PlayerResponded(conversation.conversationID, effect.responseRequired.response))
+                if (Decisions.Query(effect.responseRequired))
                 {
                     effect.effect?.Invoke();
                 }

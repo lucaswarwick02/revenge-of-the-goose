@@ -90,56 +90,24 @@ MonoBehaviour:
   rangeToStartConversation: 3
   possibleConversations:
   - conditions:
-    - variable: 1
-      predicate: 3
-      value: 1
-    - variable: 2
-      predicate: 3
-      value: 4
-    resonsesRequired: []
+    - {fileID: 11400000, guid: 3d947cfc77daa974b97a4344c7399963, type: 2}
     conversation: {fileID: 11400000, guid: 3e8b5311caed12044941527f9a62505a, type: 2}
   - conditions:
-    - variable: 1
-      predicate: 1
-      value: 1
-    - variable: 2
-      predicate: 3
-      value: 4
-    resonsesRequired: []
+    - {fileID: 11400000, guid: e7583c3bcd113d942ad67989dec7890f, type: 2}
     conversation: {fileID: 11400000, guid: a280aa0f7ac564945bb820234e4a6fec, type: 2}
   - conditions:
-    - variable: 1
-      predicate: 3
-      value: 1
-    - variable: 2
-      predicate: 1
-      value: 4
-    resonsesRequired: []
+    - {fileID: 11400000, guid: c83c9b5a4527d8044b3b8d5f6e7c254d, type: 2}
     conversation: {fileID: 11400000, guid: 802df3f2d5db322449167cf9e9bbbb83, type: 2}
   - conditions:
-    - variable: 1
-      predicate: 1
-      value: 1
-    - variable: 2
-      predicate: 1
-      value: 4
-    resonsesRequired:
-    - conversation: Rabbit_Sadist
-      response: Promise
+    - {fileID: 11400000, guid: 58c5b19d71f06a14c95296ca7a084678, type: 2}
     conversation: {fileID: 11400000, guid: 2d5f34cbdba22ba4a9ed3bb143370513, type: 2}
   - conditions:
-    - variable: 1
-      predicate: 1
-      value: 1
-    - variable: 2
-      predicate: 1
-      value: 4
-    resonsesRequired: []
+    - {fileID: 11400000, guid: 0fff3046ebefd5f4694b2be961039026, type: 2}
     conversation: {fileID: 11400000, guid: ceaa6ca671cdade4b9e7a1d942ec9111, type: 2}
   endEffects:
   - responseRequired:
-      conversation: Sheep_TotalSadist
-      response: 
+      conversationID: Sheep_Liar
+      responseID: 
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -168,8 +136,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - responseRequired:
-      conversation: Sheep_Liar
-      response: 
+      conversationID: Sheep_TotalSadist
+      responseID: 
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -198,8 +166,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - responseRequired:
-      conversation: Sheep_Sadist
-      response: Sadist
+      conversationID: Sheep_Sadist
+      responseID: Sadist
     effect:
       m_PersistentCalls:
         m_Calls:
@@ -228,17 +196,41 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - responseRequired:
-      conversation: Sheep_Reformed
-      response: Companion
+      conversationID: Sheep_Reformed
+      responseID: Companion
     effect:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8933732547433069563}
+          m_TargetAssemblyTypeName: SheepController, Assembly-CSharp
+          m_MethodName: MakeCompanion
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - responseRequired:
-      conversation: Sheep_Pacifict
-      response: Companion
+      conversationID: Sheep_Pacifist
+      responseID: Companion
     effect:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8933732547433069563}
+          m_TargetAssemblyTypeName: SheepController, Assembly-CSharp
+          m_MethodName: MakeCompanion
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &5804139146072309032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +245,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusOffset: {x: 0, y: 0.27, z: -0.61}
   focusFOV: 20
+--- !u!114 &8933732547433069563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3982307798796265088, guid: ac6ee01e3f11ce14880fbf34a3e7ae73, type: 3}
+  m_PrefabInstance: {fileID: 5528451887052037499}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993845266063900110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3bf6a56277d374bb54f2dbc503d3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

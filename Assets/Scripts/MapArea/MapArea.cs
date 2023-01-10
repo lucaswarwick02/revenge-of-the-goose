@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using static PlaythroughStats;
@@ -26,11 +27,11 @@ public class MapArea : MonoBehaviour
 
     private void MoveToNextArea(MapAreaChoice mapAreaChoice)
     {
-        foreach (ThresholdOption thresholdOption in mapAreaChoice.thresholdOptions)
+        foreach (var possibleMapArea in mapAreaChoice.possibleMapAreas)
         {
-            if (Query(thresholdOption.query))
+            if (possibleMapArea.conditions.All(c => c.Query()))
             {
-                OnNextMapAreaChosen?.Invoke(thresholdOption.resultingArea);
+                OnNextMapAreaChosen?.Invoke(possibleMapArea.resultingArea);
                 return;
             }
         }
@@ -42,14 +43,14 @@ public class MapArea : MonoBehaviour
     public struct MapAreaChoice
     {
         public ChoiceGateway gateway; // The physical gateway itself
-        public ThresholdOption[] thresholdOptions;
+        public MapAreaCondition[] possibleMapAreas;
         public UnityEvent noMapConditionsMet;
     }
 
     [Serializable]
-    public struct ThresholdOption
+    public struct MapAreaCondition
     {
         public MapArea resultingArea; // The next map area to be loaded
-        public StatisticQuery query;
+        public QueryConditions[] conditions;
     }
 }

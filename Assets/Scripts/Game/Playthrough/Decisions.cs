@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +21,16 @@ public static class Decisions
 
     private static Dictionary<string, List<string>> conversationResponses = new ();
 
-    public static bool ConversationWasStarted(string conversationID) => conversationResponses.ContainsKey(conversationID);
+    private static bool ConversationWasStarted(string conversationID) => conversationResponses.ContainsKey(conversationID);
 
-    public static bool PlayerResponded(string conversationID, string responseID) => conversationResponses.TryGetValue(conversationID, out List<string> responses) && responses.Contains(responseID);
+    private static bool PlayerResponded(string conversationID, string responseID) => conversationResponses.TryGetValue(conversationID, out List<string> responses) && responses.Contains(responseID);
+
+    public static bool Query(ResponseQuery query)
+    {
+        return query.conversationID == string.Empty
+            || (query.responseID == string.Empty && ConversationWasStarted(query.conversationID))
+            || PlayerResponded(query.conversationID, query.responseID);
+    }
 
     public static void RecordConversationStarted(string conversationID)
     {
@@ -43,5 +51,12 @@ public static class Decisions
         {
             Debug.LogError("Conversation has not been recorded to have been started.");
         }
+    }
+
+    [Serializable]
+    public struct ResponseQuery
+    {
+        public string conversationID;
+        public string responseID;
     }
 }

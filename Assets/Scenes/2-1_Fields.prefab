@@ -583,12 +583,13 @@ MonoBehaviour:
   IsCheckpoint: 1
   gateways:
   - gateway: {fileID: 7288688100972666697}
-    thresholdOptions:
+    possibleMapAreas:
     - resultingArea: {fileID: 1829712235895486512, guid: 634ddc8400d219c40ae0026706bf97dd, type: 3}
-      query:
-        variable: 0
-        predicate: 4
-        value: 0
+      conditions:
+      - {fileID: 11400000, guid: f986eb51ef0a70f4783fa318524f1d37, type: 2}
+    noMapConditionsMet:
+      m_PersistentCalls:
+        m_Calls: []
   phase: 2
 --- !u!1 &4281774661486913855
 GameObject:
