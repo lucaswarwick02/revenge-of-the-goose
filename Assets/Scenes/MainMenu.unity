@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MetalMusic: {fileID: 8300000, guid: bde4965d47600954fbdf5f9da6c7980f, type: 3}
-  NeutralMusic: {fileID: 0}
+  NeutralMusic: {fileID: 8300000, guid: 7b45cfe66dfa30742b8f36e7b0abfc56, type: 3}
 --- !u!4 &310129583
 Transform:
   m_ObjectHideFlags: 0
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 191.85
+  m_fontSize: 191.75
   m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1395,7 +1395,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 179.35
+  m_fontSize: 179.25
   m_fontSizeBase: 190
   m_fontWeight: 400
   m_enableAutoSizing: 1
