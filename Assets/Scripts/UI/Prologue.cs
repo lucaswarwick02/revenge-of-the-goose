@@ -7,10 +7,8 @@ using UnityEngine.SceneManagement;
 public class Prologue : MonoBehaviour
 {
     [SerializeField] private GameObject[] parts;
-    [Space]
-    [SerializeField] private Button leftArrow;
-    [SerializeField] private Button rightArrow;
     [SerializeField] private GameObject playButton;
+    [SerializeField] private Slider progressBar;
     [Space]
     [SerializeField] int gameSceneIndex;
     [Space]
@@ -19,26 +17,35 @@ public class Prologue : MonoBehaviour
 
     private int partIndex = 0;
 
+    private float partTime = 5f;
+    private float currentTime;
+
+    private bool isFadeActive = true;
+
     // Start is called before the first frame update
     void Start()
     {
         UpdateParts();
+
+        currentTime = partTime;
 
         BackgroundMusic.ForceNeutralMusic();
 
         StartCoroutine("fadeFromWhite", fade.GetComponent<Image>());
     }
 
-    public void LeftArrow () {
-        partIndex = Mathf.Clamp(partIndex - 1, 0, parts.Length - 1);
+    private void Update() {
+        if (isFadeActive) return;
 
-        UpdateParts();
-    }
+        if (OnLastPart()) return;
 
-    public void RightArrow () {
-        partIndex = Mathf.Clamp(partIndex + 1, 0, parts.Length - 1);
-
-        UpdateParts();
+        currentTime -= Time.deltaTime;
+        UpdateProgressBar();
+        if (currentTime < 0) {
+            partIndex = Mathf.Clamp(partIndex + 1, 0, parts.Length - 1);
+            currentTime = partTime;
+            UpdateParts();
+        }
     }
 
     private void UpdateParts () {
@@ -46,13 +53,13 @@ public class Prologue : MonoBehaviour
             part.SetActive(false);
         }
 
-        leftArrow.interactable = partIndex != 0;
-
-        bool onLastPart = partIndex == parts.Length - 1;
-        rightArrow.gameObject.SetActive(!onLastPart);
-        playButton.SetActive(onLastPart);
+        playButton.SetActive(OnLastPart());
 
         parts[partIndex].SetActive(true);
+    }
+
+    private bool OnLastPart () {
+        return partIndex == parts.Length - 1;
     }
 
     public void Play ()
@@ -74,6 +81,7 @@ public class Prologue : MonoBehaviour
         }
 
         fade.SetActive(false);
+        isFadeActive = false;
     }
 
     IEnumerator fadeToWhite(Image image)
@@ -92,5 +100,9 @@ public class Prologue : MonoBehaviour
         }
 
         SceneManager.LoadScene(gameSceneIndex);
+    }
+
+    private void UpdateProgressBar () {
+        progressBar.value = 1f - (currentTime / partTime);
     }
 }
