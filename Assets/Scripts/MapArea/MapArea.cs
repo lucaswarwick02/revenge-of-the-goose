@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using static PlaythroughStats;
 
 public class MapArea : MonoBehaviour
@@ -17,20 +18,24 @@ public class MapArea : MonoBehaviour
         foreach (MapAreaChoice choice in gateways)
         {
             // When the map is loaded, set the choice trigger's to move to the corresponding node
-            choice.gateway.OnPlayerEnteredGateway += () => MoveToNextArea(choice.thresholdOptions);
+            choice.gateway.OnPlayerEnteredGateway += () => MoveToNextArea(choice);
         }
 
         OnNextMapAreaChosen += node => { if (node == null) { Debug.LogError("StoryNode not set!"); } else { Debug.Log("Next StoryNode = " + node.name); } };
     }
 
-    private void MoveToNextArea(ThresholdOption[] thresholdOptions)
+    private void MoveToNextArea(MapAreaChoice mapAreaChoice)
     {
-        foreach (ThresholdOption thresholdOption in thresholdOptions) {
-            if (PlaythroughStats.Query(thresholdOption.query)) {
+        foreach (ThresholdOption thresholdOption in mapAreaChoice.thresholdOptions)
+        {
+            if (Query(thresholdOption.query))
+            {
                 OnNextMapAreaChosen?.Invoke(thresholdOption.resultingArea);
-                break;
+                return;
             }
         }
+
+        mapAreaChoice.noMapConditionsMet?.Invoke();
     }
 
     [Serializable]
@@ -38,6 +43,7 @@ public class MapArea : MonoBehaviour
     {
         public ChoiceGateway gateway; // The physical gateway itself
         public ThresholdOption[] thresholdOptions;
+        public UnityEvent noMapConditionsMet;
     }
 
     [Serializable]

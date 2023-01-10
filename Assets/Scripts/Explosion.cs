@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,8 +14,6 @@ public class Explosion : MonoBehaviour
 
     public void Trigger()
     {
-        Time.timeScale = 0;
-        FindObjectOfType<Canvas>().gameObject.SetActive(false);
         StartCoroutine(DoAnimation());
     }
 

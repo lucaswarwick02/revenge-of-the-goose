@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameEnder : MonoBehaviour
 {
     [SerializeField] private float delay;
+    [SerializeField] private bool pauseImmediately;
+    [SerializeField] private bool setToNeutralModeImmediately;
 
     public static Ending EndingRealised { get; private set; }
 
@@ -37,6 +39,18 @@ public class GameEnder : MonoBehaviour
 
     private IEnumerator EndGameAfterDelay(Ending ending)
     {
+        FindObjectOfType<Canvas>().gameObject.SetActive(false);
+
+        if (pauseImmediately)
+        {
+            Time.timeScale = 0;
+        }
+
+        if (setToNeutralModeImmediately)
+        {
+            GameHandler.SetNeutralMode(true);
+        }
+
         yield return new WaitForSecondsRealtime(delay);
         EndingRealised = ending;
         LoadEpilogue();

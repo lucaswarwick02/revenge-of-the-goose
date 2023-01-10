@@ -51,6 +51,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2917650007297609530, guid: ac6ee01e3f11ce14880fbf34a3e7ae73, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303807506793078874, guid: ac6ee01e3f11ce14880fbf34a3e7ae73, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8923316038243590325, guid: ac6ee01e3f11ce14880fbf34a3e7ae73, type: 3}
       propertyPath: m_Name
       value: Sheep_Escapee
