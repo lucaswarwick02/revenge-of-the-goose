@@ -59,11 +59,11 @@ public class PlayerHealth : MonoBehaviour
         INSTANCE = this;
         volumeProfile.TryGet(out vignette);
 
-        GameHandler.OnGameLoaded += ResetHealth;
+        GameHandler.OnMapAreaChanged += ResetHealth;
     }
     private void OnDisable()
     {
-        GameHandler.OnGameLoaded -= ResetHealth;
+        GameHandler.OnMapAreaChanged -= ResetHealth;
     }
 
     private void Update()
