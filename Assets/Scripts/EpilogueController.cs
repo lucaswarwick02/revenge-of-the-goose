@@ -23,6 +23,8 @@ public class EpilogueController : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         string endingNum;
         if (GameEnder.EndingRealised == GameEnder.Ending.Sadist)
