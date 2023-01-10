@@ -5,10 +5,15 @@ using UnityEngine;
 public class BossManager : MonoBehaviour
 {
     [SerializeField] private GameObject farmhandBossPrefab;
+    [Space]
     [SerializeField] private GameObject darkGroupPrefab;
     [SerializeField] private Vector3 darkGroupOffset = new Vector3(0, 0, 10);
+    [Space]
     [SerializeField] private Transform choiceGateway;
     [SerializeField] private Vector3 choiceGatewayOffset = new Vector3(0, 0, 12.5f);
+    [Space]
+    [SerializeField] private Transform backBoundary;
+    [SerializeField] private Vector3 boundaryDistanceFromPlayer = new Vector3(0, 0, -5);
 
     private void OnEnable() {
         GetComponent<Destructible>().OnDestroyed.AddListener(CreateFarmhandBoss);
@@ -35,5 +40,8 @@ public class BossManager : MonoBehaviour
         Instantiate(darkGroupPrefab, transform.position + darkGroupOffset, Quaternion.identity);
         choiceGateway.position = transform.position + choiceGatewayOffset;
         choiceGateway.gameObject.SetActive(true);
+
+        // Move the back boundary to slightly behind the player, to block them moving backwards
+        backBoundary.position = GameObject.FindGameObjectWithTag("Player").transform.position + boundaryDistanceFromPlayer;
     }
 }
