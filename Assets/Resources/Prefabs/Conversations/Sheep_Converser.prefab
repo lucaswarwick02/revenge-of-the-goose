@@ -102,7 +102,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 58c5b19d71f06a14c95296ca7a084678, type: 2}
     conversation: {fileID: 11400000, guid: 2d5f34cbdba22ba4a9ed3bb143370513, type: 2}
   - conditions:
-    - {fileID: 11400000, guid: 0fff3046ebefd5f4694b2be961039026, type: 2}
+    - {fileID: 11400000, guid: 9219ee0c10d96be42b28e88c800928d6, type: 2}
     conversation: {fileID: 11400000, guid: ceaa6ca671cdade4b9e7a1d942ec9111, type: 2}
   endEffects:
   - responseRequired:

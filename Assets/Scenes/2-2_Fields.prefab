@@ -817,7 +817,7 @@ MonoBehaviour:
     noMapConditionsMet:
       m_PersistentCalls:
         m_Calls: []
-  phase: 1
+  phase: 2
 --- !u!1 &4281774661486913855
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,11 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 713ef6dc47f4fa74ab437415e996d58e, type: 3}
-  m_Name: 2_TotalSadist
+  m_Script: {fileID: 11500000, guid: cd13171392f319c45b868bcd9c84263e, type: 3}
+  m_Name: 2_TotalSadist_Actions
   m_EditorClassIdentifier: 
   conditionsAnyTrue:
   - conditionsAllTrue:
-    - {fileID: 11400000, guid: 0fff3046ebefd5f4694b2be961039026, type: 2}
-  - conditionsAllTrue:
-    - {fileID: 11400000, guid: 8b4d72423fbad8c4ebf98fa107cc944f, type: 2}
+    - variable: 1
+      predicate: 1
+      value: 2
+    - variable: 2
+      predicate: 1
+      value: 5
+  responsesRequired: []

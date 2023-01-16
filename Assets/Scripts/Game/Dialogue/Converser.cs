@@ -25,7 +25,7 @@ public class Converser : MonoBehaviour
     [Serializable]
     private struct ConditionalConversation
     {
-        public QueryConditions[] conditions;
+        public QueryCondition_Base[] conditions;
         public Conversation conversation;
     }
 
